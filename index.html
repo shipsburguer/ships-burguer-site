@@ -141,7 +141,7 @@
   .section-heading { display: grid; place-items: center; gap: 10px; margin-bottom: 36px; text-align: center; }
   .section-title { max-width: 820px; font-size: clamp(2.8rem, 6vw, 5rem); }
 
-  .timeline { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
+  .timeline { position: relative; display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
   .timeline::before { content: ""; position: absolute; top: 56px; right: 8%; left: 8%; height: 3px; background: var(--blue); }
   .timeline-item { position: relative; display: grid; justify-items: center; gap: 10px; padding: 0 10px; text-align: center; }
   .timeline-icon { display: grid; place-items: center; width: 112px; height: 112px; border: 3px solid var(--blue); border-radius: 50%; background: var(--paper-soft); color: var(--black); font-family: "Oswald", sans-serif; font-size: 2.2rem; font-weight: 800; z-index: 1; }
@@ -364,9 +364,9 @@
   <header class="site-header">
     <div class="container header-inner">
       <a class="brand" href="#historia" aria-label="Ship's Burguer">
-        <img class="logo-complete" src="images/Logo site" alt="Ship's Burguer" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
+        <img class="logo-complete" src="./assets/logo-site.avif" alt="Ship's Burguer" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
         <span class="brand-logo-fallback">
-          <img src="images/Shipinho.png" alt="Mascote Ship's Burguer" />
+          <img src="./assets/shipinho.png" alt="Mascote Ship's Burguer" />
           <span class="brand-text">
             <span class="brand-name">Ship's</span>
             <span class="brand-subtitle">Burguer</span>
@@ -381,7 +381,7 @@
         <a href="#historia">Nossa História</a>
         <a href="#lanches">Lanches</a>
         <a href="#galeria">Galeria</a>
-        <a href="#grupo-vip">Grupo VIP</a>
+        <a href="https://chat.whatsapp.com/E45CywnC8P7261yBHHF9EA" target="_blank" rel="noopener noreferrer">Grupo VIP</a>
         <a class="order-link" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
       </nav>
     </div>
@@ -406,7 +406,7 @@
 
         <div class="hero-plate" aria-label="Burger artesanal da Ship's Burguer">
           <div class="hero-image-wrap reveal reveal-right">
-            <img class="hero-main-image" src="images/copo com o shipinho.png" alt="Hambúrguer e copo com Shipinho" />
+            <img class="hero-main-image" src="./assets/hero-burger-shipinho.png" alt="Hambúrguer e copo com Shipinho" />
           </div>
         </div>
       </div>
@@ -447,6 +447,13 @@
             <h3>A realização</h3>
             <p>O sonho se tornou realidade: nossa loja física nasceu para oferecer uma experiência ainda melhor.</p>
           </article>
+
+          <article class="timeline-item reveal reveal-delay">
+            <div class="timeline-icon" aria-hidden="true">25</div>
+            <strong class="timeline-year">2025</strong>
+            <h3>Novo salão</h3>
+            <p>A Ship's cresceu mais uma vez com um novo salão para receber melhor nossos clientes.</p>
+          </article>
         </div>
       </div>
     </section>
@@ -461,11 +468,11 @@
         <div class="products-grid">
           <article class="product-card reveal">
             <div class="product-media">
-              <img src="smash-guilbert.png" alt="Smash Guilbert" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop';" />
+              <img src="./assets/letchiken.jpg" alt="LETCHIKEN" />
             </div>
             <div class="product-info">
-              <h3>Smash Guilbert</h3>
-              <p>Smash, queijo derretido, alface, tomate, maionese especial e crispy de cebola.</p>
+              <h3>LETCHIKEN</h3>
+              <p>Pão com gergelim, alface americana fresquinha, tomate, molho ainda mais saboroso e um frango empanado crocante que derrete na boca.</p>
               <strong class="price">R$ 27,90</strong>
               <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
             </div>
@@ -473,11 +480,11 @@
 
           <article class="product-card reveal reveal-delay">
             <div class="product-media">
-              <img src="smash-toven.png" alt="Smash Toven" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1200&auto=format&fit=crop';" />
+              <img src="./assets/guilbert.jpg" alt="GUILBERT" />
             </div>
             <div class="product-info">
-              <h3>Smash Toven</h3>
-              <p>Smash, queijo cheddar, bacon, cebola, picles e molho especial.</p>
+              <h3>GUILBERT</h3>
+              <p>Pão de Brioche + 2 Carnes Smash de 100g (200g total) + Queijo Mussarela bemmmm derretido + Alface americano picado, tomate, Cebola Crispy e o saboroso Molho "Tosca" (sabor Churrasco)</p>
               <strong class="price">R$ 28,90</strong>
               <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
             </div>
@@ -485,11 +492,11 @@
 
           <article class="product-card reveal reveal-delay-2">
             <div class="product-media">
-              <img src="smash-leoncio.png" alt="Smash Leôncio" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1200&auto=format&fit=crop';" />
+              <img src="./assets/toven.png" alt="TOVEN" />
             </div>
             <div class="product-info">
-              <h3>Smash Leôncio</h3>
-              <p>Smash, queijo cheddar, bacon e molho especial da casa.</p>
+              <h3>TOVEN</h3>
+              <p>Pão de gergelim, 2 carnes Smash de 100g cada, Queijo cheddar derretido, Ketchup de picles (Heinz), Mostarda, Cebola picada, Picles e Bacon</p>
               <strong class="price">R$ 26,90</strong>
               <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
             </div>
@@ -502,7 +509,7 @@
             <p>E receba em casa!</p>
           </div>
           <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
-          <a class="retro-button btn-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="PEÇA PELO IFOOD"><img src="images/ifood.png" alt="iFood">PEÇA PELO IFOOD</a>
+          <a class="retro-button btn-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="PEÇA PELO IFOOD"><img src="./assets/ifood.png" alt="iFood">PEÇA PELO IFOOD</a>
         </div>
       </div>
     </section>
@@ -516,19 +523,19 @@
 
         <div class="gallery-grid">
           <figure class="gallery-item reveal">
-            <img src="assets/galeria-loja.jpg" alt="Loja Ship's Burguer" onerror="this.style.display='none';" />
+            <img src="./assets/loja-ships-burguer.jpg" alt="Loja Ship's Burguer" onerror="this.style.display='none';" />
             <figcaption>Loja</figcaption>
           </figure>
           <figure class="gallery-item reveal reveal-delay">
-            <img src="assets/galeria-lanches.jpg" alt="Lanches Ship's Burguer" onerror="this.style.display='none';" />
+            <img src="./assets/hero-burger-shipinho.png" alt="Lanches Ship's Burguer" onerror="this.style.display='none';" />
             <figcaption>Lanches</figcaption>
           </figure>
           <figure class="gallery-item reveal reveal-delay-2">
-            <img src="assets/galeria-clientes.jpg" alt="Clientes da Ship's Burguer" onerror="this.style.display='none';" />
+            <img src="./assets/shipinho.png" alt="Clientes da Ship's Burguer" onerror="this.style.display='none';" />
             <figcaption>Clientes</figcaption>
           </figure>
           <figure class="gallery-item reveal">
-            <img src="assets/galeria-bastidores.jpg" alt="Bastidores da cozinha Ship's Burguer" onerror="this.style.display='none';" />
+            <img src="./assets/batata-ships.png" alt="Bastidores da cozinha Ship's Burguer" onerror="this.style.display='none';" />
             <figcaption>Bastidores</figcaption>
           </figure>
         </div>
@@ -544,7 +551,7 @@
             Entre no nosso Grupo VIP e receba promoções exclusivas, novidades do cardápio
             e ofertas especiais antes de todo mundo.
           </p>
-          <a class="retro-button" href="https://chat.whatsapp.com/SEU-LINK-AQUI" target="_blank" rel="noopener">Entrar no Grupo VIP</a>
+          <a class="retro-button" href="https://chat.whatsapp.com/E45CywnC8P7261yBHHF9EA" target="_blank" rel="noopener noreferrer">Entrar no Grupo VIP</a>
         </div>
       </div>
     </section>
@@ -554,9 +561,9 @@
     <div class="container footer-grid">
       <div class="footer-col footer-logo reveal">
         <a class="brand" href="#historia" aria-label="Ship's Burguer">
-          <img class="logo-complete" src="images/Logo site" alt="Ship's Burguer" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
+          <img class="logo-complete" src="./assets/logo-site.avif" alt="Ship's Burguer" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
           <span class="brand-logo-fallback">
-            <img src="images/Shipinho.png" alt="Mascote Ship's Burguer" />
+            <img src="./assets/shipinho.png" alt="Mascote Ship's Burguer" />
             <span class="brand-text">
               <span class="brand-name">Ship's</span>
               <span class="brand-subtitle">Burguer</span>
@@ -565,9 +572,9 @@
           </span>
         </a>
         <div class="socials" aria-label="Redes sociais">
-          <a class="social-instagram" href="https://www.instagram.com/shipsburguer" target="_blank" rel="noopener" aria-label="Instagram da Ship's"><img src="images/instagram.png" alt="Instagram"></a>
-          <a class="social-whatsapp" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" aria-label="WhatsApp da Ship's"><img src="images/logo whats.png" alt="WhatsApp"></a>
-          <a class="social-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="iFood da Ship's"><img src="images/ifood.png" alt="iFood"></a>
+          <a class="social-instagram" href="https://www.instagram.com/shipsburguer" target="_blank" rel="noopener" aria-label="Instagram da Ship's"><img src="./assets/instagram.png" alt="Instagram"></a>
+          <a class="social-whatsapp" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" aria-label="WhatsApp da Ship's"><img src="./assets/whatsapp.svg" alt="WhatsApp"></a>
+          <a class="social-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="iFood da Ship's"><img src="./assets/ifood.png" alt="iFood"></a>
         </div>
       </div>
 
@@ -577,7 +584,7 @@
           <li><a href="#historia">Nossa História</a></li>
           <li><a href="#lanches">Lanches</a></li>
           <li><a href="#galeria">Galeria</a></li>
-          <li><a href="#grupo-vip">Grupo VIP</a></li>
+          <li><a href="https://chat.whatsapp.com/E45CywnC8P7261yBHHF9EA" target="_blank" rel="noopener noreferrer">Grupo VIP</a></li>
           <li><a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a></li>
         </ul>
       </div>
@@ -651,7 +658,7 @@
       revealElements.forEach((element) => element.classList.add("active"));
     }
   </script>
-  <a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chamar a Ship's Burguer no WhatsApp"><img src="images/logo whats.png" alt="WhatsApp"></a>
+  <a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chamar a Ship's Burguer no WhatsApp"><img src="./assets/whatsapp.svg" alt="WhatsApp"></a>
 </body>
 </html>
 
