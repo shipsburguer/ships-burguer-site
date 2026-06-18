@@ -1,0 +1,695 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ship's Burguer | Não é só sobre burger. É sobre história.</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+  @import url('https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@500;600;700&display=swap');
+
+  :root {
+    --blue: #0f4ea2;
+    --blue-dark: #082f68;
+    --black: #111111;
+    --ink: #202020;
+    --paper: #f7f1e7;
+    --paper-soft: #fffaf0;
+    --line: rgba(17, 17, 17, 0.2);
+    --shadow: 0 18px 40px rgba(17, 17, 17, 0.12);
+    --radius: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    overflow-x: hidden;
+    color: var(--ink);
+    font-family: "Open Sans", Arial, sans-serif;
+    line-height: 1.6;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(15, 78, 162, 0.06) 0 1px, transparent 1px),
+      radial-gradient(circle at 74% 34%, rgba(17, 17, 17, 0.04) 0 1px, transparent 1px),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(247, 241, 231, 0.92)),
+      var(--paper);
+    background-size: 18px 18px, 24px 24px, auto, auto;
+  }
+
+  body.menu-open { overflow: hidden; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 2px solid var(--black);
+    background: rgba(247, 241, 231, 0.96);
+    backdrop-filter: blur(10px);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 92px;
+    gap: 24px;
+  }
+
+  .brand { display: inline-flex; align-items: center; gap: 12px; flex: 0 0 auto; min-width: 0; }
+
+  .logo-complete {
+    display: block;
+    height: 78px;
+    width: auto;
+    max-width: 250px;
+    object-fit: contain;
+    object-position: left center;
+    background: transparent;
+    border: none;
+    mix-blend-mode: multiply;
+    filter: contrast(1.08) saturate(1.05);
+  }
+
+  .brand-logo-fallback { display: none; align-items: center; gap: 10px; }
+  .brand-logo-fallback img { width: 70px; height: 70px; object-fit: cover; object-position: center 16%; border: 2px solid var(--blue); border-radius: 50%; background: var(--paper-soft); }
+  .brand-text { display: grid; line-height: 0.9; }
+  .brand-name { color: var(--black); font-family: "Bebas Neue", "Oswald", sans-serif; font-size: clamp(2rem, 4vw, 3.1rem); text-transform: uppercase; }
+  .brand-subtitle { color: var(--blue); font-family: "Oswald", sans-serif; font-size: 1.05rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .brand-since { color: var(--black); font-size: .7rem; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; }
+
+  .nav { display: flex; align-items: center; justify-content: flex-end; gap: clamp(14px, 2.2vw, 32px); width: 100%; font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; }
+  .nav a { color: var(--black); font-size: 1.02rem; border-bottom: 3px solid transparent; transition: color .18s ease, border-color .18s ease; white-space: nowrap; }
+  .nav a:hover, .nav a:focus-visible { color: var(--blue); border-color: var(--blue); outline: none; }
+
+  .retro-button, .nav .order-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: 2px solid var(--blue);
+    border-radius: var(--radius);
+    color: var(--blue);
+    background: transparent;
+    box-shadow: 4px 4px 0 var(--black);
+    font-family: "Oswald", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+  }
+
+  .retro-button:hover, .retro-button:focus-visible, .nav .order-link:hover, .nav .order-link:focus-visible {
+    color: var(--paper-soft);
+    background: var(--blue);
+    box-shadow: 2px 2px 0 var(--black);
+    transform: translate(2px, 2px);
+    outline: none;
+  }
+
+  .menu-toggle { display: none; width: 48px; min-width: 48px; height: 48px; border: 2px solid var(--black); border-radius: var(--radius); background: var(--paper-soft); color: var(--black); font-family: "Oswald", sans-serif; font-size: 1rem; font-weight: 800; text-transform: uppercase; }
+
+  .hero { position: relative; padding: clamp(42px, 7vw, 88px) 0 30px; border-bottom: 2px solid var(--line); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, .86fr) minmax(420px, 1.14fr); align-items: end; gap: clamp(18px, 3.5vw, 48px); }
+  .eyebrow, .section-kicker { display: inline-flex; align-items: center; justify-content: center; gap: 10px; color: var(--blue); font-family: "Oswald", sans-serif; font-size: 1rem; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+  .eyebrow { justify-content: flex-start; margin-bottom: 18px; }
+  .eyebrow::before, .eyebrow::after { content: ""; width: 42px; height: 2px; background: var(--blue); }
+  .section-kicker::before, .section-kicker::after { content: "*"; font-size: .9rem; }
+
+  h1, h2, h3 { color: var(--black); font-family: "Bebas Neue", "Oswald", sans-serif; line-height: .92; letter-spacing: 0; text-transform: uppercase; }
+  h1 { max-width: 690px; font-size: clamp(4rem, 10vw, 8rem); }
+  h1 span, .section-title span { color: var(--blue); }
+  .hero-copy { max-width: 620px; margin: 22px 0 30px; color: #2b2b2b; font-size: clamp(1rem, 2vw, 1.2rem); font-weight: 700; }
+  .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .hero-badge { display: inline-flex; align-items: center; min-height: 46px; padding: 9px 16px; border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); color: var(--black); font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; }
+
+  .hero-plate { position: relative; min-height: 520px; isolation: isolate; background: transparent; border: none; box-shadow: none; overflow: visible; }
+  .hero-plate::before { content: ""; position: absolute; inset: 7% 1% 14% 4%; z-index: -2; background: radial-gradient(circle, rgba(15, 78, 162, .24) 0 1.4px, transparent 1.5px); background-size: 12px 12px; transform: rotate(-2deg); pointer-events: none; }
+  .hero-image-wrap { position: absolute; right: -76px; bottom: -18px; width: min(820px, 122%); height: min(560px, 84vw); background: transparent; border: none; box-shadow: none; overflow: visible; }
+  .hero-image-wrap .hero-main-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: right bottom; background: transparent; border: none; box-shadow: none; mix-blend-mode: multiply; filter: contrast(1.08) saturate(1.05); }
+  .hero-image-wrap::after { content: ""; position: absolute; left: 12%; right: 2%; bottom: 1%; height: 15%; z-index: -1; background: radial-gradient(ellipse at center, rgba(17,17,17,.20) 0%, rgba(17,17,17,.10) 42%, transparent 72%); filter: blur(5px); transform: scaleX(.92); pointer-events: none; }
+
+  .section { padding: clamp(56px, 7vw, 88px) 0; border-bottom: 2px solid var(--line); }
+  .section-heading { display: grid; place-items: center; gap: 10px; margin-bottom: 36px; text-align: center; }
+  .section-title { max-width: 820px; font-size: clamp(2.8rem, 6vw, 5rem); }
+
+  .timeline { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
+  .timeline::before { content: ""; position: absolute; top: 56px; right: 8%; left: 8%; height: 3px; background: var(--blue); }
+  .timeline-item { position: relative; display: grid; justify-items: center; gap: 10px; padding: 0 10px; text-align: center; }
+  .timeline-icon { display: grid; place-items: center; width: 112px; height: 112px; border: 3px solid var(--blue); border-radius: 50%; background: var(--paper-soft); color: var(--black); font-family: "Oswald", sans-serif; font-size: 2.2rem; font-weight: 800; z-index: 1; }
+  .timeline-year { color: var(--blue); font-family: "Bebas Neue", "Oswald", sans-serif; font-size: 2.4rem; line-height: .9; }
+  .timeline-item h3 { font-size: 1.55rem; }
+  .timeline-item p { max-width: 240px; font-size: .98rem; font-weight: 600; }
+
+  .products-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .product-card { display: grid; grid-template-columns: 45% 1fr; min-height: 286px; border: 2px solid var(--blue); border-radius: var(--radius); background: rgba(255,250,240,.76); box-shadow: 5px 5px 0 rgba(17,17,17,.14); overflow: hidden; }
+  .product-media { display: grid; place-items: end center; min-height: 250px; padding: 14px; background: linear-gradient(180deg, rgba(255,255,255,.58), rgba(15,78,162,.08)); }
+  .product-media img { width: 100%; height: 220px; object-fit: contain; filter: drop-shadow(0 12px 10px rgba(17,17,17,.22)); }
+  .product-info { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 22px 18px 22px 6px; }
+  .product-info h3 { font-size: clamp(1.75rem, 3vw, 2.2rem); }
+  .product-info p { color: #303030; font-size: .96rem; font-weight: 700; }
+  .price { color: var(--blue); font-family: "Oswald", sans-serif; font-size: 1.75rem; font-weight: 800; }
+  .product-info .retro-button { align-self: flex-start; min-height: 42px; padding: 8px 16px; box-shadow: 3px 3px 0 var(--black); font-size: .96rem; }
+
+  .btn-ifood { display: inline-flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap; }
+  .btn-ifood img { width: 58px; height: 24px; object-fit: contain; display: block; flex: 0 0 auto; }
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .gallery-item { min-height: 220px; border: 2px solid var(--black); border-radius: var(--radius); background: linear-gradient(135deg, rgba(15,78,162,.12), rgba(255,250,240,.85)), radial-gradient(circle at center, rgba(15,78,162,.22), transparent 55%); overflow: hidden; position: relative; }
+  .gallery-item img { width: 100%; height: 100%; min-height: 220px; object-fit: cover; }
+  .gallery-item figcaption { position: absolute; right: 12px; bottom: 12px; left: 12px; padding: 8px 10px; border: 1px solid var(--blue); background: rgba(255,250,240,.92); color: var(--black); font-family: "Oswald", sans-serif; font-weight: 700; text-transform: uppercase; }
+
+  .vip { border: 2px solid var(--blue); border-radius: var(--radius); padding: clamp(28px, 5vw, 54px); background: rgba(255,250,240,.78); box-shadow: var(--shadow); text-align: center; }
+  .vip p { max-width: 760px; margin: 18px auto 28px; font-size: clamp(1rem, 2vw, 1.18rem); font-weight: 700; }
+
+  .cta-strip { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 18px; margin-top: 18px; padding: 22px; border: 2px solid var(--blue); border-radius: var(--radius); background: var(--paper-soft); }
+  .cta-strip h2 { color: var(--blue); font-size: clamp(2.4rem, 5vw, 4.6rem); }
+  .cta-strip p { color: var(--black); font-family: "Oswald", sans-serif; font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 700; text-transform: uppercase; }
+
+  .site-footer { background: rgba(255,250,240,.7); border-top: 2px solid var(--black); }
+  .footer-grid { display: grid; grid-template-columns: 1.2fr .75fr 1fr 1.2fr; gap: 30px; padding: 42px 0; }
+  .footer-logo { align-items: flex-start; flex-direction: column; min-width: 0; }
+  .footer-logo .brand { min-width: 0; }
+  .socials { display: flex; gap: 10px; margin-top: 18px; }
+  .socials a {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1.5px solid var(--blue);
+    border-radius: 50%;
+    background: var(--paper-soft);
+    box-shadow: 0 6px 14px rgba(17, 17, 17, 0.14);
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .socials a img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    display: block;
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .socials a:hover,
+  .socials a:focus-visible {
+    transform: scale(1.08);
+    border-color: transparent;
+    box-shadow: 0 8px 18px rgba(17, 17, 17, 0.18);
+    outline: none;
+  }
+
+  .social-instagram:hover img,
+  .social-instagram:focus-visible img,
+  .social-ifood:hover img,
+  .social-ifood:focus-visible img {
+    filter: brightness(0) invert(1);
+  }
+
+  .social-instagram:hover,
+  .social-instagram:focus-visible {
+    background: linear-gradient(135deg, #f58529, #dd2a7b 45%, #8134af 72%, #515bd4);
+  }
+
+  .social-whatsapp:hover,
+  .social-whatsapp:focus-visible {
+    background: #25D366;
+  }
+
+  .social-ifood:hover,
+  .social-ifood:focus-visible {
+    background: #ea1d2c;
+  }
+  .footer-col h3 { margin-bottom: 12px; color: var(--blue); font-family: "Oswald", sans-serif; font-size: 1.25rem; letter-spacing: .04em; text-transform: uppercase; }
+  .footer-col ul { list-style: none; }
+  .footer-col li, .footer-col p { margin-bottom: 8px; font-weight: 600; }
+  .footer-bottom { display: flex; justify-content: space-between; gap: 18px; padding: 16px 0; border-top: 1px solid var(--line); font-size: .94rem; font-weight: 700; }
+
+  .fallback-logo { display: none; }
+
+  .reveal, .reveal-left, .reveal-right { opacity: 0; transition: opacity .85s ease, transform .85s cubic-bezier(.22, 1, .36, 1); will-change: opacity, transform; }
+  .reveal { transform: translateY(46px); }
+  .reveal-left { transform: translateX(-48px); }
+  .reveal-right { transform: translateX(48px); }
+  .reveal-delay { transition-delay: .14s; }
+  .reveal-delay-2 { transition-delay: .26s; }
+  .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; transition: none; }
+  }
+
+  @media (max-width: 1024px) {
+    .header-inner { min-height: 82px; }
+    .menu-toggle { display: inline-grid; place-items: center; }
+    .nav { position: fixed; inset: 82px 0 auto 0; display: none; flex-direction: column; align-items: stretch; gap: 14px; padding: 22px 24px 28px; border-bottom: 2px solid var(--black); background: var(--paper); box-shadow: 0 16px 24px rgba(17,17,17,.12); }
+    body.menu-open .nav { display: flex; }
+    .nav a, .nav .order-link { width: 100%; justify-content: center; text-align: center; }
+    .hero-grid { grid-template-columns: 1fr; align-items: start; }
+    .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .hero-plate { min-height: 430px; }
+    .hero-image-wrap { right: -28px; bottom: -10px; width: min(720px, 112%); height: 430px; }
+    .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .product-card { grid-template-columns: 1fr; }
+    .product-info { padding: 20px; }
+    .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cta-strip { grid-template-columns: 1fr; text-align: center; }
+  }
+
+  @media (max-width: 768px) {
+    .container { width: min(100% - 24px, 1160px); }
+    .logo-complete { height: 52px; max-width: 180px; }
+    .brand-logo-fallback img { width: 52px; height: 52px; }
+    .brand-name { font-size: 2rem; }
+    .brand-subtitle { font-size: .92rem; }
+    .hero { padding-top: 32px; }
+    h1 { font-size: clamp(3.35rem, 16vw, 5.25rem); }
+    .eyebrow::before, .eyebrow::after { width: 28px; }
+    .hero-actions, .cta-strip { align-items: stretch; }
+    .hero-actions .retro-button, .hero-actions .hero-badge, .cta-strip .retro-button, .vip .retro-button { width: 100%; }
+    .hero-plate { min-height: 320px; }
+    .hero-image-wrap { position: relative; right: auto; bottom: auto; width: 100%; height: 320px; }
+    .hero-image-wrap .hero-main-image { object-position: center bottom; }
+    .timeline { grid-template-columns: 1fr; gap: 34px; }
+    .timeline::before { top: 0; bottom: 0; left: 50%; right: auto; width: 3px; height: auto; }
+    .timeline-item { background: linear-gradient(90deg, transparent, rgba(247,241,231,.92), transparent); }
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card { grid-template-columns: 1fr; }
+    .product-media { min-height: 220px; }
+    .product-media img { height: 210px; }
+    .product-info .retro-button { width: 100%; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .footer-logo, .footer-col { align-items: center; }
+    .footer-logo .brand { justify-content: center; }
+    .socials { display: flex; gap: 10px; margin-top: 18px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    .socials a { width: 48px; height: 48px; }
+    .socials a img { width: 24px; height: 24px; }
+    .container { width: min(100% - 20px, 1160px); }
+    .header-inner { gap: 12px; }
+    .logo-complete { height: 46px; max-width: 150px; }
+    .menu-toggle { width: 44px; min-width: 44px; height: 44px; font-size: .9rem; }
+    .nav { inset: 74px 0 auto 0; padding: 18px 16px 24px; }
+    h1 { font-size: clamp(3rem, 18vw, 4.25rem); }
+    .section-title { font-size: clamp(2.35rem, 12vw, 3.6rem); }
+    .hero-copy { font-size: 1rem; }
+    .hero-plate { min-height: 270px; }
+    .hero-image-wrap { height: 270px; }
+    .timeline-icon { width: 96px; height: 96px; font-size: 1.9rem; }
+    .product-media img { height: 190px; }
+    .vip, .cta-strip { padding: 22px 16px; }
+    .btn-ifood { gap: 8px; white-space: normal; }
+    .btn-ifood img { width: 50px; height: 22px; }
+  }
+
+  .whatsapp-float {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #25D366;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .whatsapp-float:hover,
+  .whatsapp-float:focus-visible {
+    transform: scale(1.1);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.34);
+    outline: none;
+  }
+
+  .whatsapp-float img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+  }
+
+  @media (max-width: 480px) {
+    .socials a { width: 48px; height: 48px; }
+    .socials a img { width: 24px; height: 24px; }
+    .whatsapp-float {
+      right: 14px;
+      bottom: 14px;
+      width: 54px;
+      height: 54px;
+    }
+
+    .whatsapp-float img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#historia" aria-label="Ship's Burguer">
+        <img class="logo-complete" src="images/Logo site" alt="Ship's Burguer" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
+        <span class="brand-logo-fallback">
+          <img src="images/Shipinho.png" alt="Mascote Ship's Burguer" />
+          <span class="brand-text">
+            <span class="brand-name">Ship's</span>
+            <span class="brand-subtitle">Burguer</span>
+            <span class="brand-since">Since 2021</span>
+          </span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">Menu</button>
+
+      <nav class="nav" aria-label="Menu principal">
+        <a href="#historia">Nossa História</a>
+        <a href="#lanches">Lanches</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#grupo-vip">Grupo VIP</a>
+        <a class="order-link" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="historia">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow reveal reveal-left">Nossa História</p>
+          <h1 class="reveal reveal-left reveal-delay">Não é só sobre burger. É sobre <span>história.</span></h1>
+          <p class="hero-copy reveal reveal-left reveal-delay-2">
+            Da nossa primeira chapa dentro de um trailer até a realização do sonho da loja própria.
+            Essa é a história da Ship's Burguer: feita de determinação, família, clientes que viraram amigos
+            e uma vontade enorme de servir o melhor burger da região.
+          </p>
+          <div class="hero-actions reveal reveal-left reveal-delay-2">
+            <a class="retro-button" href="#trajetoria">Conheça nossa jornada</a>
+            <span class="hero-badge">Ship's Burguer desde 2021</span>
+          </div>
+        </div>
+
+        <div class="hero-plate" aria-label="Burger artesanal da Ship's Burguer">
+          <div class="hero-image-wrap reveal reveal-right">
+            <img class="hero-main-image" src="images/copo com o shipinho.png" alt="Hambúrguer e copo com Shipinho" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="trajetoria">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Nossa trajetória</p>
+          <h2 class="section-title">Uma história feita de <span>determinação</span></h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-icon" aria-hidden="true">21</div>
+            <strong class="timeline-year">2021</strong>
+            <h3>O começo</h3>
+            <p>Tudo começou em um pequeno trailer, com muita vontade de fazer o melhor burger da região.</p>
+          </article>
+
+          <article class="timeline-item reveal reveal-delay">
+            <div class="timeline-icon" aria-hidden="true">22</div>
+            <strong class="timeline-year">2022</strong>
+            <h3>Crescendo</h3>
+            <p>A qualidade conquistou clientes e nossa fama só aumentava. O trailer ficou pequeno perto do sonho.</p>
+          </article>
+
+          <article class="timeline-item reveal reveal-delay-2">
+            <div class="timeline-icon" aria-hidden="true">23</div>
+            <strong class="timeline-year">2023</strong>
+            <h3>Uma família</h3>
+            <p>Mais que clientes, conquistamos amigos. A Ship's Burguer virou ponto de encontro.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-icon" aria-hidden="true">24</div>
+            <strong class="timeline-year">2024</strong>
+            <h3>A realização</h3>
+            <p>O sonho se tornou realidade: nossa loja física nasceu para oferecer uma experiência ainda melhor.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lanches">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Nossos destaques</p>
+          <h2 class="section-title">Lanches</h2>
+        </div>
+
+        <div class="products-grid">
+          <article class="product-card reveal">
+            <div class="product-media">
+              <img src="smash-guilbert.png" alt="Smash Guilbert" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop';" />
+            </div>
+            <div class="product-info">
+              <h3>Smash Guilbert</h3>
+              <p>Smash, queijo derretido, alface, tomate, maionese especial e crispy de cebola.</p>
+              <strong class="price">R$ 27,90</strong>
+              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
+            </div>
+          </article>
+
+          <article class="product-card reveal reveal-delay">
+            <div class="product-media">
+              <img src="smash-toven.png" alt="Smash Toven" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1200&auto=format&fit=crop';" />
+            </div>
+            <div class="product-info">
+              <h3>Smash Toven</h3>
+              <p>Smash, queijo cheddar, bacon, cebola, picles e molho especial.</p>
+              <strong class="price">R$ 28,90</strong>
+              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
+            </div>
+          </article>
+
+          <article class="product-card reveal reveal-delay-2">
+            <div class="product-media">
+              <img src="smash-leoncio.png" alt="Smash Leôncio" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1200&auto=format&fit=crop';" />
+            </div>
+            <div class="product-info">
+              <h3>Smash Leôncio</h3>
+              <p>Smash, queijo cheddar, bacon e molho especial da casa.</p>
+              <strong class="price">R$ 26,90</strong>
+              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="cta-strip" id="peca-agora">
+          <div>
+            <h2>Peça Agora</h2>
+            <p>E receba em casa!</p>
+          </div>
+          <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Pedir pelo WhatsApp</a>
+          <a class="retro-button btn-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="PEÇA PELO IFOOD"><img src="images/ifood.png" alt="iFood">PEÇA PELO IFOOD</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeria">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Momentos Ship's</p>
+          <h2 class="section-title">Galeria</h2>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item reveal">
+            <img src="assets/galeria-loja.jpg" alt="Loja Ship's Burguer" onerror="this.style.display='none';" />
+            <figcaption>Loja</figcaption>
+          </figure>
+          <figure class="gallery-item reveal reveal-delay">
+            <img src="assets/galeria-lanches.jpg" alt="Lanches Ship's Burguer" onerror="this.style.display='none';" />
+            <figcaption>Lanches</figcaption>
+          </figure>
+          <figure class="gallery-item reveal reveal-delay-2">
+            <img src="assets/galeria-clientes.jpg" alt="Clientes da Ship's Burguer" onerror="this.style.display='none';" />
+            <figcaption>Clientes</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="assets/galeria-bastidores.jpg" alt="Bastidores da cozinha Ship's Burguer" onerror="this.style.display='none';" />
+            <figcaption>Bastidores</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="grupo-vip">
+      <div class="container">
+        <div class="vip reveal">
+          <p class="section-kicker">Grupo VIP</p>
+          <h2 class="section-title">Promoções antes de todo mundo</h2>
+          <p>
+            Entre no nosso Grupo VIP e receba promoções exclusivas, novidades do cardápio
+            e ofertas especiais antes de todo mundo.
+          </p>
+          <a class="retro-button" href="https://chat.whatsapp.com/SEU-LINK-AQUI" target="_blank" rel="noopener">Entrar no Grupo VIP</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-logo reveal">
+        <a class="brand" href="#historia" aria-label="Ship's Burguer">
+          <img class="logo-complete" src="images/Logo site" alt="Ship's Burguer" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
+          <span class="brand-logo-fallback">
+            <img src="images/Shipinho.png" alt="Mascote Ship's Burguer" />
+            <span class="brand-text">
+              <span class="brand-name">Ship's</span>
+              <span class="brand-subtitle">Burguer</span>
+              <span class="brand-since">Since 2021</span>
+            </span>
+          </span>
+        </a>
+        <div class="socials" aria-label="Redes sociais">
+          <a class="social-instagram" href="https://www.instagram.com/shipsburguer" target="_blank" rel="noopener" aria-label="Instagram da Ship's"><img src="images/instagram.png" alt="Instagram"></a>
+          <a class="social-whatsapp" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" aria-label="WhatsApp da Ship's"><img src="images/logo whats.png" alt="WhatsApp"></a>
+          <a class="social-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="iFood da Ship's"><img src="images/ifood.png" alt="iFood"></a>
+        </div>
+      </div>
+
+      <div class="footer-col reveal">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="#historia">Nossa História</a></li>
+          <li><a href="#lanches">Lanches</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#grupo-vip">Grupo VIP</a></li>
+          <li><a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col reveal">
+        <h3>Contato</h3>
+        <p>WhatsApp: (11) 97637-4369</p>
+        <p>Instagram: @shipsburguer</p>
+        <p>Rua José Mascarenhas, 586, Vila Matilde<br>São Paulo - SP</p>
+      </div>
+
+      <div class="footer-col reveal">
+        <h3>Horário de funcionamento</h3>
+        <p>Quarta-feira: 19:00 - 23:00</p>
+        <p>Quinta-feira: 19:00 - 23:00</p>
+        <p>Sexta-feira: 19:00 - 23:59</p>
+        <p>Sábado: 19:00 - 23:59</p>
+        <p>Domingo: 19:00 - 23:00</p>
+        <p>Segunda-feira: 19:00 - 23:00</p>
+        <p>Terça-feira: 19:00 - 23:00</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom reveal">
+      <p>© 2024 Ship's Burguer. Todos os direitos reservados.</p>
+      <p>Feito com paixão para nossos clientes.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = document.body.classList.toggle("menu-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "Fechar" : "Menu";
+    });
+
+    nav.addEventListener("click", (event) => {
+      if (event.target.matches("a")) {
+        document.body.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "Menu";
+      }
+    });
+
+    const revealElements = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+
+    revealElements.forEach((element, index) => {
+      if (!element.classList.contains("reveal-delay") && !element.classList.contains("reveal-delay-2")) {
+        element.style.transitionDelay = `${Math.min(index % 4, 3) * 0.08}s`;
+      }
+    });
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            window.setTimeout(() => entry.target.classList.add("active"), 80);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -90px 0px"
+      });
+
+      revealElements.forEach((element) => revealObserver.observe(element));
+    } else {
+      revealElements.forEach((element) => element.classList.add("active"));
+    }
+  </script>
+  <a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chamar a Ship's Burguer no WhatsApp"><img src="images/logo whats.png" alt="WhatsApp"></a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

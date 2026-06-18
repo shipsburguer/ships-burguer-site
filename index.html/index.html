@@ -1,0 +1,1675 @@
+﻿<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Ship's Burguer | Não é só sobre burger. É sobre história.</title>
+  <link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <style>
+:root {
+    --blue: #0f4ea2;
+    --blue-dark: #082f68;
+    --black: #111111;
+    --ink: #202020;
+    --paper: #f7f1e7;
+    --paper-soft: #fffaf0;
+    --line: rgba(17, 17, 17, 0.2);
+    --shadow: 0 18px 40px rgba(17, 17, 17, 0.12);
+    --radius: 8px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; overflow-x: hidden; }
+
+  body {
+    overflow-x: hidden;
+    color: var(--ink);
+    font-family: "Open Sans", Arial, sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.6;
+    text-rendering: geometricPrecision;
+    -webkit-font-smoothing: antialiased;
+    background:
+      radial-gradient(circle at 12% 18%, rgba(15, 78, 162, 0.06) 0 1px, transparent 1px),
+      radial-gradient(circle at 74% 34%, rgba(17, 17, 17, 0.04) 0 1px, transparent 1px),
+      linear-gradient(135deg, rgba(255, 255, 255, 0.7), rgba(247, 241, 231, 0.92)),
+      var(--paper);
+    background-size: 18px 18px, 24px 24px, auto, auto;
+  }
+
+  body.menu-open { overflow: hidden; }
+  img { display: block; max-width: 100%; }
+  a { color: inherit; text-decoration: none; }
+
+  .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+
+  .site-header {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    border-bottom: 2px solid var(--black);
+    background: rgba(247, 241, 231, 0.96);
+    backdrop-filter: blur(10px);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-height: 92px;
+    gap: 24px;
+  }
+
+  .brand { display: inline-flex; align-items: center; gap: 12px; flex: 0 0 auto; min-width: 0; }
+
+  .logo-complete {
+    display: block;
+    height: 78px;
+    width: auto;
+    max-width: 250px;
+    object-fit: contain;
+    object-position: left center;
+    background: transparent;
+    border: none;
+    mix-blend-mode: multiply;
+    filter: contrast(1.08) saturate(1.05);
+  }
+
+  .brand-logo-fallback { display: none; align-items: center; gap: 10px; }
+  .brand-logo-fallback img { width: 70px; height: 70px; object-fit: cover; object-position: center 16%; border: 2px solid var(--blue); border-radius: 50%; background: var(--paper-soft); }
+  .brand-text { display: grid; line-height: 0.9; }
+  .brand-name { color: var(--black); font-family: "Bebas Neue", sans-serif; font-size: clamp(2.15rem, 4vw, 3.25rem); line-height: .82; letter-spacing: 2px; text-transform: uppercase; }
+  .brand-subtitle { color: var(--blue); font-family: "Oswald", sans-serif; font-size: 1.08rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+  .brand-since { color: var(--black); font-family: "Oswald", sans-serif; font-size: .72rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+
+  .nav { display: flex; align-items: center; justify-content: flex-end; gap: clamp(14px, 2.2vw, 32px); width: 100%; font-family: "Oswald", sans-serif; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+  .nav a { color: var(--black); font-size: 1rem; letter-spacing: 1px; border-bottom: 3px solid transparent; transition: color .18s ease, border-color .18s ease; white-space: nowrap; }
+  .nav a:hover, .nav a:focus-visible { color: var(--blue); border-color: var(--blue); outline: none; }
+
+  .retro-button, .nav .order-link {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    padding: 12px 20px;
+    border: 2px solid var(--blue);
+    border-radius: var(--radius);
+    color: var(--blue);
+    background: transparent;
+    box-shadow: 4px 4px 0 var(--black);
+    font-family: "Oswald", sans-serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.1;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease;
+  }
+
+  .retro-button:hover, .retro-button:focus-visible, .nav .order-link:hover, .nav .order-link:focus-visible {
+    color: var(--paper-soft);
+    background: var(--blue);
+    box-shadow: 2px 2px 0 var(--black);
+    transform: translate(2px, 2px);
+    outline: none;
+  }
+
+  .menu-toggle { display: none; width: 48px; min-width: 48px; height: 48px; border: 2px solid var(--black); border-radius: var(--radius); background: var(--paper-soft); color: var(--black); font-family: "Oswald", sans-serif; font-size: 1rem; font-weight: 800; text-transform: uppercase; }
+
+  .hero { position: relative; padding: clamp(42px, 7vw, 88px) 0 30px; border-bottom: 2px solid var(--line); overflow: hidden; }
+  .hero-grid { display: grid; grid-template-columns: minmax(0, .86fr) minmax(420px, 1.14fr); align-items: end; gap: clamp(18px, 3.5vw, 48px); }
+  .eyebrow, .section-kicker { display: inline-flex; align-items: center; justify-content: center; gap: 10px; color: var(--blue); font-family: "Oswald", sans-serif; font-size: .98rem; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; }
+  .eyebrow { justify-content: flex-start; margin-bottom: 18px; }
+  .eyebrow::before, .eyebrow::after { content: ""; width: 42px; height: 2px; background: var(--blue); }
+  .section-kicker::before, .section-kicker::after { content: "*"; font-size: .9rem; }
+
+  h1, h2, h3 { color: var(--black); font-family: "Bebas Neue", sans-serif; line-height: .95; letter-spacing: 2px; text-transform: uppercase; font-weight: 400; }
+  h1 { max-width: 700px; font-size: clamp(4.25rem, 9.5vw, 8rem); letter-spacing: 2.5px; }
+  h1 span, .section-title span { color: var(--blue); }
+  .hero-copy { font-size: .98rem; line-height: 1.6; }
+  .hero-actions { display: flex; align-items: center; flex-wrap: wrap; gap: 16px; }
+  .hero-badge { display: inline-flex; align-items: center; min-height: 46px; padding: 9px 16px; border-top: 2px solid var(--black); border-bottom: 2px solid var(--black); color: var(--black); font-family: "Oswald", sans-serif; font-size: .98rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+  .hero-plate { position: relative; min-height: 520px; isolation: isolate; background: transparent; border: none; box-shadow: none; overflow: visible; }
+  .hero-plate::before { content: ""; position: absolute; inset: 7% 1% 14% 4%; z-index: -2; background: radial-gradient(circle, rgba(15, 78, 162, .24) 0 1.4px, transparent 1.5px); background-size: 12px 12px; transform: rotate(-2deg); pointer-events: none; }
+  .hero-image-wrap { position: absolute; right: -76px; bottom: -18px; width: min(820px, 122%); height: min(560px, 84vw); background: transparent; border: none; box-shadow: none; overflow: visible; }
+  .hero-image-wrap .hero-main-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: right bottom; background: transparent; border: none; box-shadow: none; mix-blend-mode: multiply; filter: contrast(1.08) saturate(1.05); }
+  .hero-image-wrap::after { content: ""; position: absolute; left: 12%; right: 2%; bottom: 1%; height: 15%; z-index: -1; background: radial-gradient(ellipse at center, rgba(17,17,17,.20) 0%, rgba(17,17,17,.10) 42%, transparent 72%); filter: blur(5px); transform: scaleX(.92); pointer-events: none; }
+
+  .section { padding: clamp(56px, 7vw, 88px) 0; border-bottom: 2px solid var(--line); }
+  .section-heading { display: grid; place-items: center; gap: 10px; margin-bottom: 36px; text-align: center; }
+  .section-title { font-size: clamp(2.25rem, 11vw, 3.35rem); letter-spacing: 1px; }
+
+  .timeline { position: relative; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 22px; margin-top: 28px; }
+  .timeline::before { content: ""; position: absolute; top: 56px; right: 8%; left: 8%; height: 3px; background: var(--blue); }
+  .timeline-item { position: relative; display: grid; justify-items: center; gap: 10px; padding: 0 10px; text-align: center; }
+  .timeline-icon { display: grid; place-items: center; width: 112px; height: 112px; border: 3px solid var(--blue); border-radius: 50%; background: var(--paper-soft); color: var(--black); font-family: "Oswald", sans-serif; font-size: 2.2rem; font-weight: 800; z-index: 1; }
+  .timeline-year { color: var(--blue); font-family: "Oswald", sans-serif; font-size: 2.2rem; font-weight: 700; line-height: .95; letter-spacing: 1px; }
+  .timeline-item h3 { font-family: "Oswald", sans-serif; font-size: 1.45rem; font-weight: 700; letter-spacing: 1px; }
+  .timeline-item p { max-width: 240px; font-family: "Open Sans", sans-serif; font-size: .98rem; font-weight: 500; line-height: 1.55; }
+
+  .products-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+  .product-card { display: grid; grid-template-columns: 45% 1fr; min-height: 286px; border: 2px solid var(--blue); border-radius: var(--radius); background: rgba(255,250,240,.76); box-shadow: 5px 5px 0 rgba(17,17,17,.14); overflow: hidden; }
+  .product-media { display: grid; place-items: end center; min-height: 250px; padding: 14px; background: linear-gradient(180deg, rgba(255,255,255,.58), rgba(15,78,162,.08)); }
+  .product-media img { width: 100%; height: 220px; object-fit: contain; filter: drop-shadow(0 12px 10px rgba(17,17,17,.22)); }
+  .product-info { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 22px 18px 22px 6px; }
+  .product-info h3 { font-family: "Oswald", sans-serif; font-size: clamp(1.75rem, 2.6vw, 2.15rem); font-weight: 700; letter-spacing: 1px; line-height: 1.05; }
+  .product-info p { color: #303030; font-family: "Open Sans", sans-serif; font-size: .96rem; font-weight: 500; line-height: 1.6; }
+  .price { color: var(--blue); font-family: "Oswald", sans-serif; font-size: 1.95rem; font-weight: 700; letter-spacing: 1px; line-height: 1; }
+  .product-info .retro-button { align-self: flex-start; min-height: 42px; padding: 8px 16px; box-shadow: 3px 3px 0 var(--black); font-size: .96rem; }
+
+  .btn-ifood { display: inline-flex; align-items: center; justify-content: center; gap: 10px; white-space: nowrap; }
+  .btn-ifood img { width: 58px; height: 24px; object-fit: contain; display: block; flex: 0 0 auto; }
+
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
+  .gallery-item { min-height: 220px; border: 2px solid var(--black); border-radius: var(--radius); background: linear-gradient(135deg, rgba(15,78,162,.12), rgba(255,250,240,.85)), radial-gradient(circle at center, rgba(15,78,162,.22), transparent 55%); overflow: hidden; position: relative; }
+  .gallery-item img { width: 100%; height: 100%; min-height: 220px; object-fit: cover; }
+  .gallery-item figcaption { position: absolute; right: 12px; bottom: 12px; left: 12px; padding: 8px 10px; border: 1px solid var(--blue); background: rgba(255,250,240,.92); color: var(--black); font-family: "Oswald", sans-serif; font-size: .95rem; font-weight: 700; letter-spacing: 1px; text-transform: uppercase; }
+
+  .vip { border: 2px solid var(--blue); border-radius: var(--radius); padding: clamp(28px, 5vw, 54px); background: rgba(255,250,240,.78); box-shadow: var(--shadow); text-align: center; }
+  .vip p { max-width: 760px; margin: 18px auto 28px; font-family: "Open Sans", sans-serif; font-size: clamp(1rem, 1.7vw, 1.14rem); font-weight: 500; line-height: 1.65; }
+
+  .cta-strip { grid-template-columns: auto 1fr; text-align: left; }
+    .order-fries { grid-column: 1 / -1; }
+    .order-actions { grid-column: 1 / -1; justify-content: center; }
+  .cta-strip h2 { color: var(--blue); font-family: "Bebas Neue", sans-serif; font-size: clamp(3.2rem, 5vw, 5rem); line-height: .88; letter-spacing: 2px; }
+  .cta-strip p { color: var(--black); font-family: "Oswald", sans-serif; font-size: clamp(1.8rem, 3vw, 2.55rem); font-weight: 700; letter-spacing: 1px; line-height: 1; text-transform: uppercase; }
+
+
+  .order-bag {
+    display: grid;
+    place-items: center;
+    width: 92px;
+    height: 92px;
+    border: 2px solid var(--blue);
+    border-radius: 18px 18px 10px 10px;
+    background: var(--paper-soft);
+    position: relative;
+  }
+
+  .order-bag::before {
+    content: "";
+    position: absolute;
+    top: -18px;
+    width: 42px;
+    height: 28px;
+    border: 5px solid var(--blue);
+    border-bottom: none;
+    border-radius: 26px 26px 0 0;
+    background: transparent;
+  }
+
+  .order-bag img {
+    width: 62px;
+    height: 62px;
+    object-fit: cover;
+    object-position: center 18%;
+    border-radius: 50%;
+    mix-blend-mode: multiply;
+  }
+
+  .order-copy {
+    min-width: 0;
+  }
+
+  .order-fries {
+    display: grid;
+    place-items: center;
+    align-self: end;
+  }
+
+  .order-fries img {
+    width: min(160px, 100%);
+    height: auto;
+    max-height: 150px;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 8px rgba(17, 17, 17, .16));
+  }
+
+  .order-fries-fallback {
+    display: grid;
+    place-items: center;
+    width: 118px;
+    height: 112px;
+    border: 2px solid var(--blue);
+    border-radius: 8px 8px 20px 20px;
+    background: linear-gradient(180deg, #fffaf0 0 38%, #f4f0e7 38% 100%);
+    color: var(--blue);
+    font-family: "Oswald", sans-serif;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    text-transform: uppercase;
+    position: relative;
+  }
+
+  .order-fries-fallback::before {
+    content: "";
+    position: absolute;
+    top: -38px;
+    left: 16px;
+    right: 16px;
+    height: 48px;
+    background: repeating-linear-gradient(90deg, #f59d23 0 10px, transparent 10px 15px);
+    border-radius: 8px 8px 0 0;
+  }
+
+  .order-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+
+  .order-action {
+    min-height: 58px;
+    padding: 14px 20px;
+    border: 2px solid transparent;
+    border-radius: 7px;
+    box-shadow: 4px 4px 0 var(--black);
+    color: #fff;
+    font-family: "Oswald", sans-serif;
+    font-size: 1.05rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .order-action img {
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
+    filter: brightness(0) invert(1);
+  }
+
+  .order-whatsapp {
+    background: var(--blue);
+  }
+
+  .order-ifood {
+    background: #d71920;
+  }
+  .site-footer { background: rgba(255,250,240,.7); border-top: 2px solid var(--black); }
+  .footer-grid { display: grid; grid-template-columns: 1.2fr .75fr 1fr 1.2fr; gap: 30px; padding: 42px 0; }
+  .footer-logo { align-items: flex-start; flex-direction: column; min-width: 0; }
+  .footer-logo .brand { min-width: 0; }
+  .socials { display: flex; gap: 10px; margin-top: 18px; }
+  .socials a {
+    display: grid;
+    place-items: center;
+    width: 50px;
+    height: 50px;
+    border: 1.5px solid var(--blue);
+    border-radius: 50%;
+    background: var(--paper-soft);
+    box-shadow: 0 6px 14px rgba(17, 17, 17, 0.14);
+    transition: transform 0.3s ease, background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+  }
+
+  .socials a img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+    display: block;
+    transition: filter 0.3s ease, transform 0.3s ease;
+  }
+
+  .socials a:hover,
+  .socials a:focus-visible {
+    transform: scale(1.08);
+    border-color: transparent;
+    box-shadow: 0 8px 18px rgba(17, 17, 17, 0.18);
+    outline: none;
+  }
+
+  .social-instagram:hover img,
+  .social-instagram:focus-visible img,
+  .social-ifood:hover img,
+  .social-ifood:focus-visible img {
+    filter: brightness(0) invert(1);
+  }
+
+  .social-instagram:hover,
+  .social-instagram:focus-visible {
+    background: linear-gradient(135deg, #f58529, #dd2a7b 45%, #8134af 72%, #515bd4);
+  }
+
+  .social-whatsapp:hover,
+  .social-whatsapp:focus-visible {
+    background: #25D366;
+  }
+
+  .social-ifood:hover,
+  .social-ifood:focus-visible {
+    background: #ea1d2c;
+  }
+  .footer-col h3 { margin-bottom: 12px; color: var(--blue); font-family: "Oswald", sans-serif; font-size: 1.18rem; font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; }
+  .footer-col ul { list-style: none; }
+  .footer-col li, .footer-col p { margin-bottom: 8px; font-family: "Open Sans", sans-serif; font-size: .95rem; font-weight: 600; line-height: 1.55; }
+  .footer-bottom { flex-direction: column; text-align: center; }
+
+  .fallback-logo { display: none; }
+
+  .reveal, .reveal-left, .reveal-right { opacity: 0; transition: opacity .85s ease, transform .85s cubic-bezier(.22, 1, .36, 1); will-change: opacity, transform; }
+  .reveal { transform: translateY(46px); }
+  .reveal-left { transform: translateX(-48px); }
+  .reveal-right { transform: translateX(48px); }
+  .reveal-delay { transition-delay: .14s; }
+  .reveal-delay-2 { transition-delay: .26s; }
+  .reveal.active, .reveal-left.active, .reveal-right.active { opacity: 1; transform: translate(0, 0); }
+
+  @media (prefers-reduced-motion: reduce) {
+    .reveal, .reveal-left, .reveal-right { opacity: 1; transform: none; transition: none; }
+  }
+
+  @media (max-width: 1024px) {
+    .header-inner { min-height: 82px; }
+    .menu-toggle { display: inline-grid; place-items: center; }
+    .nav { position: fixed; inset: 82px 0 auto 0; display: none; flex-direction: column; align-items: stretch; gap: 14px; padding: 22px 24px 28px; border-bottom: 2px solid var(--black); background: var(--paper); box-shadow: 0 16px 24px rgba(17,17,17,.12); }
+    body.menu-open .nav { display: flex; }
+    .nav a, .nav .order-link { width: 100%; justify-content: center; text-align: center; }
+    .hero-grid { grid-template-columns: 1fr; align-items: start; }
+    .footer-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .hero-plate { min-height: 430px; }
+    .hero-image-wrap { right: -28px; bottom: -10px; width: min(720px, 112%); height: 430px; }
+    .products-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .product-card { grid-template-columns: 1fr; }
+    .product-info { padding: 20px; }
+    .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .cta-strip { grid-template-columns: auto 1fr; text-align: left; }
+    .order-fries { grid-column: 1 / -1; }
+    .order-actions { grid-column: 1 / -1; justify-content: center; }
+  }
+
+  @media (max-width: 768px) {
+    body { font-size: 15.5px; }
+    .container { width: min(100% - 24px, 1160px); }
+    .logo-complete { height: 52px; max-width: 180px; }
+    .brand-logo-fallback img { width: 52px; height: 52px; }
+    .brand-name { font-size: 2rem; letter-spacing: 1.5px; }
+    .brand-subtitle { font-size: .92rem; letter-spacing: 1.5px; }
+    .hero { padding-top: 32px; }
+    h1 { font-size: clamp(3.05rem, 14.5vw, 4.75rem); letter-spacing: 1.5px; line-height: .98; }
+    .eyebrow::before, .eyebrow::after { width: 28px; }
+    .hero-actions { align-items: stretch; }
+    .cta-strip { grid-template-columns: 1fr; justify-items: center; text-align: center; }
+    .order-actions { width: 100%; flex-direction: column; }
+    .order-action { width: 100%; }
+    .order-fries { grid-column: 1 / -1; }
+    .order-actions { grid-column: 1 / -1; justify-content: center; }
+    .hero-actions .retro-button, .hero-actions .hero-badge, .cta-strip .retro-button, .vip .retro-button { width: 100%; }
+    .hero-plate { min-height: 320px; }
+    .hero-image-wrap { position: relative; right: auto; bottom: auto; width: 100%; height: 320px; }
+    .hero-image-wrap .hero-main-image { object-position: center bottom; }
+    .timeline { grid-template-columns: 1fr; gap: 34px; }
+    .timeline::before { top: 0; bottom: 0; left: 50%; right: auto; width: 3px; height: auto; }
+    .timeline-item { background: linear-gradient(90deg, transparent, rgba(247,241,231,.92), transparent); }
+    .products-grid { grid-template-columns: 1fr; }
+    .product-card { grid-template-columns: 1fr; }
+    .product-media { min-height: 220px; }
+    .product-media img { height: 210px; }
+    .product-info .retro-button { width: 100%; }
+    .gallery-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; text-align: center; }
+    .footer-logo, .footer-col { align-items: center; }
+    .footer-logo .brand { justify-content: center; }
+    .socials { display: flex; gap: 10px; margin-top: 18px; }
+    .footer-bottom { flex-direction: column; text-align: center; }
+  }
+
+  @media (max-width: 480px) {
+    body { font-size: 15px; }
+    .socials a { width: 48px; height: 48px; }
+    .socials a img { width: 24px; height: 24px; }
+    .container { width: min(100% - 20px, 1160px); }
+    .header-inner { gap: 12px; }
+    .logo-complete { height: 46px; max-width: 150px; }
+    .menu-toggle { width: 44px; min-width: 44px; height: 44px; font-size: .9rem; }
+    .nav { inset: 74px 0 auto 0; padding: 18px 16px 24px; }
+    h1 { font-size: clamp(2.75rem, 15.8vw, 3.9rem); letter-spacing: 1px; line-height: .98; }
+    .section-title { font-size: clamp(2.25rem, 11vw, 3.35rem); letter-spacing: 1px; }
+    .hero-copy { font-size: .98rem; line-height: 1.6; }
+    .hero-plate { min-height: 270px; }
+    .hero-image-wrap { height: 270px; }
+    .timeline-icon { width: 96px; height: 96px; font-size: 1.9rem; }
+    .product-media img { height: 190px; }
+    .vip, .cta-strip { grid-template-columns: auto 1fr; text-align: left; }
+    .order-fries { grid-column: 1 / -1; }
+    .order-actions { grid-column: 1 / -1; justify-content: center; }
+    .btn-ifood { gap: 8px; white-space: normal; }
+    .btn-ifood img { width: 50px; height: 22px; }
+  }
+
+  @media (max-width: 480px) {
+    body { font-size: 15px; }
+    .socials a { width: 48px; height: 48px; }
+    .socials a img { width: 24px; height: 24px; }
+    .whatsapp-float {
+      right: 14px;
+      bottom: 14px;
+      width: 54px;
+      height: 54px;
+    }
+
+    .whatsapp-float img {
+      width: 28px;
+      height: 28px;
+    }
+  }
+
+  /* Pedido: banner vintage horizontal */
+  #peca-agora.cta-strip {
+    display: grid;
+    grid-template-columns: auto minmax(220px, .9fr) minmax(130px, .42fr) minmax(380px, 1fr);
+    align-items: center;
+    gap: clamp(18px, 3vw, 34px);
+    margin-top: 26px;
+    padding: 20px 28px;
+    border: 2px solid var(--blue);
+    border-radius: var(--radius);
+    background: rgba(255, 250, 240, 0.86);
+    text-align: left;
+    overflow: visible;
+  }
+
+  #peca-agora .order-fries,
+  #peca-agora .order-actions {
+    grid-column: auto;
+  }
+
+  #peca-agora .order-actions {
+    width: auto;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+
+  #peca-agora .order-action {
+    width: auto;
+    color: #fff;
+  }
+
+  @media (max-width: 1024px) {
+    #peca-agora.cta-strip {
+      grid-template-columns: auto 1fr;
+      text-align: left;
+    }
+
+    #peca-agora .order-fries,
+    #peca-agora .order-actions {
+      grid-column: 1 / -1;
+    }
+
+    #peca-agora .order-actions {
+      justify-content: center;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #peca-agora.cta-strip {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+    }
+
+    #peca-agora .order-actions {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    #peca-agora .order-action {
+      width: 100%;
+    }
+  }
+
+  /* Ajuste final da seção Peça Agora */
+  #peca-agora.cta-strip {
+    display: grid;
+    grid-template-columns: auto minmax(210px, .9fr) minmax(150px, .5fr) minmax(390px, 1.05fr);
+    align-items: center;
+    gap: clamp(18px, 3vw, 32px);
+    margin-top: 28px;
+    padding: 18px 24px;
+    border: 2px solid var(--blue);
+    border-radius: 8px;
+    background: rgba(255, 250, 240, .92);
+    text-align: left;
+    overflow: visible;
+  }
+
+  #peca-agora .order-bag {
+    width: 94px;
+    height: 92px;
+    flex: 0 0 auto;
+  }
+
+  #peca-agora .order-copy h2 {
+    color: var(--blue);
+    font-family: "Bebas Neue", sans-serif;
+    font-size: clamp(3.25rem, 5vw, 5rem);
+    line-height: .86;
+    letter-spacing: 2px;
+    margin: 0;
+  }
+
+  #peca-agora .order-copy p {
+    color: var(--black);
+    font-family: "Oswald", sans-serif;
+    font-size: clamp(1.75rem, 3vw, 2.45rem);
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin: 0;
+  }
+
+  #peca-agora .order-fries {
+    grid-column: auto;
+    align-self: center;
+    justify-self: center;
+    display: grid;
+    place-items: center;
+  }
+
+  #peca-agora .order-fries img {
+    display: block;
+    width: min(170px, 100%);
+    max-height: 160px;
+    height: auto;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 8px rgba(17, 17, 17, .16));
+  }
+
+  #peca-agora .order-actions {
+    grid-column: auto;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 14px;
+    width: auto;
+    flex-direction: row;
+  }
+
+  #peca-agora .order-action {
+    width: auto;
+    min-height: 58px;
+    padding: 14px 20px;
+    color: #fff;
+    border: 0;
+    border-radius: 7px;
+    box-shadow: 4px 4px 0 var(--black);
+    font-family: "Oswald", sans-serif;
+    font-size: 1.02rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    line-height: 1.05;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+
+  #peca-agora .order-action img {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    flex: 0 0 auto;
+  }
+
+  #peca-agora .order-whatsapp {
+    background: var(--blue);
+  }
+
+  #peca-agora .order-whatsapp img {
+    filter: none;
+  }
+
+  #peca-agora .order-ifood {
+    background: #d71920;
+  }
+
+  #peca-agora .order-ifood img {
+    width: 70px;
+    height: 30px;
+    filter: none;
+  }
+
+  @media (max-width: 1024px) {
+    #peca-agora.cta-strip {
+      grid-template-columns: auto 1fr;
+      text-align: left;
+    }
+
+    #peca-agora .order-fries,
+    #peca-agora .order-actions {
+      grid-column: 1 / -1;
+    }
+
+    #peca-agora .order-actions {
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+  }
+
+  @media (max-width: 768px) {
+    #peca-agora.cta-strip {
+      grid-template-columns: 1fr;
+      justify-items: center;
+      text-align: center;
+      padding: 24px 18px;
+    }
+
+    #peca-agora .order-bag {
+      display: none;
+    }
+
+    #peca-agora .order-fries {
+      grid-column: auto;
+    }
+
+    #peca-agora .order-actions {
+      width: 100%;
+      flex-direction: column;
+    }
+
+    #peca-agora .order-action {
+      width: 100%;
+      white-space: normal;
+    }
+  }
+
+  /* Batata integrada ao fundo do banner */
+  #peca-agora .order-fries {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: visible;
+  }
+
+  #peca-agora .order-fries img {
+    background: transparent;
+    border: none;
+    box-shadow: none;
+    mix-blend-mode: normal;
+    width: min(178px, 100%);
+    max-height: 168px;
+    object-fit: contain;
+    object-position: center bottom;
+    filter: drop-shadow(0 10px 8px rgba(17, 17, 17, .14));
+  }
+
+  @media (max-width: 768px) {
+    #peca-agora .order-fries img {
+      width: min(165px, 72vw);
+      max-height: 158px;
+    }
+  }
+  /* Correcao final: WhatsApp flutuante pequeno no canto superior esquerdo */
+  .whatsapp-float {
+    position: fixed !important;
+    top: 106px !important;
+    left: 20px !important;
+    right: auto !important;
+    bottom: auto !important;
+    width: 58px !important;
+    height: 58px !important;
+    max-width: 58px !important;
+    max-height: 58px !important;
+    padding: 0 !important;
+    border-radius: 50% !important;
+    background: #25d366 !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    overflow: hidden !important;
+    z-index: 9999 !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.22) !important;
+    transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+  }
+
+  .whatsapp-float:hover {
+    transform: scale(1.08) !important;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.26) !important;
+  }
+
+  .whatsapp-float img {
+    display: block !important;
+    width: 32px !important;
+    height: 32px !important;
+    max-width: 32px !important;
+    max-height: 32px !important;
+    object-fit: contain !important;
+    object-position: center !important;
+    transform: none !important;
+  }
+
+  @media (max-width: 768px) {
+    .whatsapp-float {
+      top: 86px !important;
+      left: 14px !important;
+      width: 52px !important;
+      height: 52px !important;
+      max-width: 52px !important;
+      max-height: 52px !important;
+    }
+
+    .whatsapp-float img {
+      width: 29px !important;
+      height: 29px !important;
+      max-width: 29px !important;
+      max-height: 29px !important;
+    }
+  }
+
+  /* Clube Ship's: formulario para captacao via n8n */
+  .club-card {
+    width: min(920px, 100%);
+    margin: 0 auto;
+    padding: clamp(24px, 4vw, 42px);
+    border: 2px solid var(--blue);
+    border-radius: var(--radius);
+    background: rgba(255, 250, 240, 0.76);
+    box-shadow: 0 10px 24px rgba(17, 17, 17, 0.07);
+    text-align: center;
+  }
+
+  .club-card .section-title {
+    margin: 10px auto 12px;
+  }
+
+  .club-copy {
+    max-width: 660px;
+    margin: 0 auto 24px;
+    color: var(--black);
+    font-family: "Open Sans", sans-serif;
+    font-size: 1.02rem;
+    font-weight: 600;
+    line-height: 1.65;
+  }
+
+  .club-form {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    text-align: left;
+  }
+
+  .club-field {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+  }
+
+  .club-field label {
+    color: var(--black);
+    font-family: "Oswald", sans-serif;
+    font-size: .92rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+  }
+
+  .club-field input {
+    width: 100%;
+    min-height: 48px;
+    padding: 12px 14px;
+    border: 1.5px solid rgba(17, 17, 17, 0.42);
+    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.58);
+    color: var(--black);
+    font-family: "Open Sans", sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    outline: none;
+    transition: border-color .25s ease, box-shadow .25s ease;
+  }
+
+  .club-field input:focus {
+    border-color: var(--blue);
+    box-shadow: 0 0 0 3px rgba(15, 78, 162, 0.13);
+  }
+
+  .club-form-actions {
+    grid-column: 1 / -1;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    margin-top: 6px;
+  }
+
+  .club-submit {
+    min-height: 50px;
+    padding: 12px 28px;
+    border: 2px solid var(--blue-dark);
+    border-radius: var(--radius);
+    background: var(--blue);
+    color: #fff;
+    cursor: pointer;
+    font-family: "Oswald", sans-serif;
+    font-size: 1rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    box-shadow: 4px 4px 0 var(--black);
+    transition: transform .22s ease, box-shadow .22s ease, background .22s ease;
+  }
+
+  .club-submit:hover {
+    transform: translate(-2px, -2px);
+    box-shadow: 6px 6px 0 var(--black);
+    background: var(--blue-dark);
+  }
+
+  .club-submit:disabled {
+    cursor: wait;
+    opacity: .72;
+    transform: none;
+  }
+
+  .club-message {
+    min-height: 24px;
+    color: var(--blue);
+    font-family: "Open Sans", sans-serif;
+    font-size: .95rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .club-message.error {
+    color: #b51f1f;
+  }
+
+  @media (max-width: 768px) {
+    .club-form {
+      grid-template-columns: 1fr;
+    }
+
+    .club-submit {
+      width: 100%;
+    }
+  }
+
+  /* Ajuste tipografico vintage: Ship's Burguer */
+  body {
+    font-family: "Roboto Slab", Georgia, serif;
+    font-weight: 500;
+    letter-spacing: 0;
+  }
+
+  h1,
+  h2,
+  h3,
+  .brand-name,
+  .section-title,
+  .cta-strip h2 {
+    font-family: "Rye", "Bebas Neue", serif;
+    font-weight: 400;
+    letter-spacing: 1.2px;
+    line-height: 1.02;
+  }
+
+  h1 {
+    font-size: clamp(3.55rem, 8.2vw, 6.85rem);
+    letter-spacing: 1px;
+    line-height: 1.04;
+  }
+
+  .section-title {
+    font-size: clamp(2.15rem, 5.2vw, 3.7rem);
+    line-height: 1.08;
+  }
+
+  .nav,
+  .nav a,
+  .retro-button,
+  .nav .order-link,
+  .menu-toggle,
+  .eyebrow,
+  .section-kicker,
+  .hero-badge,
+  .timeline-year,
+  .timeline-item h3,
+  .product-info h3,
+  .price,
+  .gallery-item figcaption,
+  .cta-strip p,
+  .footer-col h3,
+  .club-field label,
+  .club-submit,
+  .order-action {
+    font-family: "Oswald", Arial, sans-serif;
+  }
+
+  .hero-copy,
+  .timeline-item p,
+  .product-info p,
+  .vip p,
+  .club-copy,
+  .club-field input,
+  .club-message,
+  .footer-col li,
+  .footer-col p,
+  .footer-bottom,
+  p,
+  li,
+  input {
+    font-family: "Roboto Slab", Georgia, serif;
+  }
+
+  .hero-copy,
+  .timeline-item p,
+  .product-info p,
+  .vip p,
+  .club-copy {
+    line-height: 1.68;
+  }
+
+  .product-info h3 {
+    font-size: clamp(1.55rem, 2.25vw, 1.95rem);
+    letter-spacing: .8px;
+  }
+
+  .price {
+    font-size: 2.05rem;
+    letter-spacing: .8px;
+  }
+
+  .cta-strip h2 {
+    font-size: clamp(2.65rem, 4.3vw, 4.15rem);
+    line-height: 1.02;
+  }
+
+  .brand-name {
+    font-size: clamp(1.9rem, 3.2vw, 2.75rem);
+  }
+
+  @media (max-width: 768px) {
+    h1 {
+      font-size: clamp(2.35rem, 11vw, 3.55rem);
+      letter-spacing: .5px;
+      line-height: 1.12;
+    }
+
+    .section-title {
+      font-size: clamp(2rem, 8.5vw, 3rem);
+    }
+
+    .cta-strip h2 {
+      font-size: clamp(2.4rem, 10vw, 3.25rem);
+    }
+
+    .product-info h3 {
+      font-size: 1.65rem;
+    }
+  }
+
+  /* Ajuste final da hero/Nossa Historia: evita sobreposicao texto + imagem */
+  .hero-grid {
+    grid-template-columns: minmax(320px, 0.78fr) minmax(420px, 1fr);
+    gap: clamp(34px, 5vw, 76px);
+    align-items: end;
+  }
+
+  .hero-grid > div:first-child {
+    position: relative;
+    z-index: 2;
+    max-width: 590px;
+  }
+
+  .hero h1 {
+    max-width: 560px;
+    font-size: clamp(3rem, 5.6vw, 5.65rem);
+    line-height: 1.08;
+    letter-spacing: .6px;
+  }
+
+  .hero-copy {
+    max-width: 520px;
+  }
+
+  .hero-plate {
+    min-height: 500px;
+    z-index: 1;
+  }
+
+  .hero-image-wrap {
+    right: -34px;
+    bottom: -10px;
+    width: min(690px, 106%);
+    height: min(510px, 70vw);
+  }
+
+  @media (max-width: 1180px) {
+    .hero-grid {
+      grid-template-columns: minmax(300px, .9fr) minmax(380px, 1fr);
+      gap: clamp(28px, 4vw, 54px);
+    }
+
+    .hero h1 {
+      max-width: 520px;
+      font-size: clamp(2.85rem, 5.2vw, 4.85rem);
+    }
+
+    .hero-image-wrap {
+      right: -22px;
+      width: min(620px, 104%);
+      height: min(470px, 66vw);
+    }
+  }
+
+  @media (max-width: 1024px) {
+    .hero-grid {
+      grid-template-columns: 1fr;
+      gap: 28px;
+    }
+
+    .hero-grid > div:first-child,
+    .hero h1,
+    .hero-copy {
+      max-width: 100%;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.65rem, 8.6vw, 4.4rem);
+      line-height: 1.12;
+    }
+
+    .hero-plate {
+      min-height: 390px;
+    }
+
+    .hero-image-wrap {
+      position: relative;
+      right: auto;
+      bottom: auto;
+      width: 100%;
+      height: 390px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero h1 {
+      font-size: clamp(2.15rem, 9.8vw, 3.35rem);
+      line-height: 1.16;
+      letter-spacing: .3px;
+    }
+
+    .hero-plate {
+      min-height: 300px;
+    }
+
+    .hero-image-wrap {
+      height: 300px;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .hero h1 {
+      font-size: clamp(1.95rem, 9.2vw, 2.85rem);
+      line-height: 1.18;
+    }
+
+    .hero-plate {
+      min-height: 260px;
+    }
+
+    .hero-image-wrap {
+      height: 260px;
+    }
+  }
+</style>
+</head>
+<body>
+  <header class="site-header">
+    <div class="container header-inner">
+      <a class="brand" href="#historia" aria-label="Ship's Burguer">
+        <img class="logo-complete" src="images/Logo site" alt="Ship's Burguer" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
+        <span class="brand-logo-fallback">
+          <img src="images/Shipinho.png" alt="Mascote Ship's Burguer" />
+          <span class="brand-text">
+            <span class="brand-name">Ship's</span>
+            <span class="brand-subtitle">Burguer</span>
+            <span class="brand-since">Since 2021</span>
+          </span>
+        </span>
+      </a>
+
+      <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">Menu</button>
+
+      <nav class="nav" aria-label="Menu principal">
+        <a href="#historia">Nossa História</a>
+        <a href="#lanches">Lanches</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#grupo-vip">Grupo VIP</a>
+        <a class="order-link" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="historia">
+      <div class="container hero-grid">
+        <div>
+          <p class="eyebrow reveal reveal-left">Nossa História</p>
+          <h1 class="reveal reveal-left reveal-delay">Não é só sobre burger. É sobre <span>história.</span></h1>
+          <p class="hero-copy reveal reveal-left reveal-delay-2">
+            Da nossa primeira chapa dentro de um trailer até a realização do sonho da loja própria.
+            Essa é a história da Ship's Burguer: feita de determinação, família, clientes que viraram amigos
+            e uma vontade enorme de servir o melhor burger da região.
+          </p>
+          <div class="hero-actions reveal reveal-left reveal-delay-2">
+            <a class="retro-button" href="#trajetoria">Conheça nossa jornada</a>
+            <span class="hero-badge">Ship's Burguer desde 2021</span>
+          </div>
+        </div>
+
+        <div class="hero-plate" aria-label="Burger artesanal da Ship's Burguer">
+          <div class="hero-image-wrap reveal reveal-right">
+            <img class="hero-main-image" src="images/copo com o shipinho.png" alt="Hambúrguer e copo com Shipinho" />
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="trajetoria">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Nossa trajetória</p>
+          <h2 class="section-title">Uma história feita de <span>determinação</span></h2>
+        </div>
+
+        <div class="timeline">
+          <article class="timeline-item reveal">
+            <div class="timeline-icon" aria-hidden="true">21</div>
+            <strong class="timeline-year">2021</strong>
+            <h3>O começo</h3>
+            <p>Tudo começou em um pequeno trailer, com muita vontade de fazer o melhor burger da região.</p>
+          </article>
+
+          <article class="timeline-item reveal reveal-delay">
+            <div class="timeline-icon" aria-hidden="true">22</div>
+            <strong class="timeline-year">2022</strong>
+            <h3>Crescendo</h3>
+            <p>A qualidade conquistou clientes e nossa fama só aumentava. O trailer ficou pequeno perto do sonho.</p>
+          </article>
+
+          <article class="timeline-item reveal reveal-delay-2">
+            <div class="timeline-icon" aria-hidden="true">23</div>
+            <strong class="timeline-year">2023</strong>
+            <h3>Uma família</h3>
+            <p>Mais que clientes, conquistamos amigos. A Ship's Burguer virou ponto de encontro.</p>
+          </article>
+
+          <article class="timeline-item reveal">
+            <div class="timeline-icon" aria-hidden="true">24</div>
+            <strong class="timeline-year">2024</strong>
+            <h3>A realização</h3>
+            <p>O sonho se tornou realidade: nossa loja física nasceu para oferecer uma experiência ainda melhor.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="lanches">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Nossos destaques</p>
+          <h2 class="section-title">Lanches</h2>
+        </div>
+
+        <div class="products-grid">
+          <article class="product-card reveal">
+            <div class="product-media">
+              <img src="smash-guilbert.png" alt="Smash Guilbert" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop';" />
+            </div>
+            <div class="product-info">
+              <h3>Smash Guilbert</h3>
+              <p>Smash, queijo derretido, alface, tomate, maionese especial e crispy de cebola.</p>
+              <strong class="price">R$ 27,90</strong>
+              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
+            </div>
+          </article>
+
+          <article class="product-card reveal reveal-delay">
+            <div class="product-media">
+              <img src="smash-toven.png" alt="Smash Toven" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1594212699903-ec8a3eca50f5?q=80&w=1200&auto=format&fit=crop';" />
+            </div>
+            <div class="product-info">
+              <h3>Smash Toven</h3>
+              <p>Smash, queijo cheddar, bacon, cebola, picles e molho especial.</p>
+              <strong class="price">R$ 28,90</strong>
+              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
+            </div>
+          </article>
+
+          <article class="product-card reveal reveal-delay-2">
+            <div class="product-media">
+              <img src="smash-leoncio.png" alt="Smash Leôncio" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1200&auto=format&fit=crop';" />
+            </div>
+            <div class="product-info">
+              <h3>Smash Leôncio</h3>
+              <p>Smash, queijo cheddar, bacon e molho especial da casa.</p>
+              <strong class="price">R$ 26,90</strong>
+              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
+            </div>
+          </article>
+        </div>
+
+        <div class="cta-strip" id="peca-agora">
+          <div class="order-bag" aria-hidden="true">
+            <img src="images/Shipinho.png" alt="">
+          </div>
+          <div class="order-copy">
+            <h2>Peça Agora</h2>
+            <p>E receba em casa!</p>
+          </div>
+          <div class="order-fries">
+            <img src="images/batatapng-transparent.png" alt="Batata Ship's" onerror="this.style.display='none'; this.nextElementSibling.style.display='grid';">
+            <span class="order-fries-fallback" style="display:none;">Ship's<br>Fritas</span>
+          </div>
+          <div class="order-actions">
+            <a class="retro-button order-action order-whatsapp" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener"><img src="images/logo-whats-clean.svg" alt="">Pedir pelo WhatsApp</a>
+            <a class="retro-button btn-ifood order-action order-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="PEÇA PELO IFOOD"><img src="images/ifood-logo.png" alt="iFood">Faça seu pedido pelo iFood</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="galeria">
+      <div class="container">
+        <div class="section-heading reveal">
+          <p class="section-kicker">Momentos Ship's</p>
+          <h2 class="section-title">Galeria</h2>
+        </div>
+
+        <div class="gallery-grid">
+          <figure class="gallery-item reveal">
+            <img src="assets/galeria-loja.jpg" alt="Loja Ship's Burguer" onerror="this.style.display='none';" />
+            <figcaption>Loja</figcaption>
+          </figure>
+          <figure class="gallery-item reveal reveal-delay">
+            <img src="assets/galeria-lanches.jpg" alt="Lanches Ship's Burguer" onerror="this.style.display='none';" />
+            <figcaption>Lanches</figcaption>
+          </figure>
+          <figure class="gallery-item reveal reveal-delay-2">
+            <img src="assets/galeria-clientes.jpg" alt="Clientes da Ship's Burguer" onerror="this.style.display='none';" />
+            <figcaption>Clientes</figcaption>
+          </figure>
+          <figure class="gallery-item reveal">
+            <img src="assets/galeria-bastidores.jpg" alt="Bastidores da cozinha Ship's Burguer" onerror="this.style.display='none';" />
+            <figcaption>Bastidores</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="grupo-vip">
+      <div class="container">
+        <div class="vip reveal">
+          <p class="section-kicker">Grupo VIP</p>
+          <h2 class="section-title">Promoções antes de todo mundo</h2>
+          <p>
+            Entre no nosso Grupo VIP e receba promoções exclusivas, novidades do cardápio
+            e ofertas especiais antes de todo mundo.
+          </p>
+          <a class="retro-button" href="https://chat.whatsapp.com/SEU-LINK-AQUI" target="_blank" rel="noopener">Entrar no Grupo VIP</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="clube-ships">
+      <div class="container">
+        <div class="club-card reveal">
+          <p class="section-kicker">Clube Ship's</p>
+          <h2 class="section-title">Clube Ship's</h2>
+          <p class="club-copy">
+            Entre para o Clube Ship's e receba promoções, novidades e combos secretos direto no WhatsApp.
+          </p>
+
+          <form class="club-form" id="clubForm">
+            <div class="club-field">
+              <label for="clubName">Nome</label>
+              <input type="text" id="clubName" name="nome" autocomplete="name" required>
+            </div>
+
+            <div class="club-field">
+              <label for="clubWhatsapp">WhatsApp</label>
+              <input type="tel" id="clubWhatsapp" name="whatsapp" autocomplete="tel" placeholder="(11) 99999-9999" required>
+            </div>
+
+            <div class="club-field">
+              <label for="clubNeighborhood">Bairro</label>
+              <input type="text" id="clubNeighborhood" name="bairro" autocomplete="address-level3" required>
+            </div>
+
+            <div class="club-field">
+              <label for="clubFavorite">Produto favorito</label>
+              <input type="text" id="clubFavorite" name="produto_favorito" required>
+            </div>
+
+            <div class="club-form-actions">
+              <button class="club-submit" type="submit">Entrar para o Clube</button>
+              <p class="club-message" id="clubMessage" role="status" aria-live="polite"></p>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="container footer-grid">
+      <div class="footer-col footer-logo reveal">
+        <a class="brand" href="#historia" aria-label="Ship's Burguer">
+          <img class="logo-complete" src="images/Logo site" alt="Ship's Burguer" onerror="this.style.display='none'; this.nextElementSibling.style.display='inline-flex';" />
+          <span class="brand-logo-fallback">
+            <img src="images/Shipinho.png" alt="Mascote Ship's Burguer" />
+            <span class="brand-text">
+              <span class="brand-name">Ship's</span>
+              <span class="brand-subtitle">Burguer</span>
+              <span class="brand-since">Since 2021</span>
+            </span>
+          </span>
+        </a>
+        <div class="socials" aria-label="Redes sociais">
+          <a class="social-instagram" href="https://www.instagram.com/shipsburguer" target="_blank" rel="noopener" aria-label="Instagram da Ship's"><img src="images/instagram.png" alt="Instagram"></a>
+          <a class="social-whatsapp" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" aria-label="WhatsApp da Ship's"><img src="images/logo-whats-clean.svg" alt="WhatsApp"></a>
+          <a class="social-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="iFood da Ship's"><img src="images/ifood.png" alt="iFood"></a>
+        </div>
+      </div>
+
+      <div class="footer-col reveal">
+        <h3>Navegação</h3>
+        <ul>
+          <li><a href="#historia">Nossa História</a></li>
+          <li><a href="#lanches">Lanches</a></li>
+          <li><a href="#galeria">Galeria</a></li>
+          <li><a href="#grupo-vip">Grupo VIP</a></li>
+          <li><a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col reveal">
+        <h3>Contato</h3>
+        <p>WhatsApp: (11) 97637-4369</p>
+        <p>Instagram: @shipsburguer</p>
+        <p>Rua José Mascarenhas, 586, Vila Matilde<br>São Paulo - SP</p>
+      </div>
+
+      <div class="footer-col reveal">
+        <h3>Horário de funcionamento</h3>
+        <p>Quarta-feira: 19:00 - 23:00</p>
+        <p>Quinta-feira: 19:00 - 23:00</p>
+        <p>Sexta-feira: 19:00 - 23:59</p>
+        <p>Sábado: 19:00 - 23:59</p>
+        <p>Domingo: 19:00 - 23:00</p>
+        <p>Segunda-feira: 19:00 - 23:00</p>
+        <p>Terça-feira: 19:00 - 23:00</p>
+      </div>
+    </div>
+
+    <div class="container footer-bottom reveal">
+      <p>© 2024 Ship's Burguer. Todos os direitos reservados.</p>
+      <p>Feito com paixão para nossos clientes.</p>
+    </div>
+  </footer>
+
+  <script>
+    const N8N_WEBHOOK_URL = "https://ships.app.n8n.cloud/webhook/clube-ships";
+    const RAW_VITE_GA_ID = "%VITE_GA_ID%";
+    const RAW_VITE_CLARITY_ID = "%VITE_CLARITY_ID%";
+    const GA_ID = window.SHIP_ANALYTICS_CONFIG?.GA_ID || window.NEXT_PUBLIC_GA_ID || (RAW_VITE_GA_ID.startsWith("%") ? "" : RAW_VITE_GA_ID);
+    const CLARITY_ID = window.SHIP_ANALYTICS_CONFIG?.CLARITY_ID || window.NEXT_PUBLIC_CLARITY_ID || (RAW_VITE_CLARITY_ID.startsWith("%") ? "" : RAW_VITE_CLARITY_ID);
+
+    function loadGoogleAnalytics(measurementId) {
+      if (!measurementId) return;
+
+      const gaScript = document.createElement("script");
+      gaScript.async = true;
+      gaScript.src = `https://www.googletagmanager.com/gtag/js?id=${encodeURIComponent(measurementId)}`;
+      document.head.appendChild(gaScript);
+
+      window.dataLayer = window.dataLayer || [];
+      window.gtag = function gtag(){ window.dataLayer.push(arguments); };
+      window.gtag("js", new Date());
+      window.gtag("config", measurementId);
+    }
+
+    function loadMicrosoftClarity(projectId) {
+      if (!projectId) return;
+
+      window.clarity = window.clarity || function clarity(){ (window.clarity.q = window.clarity.q || []).push(arguments); };
+      const clarityScript = document.createElement("script");
+      clarityScript.async = true;
+      clarityScript.src = `https://www.clarity.ms/tag/${encodeURIComponent(projectId)}`;
+      document.head.appendChild(clarityScript);
+    }
+
+    function trackEvent(eventName, eventParams = {}) {
+      if (typeof window.gtag === "function") {
+        window.gtag("event", eventName, eventParams);
+      }
+
+      if (typeof window.clarity === "function") {
+        window.clarity("event", eventName);
+      }
+    }
+
+    loadGoogleAnalytics(GA_ID);
+    loadMicrosoftClarity(CLARITY_ID);
+
+    const menuToggle = document.querySelector(".menu-toggle");
+    const nav = document.querySelector(".nav");
+
+    menuToggle.addEventListener("click", () => {
+      const isOpen = document.body.classList.toggle("menu-open");
+      menuToggle.setAttribute("aria-expanded", String(isOpen));
+      menuToggle.textContent = isOpen ? "Fechar" : "Menu";
+    });
+
+    nav.addEventListener("click", (event) => {
+      if (event.target.matches("a")) {
+        document.body.classList.remove("menu-open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.textContent = "Menu";
+      }
+    });
+
+    const revealElements = document.querySelectorAll(".reveal, .reveal-left, .reveal-right");
+
+    revealElements.forEach((element, index) => {
+      if (!element.classList.contains("reveal-delay") && !element.classList.contains("reveal-delay-2")) {
+        element.style.transitionDelay = `${Math.min(index % 4, 3) * 0.08}s`;
+      }
+    });
+
+    if ("IntersectionObserver" in window) {
+      const revealObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            window.setTimeout(() => entry.target.classList.add("active"), 80);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, {
+        threshold: 0.12,
+        rootMargin: "0px 0px -90px 0px"
+      });
+
+      revealElements.forEach((element) => revealObserver.observe(element));
+    } else {
+      revealElements.forEach((element) => element.classList.add("active"));
+    }
+
+    const trackedSections = [
+      { selector: "#lanches", eventName: "view_cardapio" },
+      { selector: "#lanches .section-heading", eventName: "view_destaques" }
+    ];
+
+    if ("IntersectionObserver" in window) {
+      const sectionObserver = new IntersectionObserver((entries, observer) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            trackEvent(entry.target.dataset.trackView);
+            observer.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.35 });
+
+      trackedSections.forEach(({ selector, eventName }) => {
+        const element = document.querySelector(selector);
+        if (element) {
+          element.dataset.trackView = eventName;
+          sectionObserver.observe(element);
+        }
+      });
+    }
+
+    document.addEventListener("click", (event) => {
+      const popupClose = event.target.closest("[data-close-popup-promocao], .close-popup-promocao, .popup-promocao-close");
+      if (popupClose) {
+        trackEvent("close_popup_promocao");
+      }
+
+      const link = event.target.closest("a");
+      if (!link) return;
+
+      const href = link.href || "";
+      const label = link.textContent.trim() || link.getAttribute("aria-label") || "";
+      const normalizedHref = href.toLowerCase();
+
+      if (normalizedHref.includes("wa.me") || normalizedHref.includes("whatsapp")) {
+        trackEvent("click_whatsapp", { link_text: label });
+      }
+
+      if (normalizedHref.includes("ifood.com.br")) {
+        trackEvent("click_ifood", { link_text: label });
+      }
+
+      if (normalizedHref.includes("keeta")) {
+        trackEvent("click_keeta", { link_text: label });
+      }
+    });
+
+    const clubForm = document.querySelector("#clubForm");
+    const clubMessage = document.querySelector("#clubMessage");
+
+    if (clubForm && clubMessage) {
+      clubForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+
+        const submitButton = clubForm.querySelector(".club-submit");
+        const formData = new FormData(clubForm);
+        const payload = {
+          nome: formData.get("nome"),
+          whatsapp: formData.get("whatsapp"),
+          bairro: formData.get("bairro"),
+          produto_favorito: formData.get("produto_favorito"),
+          origem: "Site Ship's Burguer",
+          enviado_em: new Date().toISOString()
+        };
+
+        clubMessage.textContent = "";
+        clubMessage.classList.remove("error");
+        submitButton.disabled = true;
+        submitButton.textContent = "Enviando...";
+
+        try {
+          if (!N8N_WEBHOOK_URL) {
+            throw new Error("Webhook do n8n nao configurado.");
+          }
+
+          const response = await fetch(N8N_WEBHOOK_URL, {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!response.ok) {
+            throw new Error("Falha no envio.");
+          }
+
+          clubForm.reset();
+          trackEvent("submit_clube_ships", {
+            bairro: payload.bairro,
+            produto_favorito: payload.produto_favorito
+          });
+          clubMessage.textContent = "Cadastro enviado! Em breve você pode receber novidades da Ship's.";
+        } catch (error) {
+          clubMessage.textContent = "Não conseguimos enviar agora. Tente novamente em instantes.";
+          clubMessage.classList.add("error");
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Entrar para o Clube";
+        }
+      });
+    }
+  </script>
+  <a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chamar a Ship's Burguer no WhatsApp"><img src="images/logo-whats-clean.svg" alt="WhatsApp"></a>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
