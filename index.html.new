@@ -1,9 +1,9 @@
-ï»¿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Ship's Burguer | NÃ£o Ã© sÃ³ sobre burger. Ã‰ sobre histÃ³ria.</title>
+  <title>Ship's Burguer | Não é só sobre burger. É sobre história.</title>
   <link href="https://fonts.googleapis.com/css2?family=Rye&family=Oswald:wght@400;500;600;700&family=Roboto+Slab:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -527,7 +527,7 @@
     }
   }
 
-  /* Ajuste final da seÃ§Ã£o PeÃ§a Agora */
+  /* Ajuste final da seção Peça Agora */
   #peca-agora.cta-strip {
     display: grid;
     grid-template-columns: auto minmax(210px, .9fr) minmax(150px, .5fr) minmax(390px, 1.05fr);
@@ -1142,11 +1142,11 @@
       <button class="menu-toggle" type="button" aria-label="Abrir menu" aria-expanded="false">Menu</button>
 
       <nav class="nav" aria-label="Menu principal">
-        <a href="#historia">Nossa HistÃ³ria</a>
+        <a href="#historia">Nossa História</a>
         <a href="#lanches">Lanches</a>
         <a href="#galeria">Galeria</a>
         <a href="#grupo-vip">Grupo VIP</a>
-        <a class="order-link" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">PeÃ§a Agora</a>
+        <a class="order-link" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
       </nav>
     </div>
   </header>
@@ -1155,22 +1155,22 @@
     <section class="hero" id="historia">
       <div class="container hero-grid">
         <div>
-          <p class="eyebrow reveal reveal-left">Nossa HistÃ³ria</p>
-          <h1 class="reveal reveal-left reveal-delay">NÃ£o Ã© sÃ³ sobre burger. Ã‰ sobre <span>histÃ³ria.</span></h1>
+          <p class="eyebrow reveal reveal-left">Nossa História</p>
+          <h1 class="reveal reveal-left reveal-delay">Não é só sobre burger. É sobre <span>história.</span></h1>
           <p class="hero-copy reveal reveal-left reveal-delay-2">
-            Da nossa primeira chapa dentro de um trailer atÃ© a realizaÃ§Ã£o do sonho da loja prÃ³pria.
-            Essa Ã© a histÃ³ria da Ship's Burguer: feita de determinaÃ§Ã£o, famÃ­lia, clientes que viraram amigos
-            e uma vontade enorme de servir o melhor burger da regiÃ£o.
+            Da nossa primeira chapa dentro de um trailer até a realização do sonho da loja própria.
+            Essa é a história da Ship's Burguer: feita de determinação, família, clientes que viraram amigos
+            e uma vontade enorme de servir o melhor burger da região.
           </p>
           <div class="hero-actions reveal reveal-left reveal-delay-2">
-            <a class="retro-button" href="#trajetoria">ConheÃ§a nossa jornada</a>
+            <a class="retro-button" href="#trajetoria">Conheça nossa jornada</a>
             <span class="hero-badge">Ship's Burguer desde 2021</span>
           </div>
         </div>
 
         <div class="hero-plate" aria-label="Burger artesanal da Ship's Burguer">
           <div class="hero-image-wrap reveal reveal-right">
-            <img class="hero-main-image" src="images/copo com o shipinho.png" alt="HambÃºrguer e copo com Shipinho" />
+            <img class="hero-main-image" src="images/copo com o shipinho.png" alt="Hambúrguer e copo com Shipinho" />
           </div>
         </div>
       </div>
@@ -1179,37 +1179,37 @@
     <section class="section" id="trajetoria">
       <div class="container">
         <div class="section-heading reveal">
-          <p class="section-kicker">Nossa trajetÃ³ria</p>
-          <h2 class="section-title">Uma histÃ³ria feita de <span>determinaÃ§Ã£o</span></h2>
+          <p class="section-kicker">Nossa trajetória</p>
+          <h2 class="section-title">Uma história feita de <span>determinação</span></h2>
         </div>
 
         <div class="timeline">
           <article class="timeline-item reveal">
             <div class="timeline-icon" aria-hidden="true">21</div>
             <strong class="timeline-year">2021</strong>
-            <h3>O comeÃ§o</h3>
-            <p>Tudo comeÃ§ou em um pequeno trailer, com muita vontade de fazer o melhor burger da regiÃ£o.</p>
+            <h3>O começo</h3>
+            <p>Tudo começou em um pequeno trailer, com muita vontade de fazer o melhor burger da região.</p>
           </article>
 
           <article class="timeline-item reveal reveal-delay">
             <div class="timeline-icon" aria-hidden="true">22</div>
             <strong class="timeline-year">2022</strong>
             <h3>Crescendo</h3>
-            <p>A qualidade conquistou clientes e nossa fama sÃ³ aumentava. O trailer ficou pequeno perto do sonho.</p>
+            <p>A qualidade conquistou clientes e nossa fama só aumentava. O trailer ficou pequeno perto do sonho.</p>
           </article>
 
           <article class="timeline-item reveal reveal-delay-2">
             <div class="timeline-icon" aria-hidden="true">23</div>
             <strong class="timeline-year">2023</strong>
-            <h3>Uma famÃ­lia</h3>
+            <h3>Uma família</h3>
             <p>Mais que clientes, conquistamos amigos. A Ship's Burguer virou ponto de encontro.</p>
           </article>
 
           <article class="timeline-item reveal">
             <div class="timeline-icon" aria-hidden="true">24</div>
             <strong class="timeline-year">2024</strong>
-            <h3>A realizaÃ§Ã£o</h3>
-            <p>O sonho se tornou realidade: nossa loja fÃ­sica nasceu para oferecer uma experiÃªncia ainda melhor.</p>
+            <h3>A realização</h3>
+            <p>O sonho se tornou realidade: nossa loja física nasceu para oferecer uma experiência ainda melhor.</p>
           </article>
         </div>
       </div>
@@ -1231,7 +1231,7 @@
               <h3>Smash Guilbert</h3>
               <p>Smash, queijo derretido, alface, tomate, maionese especial e crispy de cebola.</p>
               <strong class="price">R$ 27,90</strong>
-              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">PeÃ§a Agora</a>
+              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
             </div>
           </article>
 
@@ -1243,19 +1243,19 @@
               <h3>Smash Toven</h3>
               <p>Smash, queijo cheddar, bacon, cebola, picles e molho especial.</p>
               <strong class="price">R$ 28,90</strong>
-              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">PeÃ§a Agora</a>
+              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
             </div>
           </article>
 
           <article class="product-card reveal reveal-delay-2">
             <div class="product-media">
-              <img src="smash-leoncio.png" alt="Smash LeÃ´ncio" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1200&auto=format&fit=crop';" />
+              <img src="smash-leoncio.png" alt="Smash Leôncio" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1571091718767-18b5b1457add?q=80&w=1200&auto=format&fit=crop';" />
             </div>
             <div class="product-info">
-              <h3>Smash LeÃ´ncio</h3>
+              <h3>Smash Leôncio</h3>
               <p>Smash, queijo cheddar, bacon e molho especial da casa.</p>
               <strong class="price">R$ 26,90</strong>
-              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">PeÃ§a Agora</a>
+              <a class="retro-button" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a>
             </div>
           </article>
         </div>
@@ -1265,7 +1265,7 @@
             <img src="images/Shipinho.png" alt="">
           </div>
           <div class="order-copy">
-            <h2>PeÃ§a Agora</h2>
+            <h2>Peça Agora</h2>
             <p>E receba em casa!</p>
           </div>
           <div class="order-fries">
@@ -1274,7 +1274,7 @@
           </div>
           <div class="order-actions">
             <a class="retro-button order-action order-whatsapp" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener"><img src="images/logo-whats-clean.svg" alt="">Pedir pelo WhatsApp</a>
-            <a class="retro-button btn-ifood order-action order-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="PEÃ‡A PELO IFOOD"><img src="images/ifood-logo.png" alt="iFood">FaÃ§a seu pedido pelo iFood</a>
+            <a class="retro-button btn-ifood order-action order-ifood" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener" aria-label="PEÇA PELO IFOOD"><img src="images/ifood-logo.png" alt="iFood">Faça seu pedido pelo iFood</a>
           </div>
         </div>
       </div>
@@ -1312,9 +1312,9 @@
       <div class="container">
         <div class="vip reveal">
           <p class="section-kicker">Grupo VIP</p>
-          <h2 class="section-title">PromoÃ§Ãµes antes de todo mundo</h2>
+          <h2 class="section-title">Promoções antes de todo mundo</h2>
           <p>
-            Entre no nosso Grupo VIP e receba promoÃ§Ãµes exclusivas, novidades do cardÃ¡pio
+            Entre no nosso Grupo VIP e receba promoções exclusivas, novidades do cardápio
             e ofertas especiais antes de todo mundo.
           </p>
           <a class="retro-button" href="https://chat.whatsapp.com/SEU-LINK-AQUI" target="_blank" rel="noopener">Entrar no Grupo VIP</a>
@@ -1328,7 +1328,7 @@
           <p class="section-kicker">Clube Ship's</p>
           <h2 class="section-title">Clube Ship's</h2>
           <p class="club-copy">
-            Entre para o Clube Ship's e receba promoÃ§Ãµes, novidades e combos secretos direto no WhatsApp.
+            Entre para o Clube Ship's e receba promoções, novidades e combos secretos direto no WhatsApp.
           </p>
 
           <form class="club-form" id="clubForm">
@@ -1384,13 +1384,13 @@
       </div>
 
       <div class="footer-col reveal">
-        <h3>NavegaÃ§Ã£o</h3>
+        <h3>Navegação</h3>
         <ul>
-          <li><a href="#historia">Nossa HistÃ³ria</a></li>
+          <li><a href="#historia">Nossa História</a></li>
           <li><a href="#lanches">Lanches</a></li>
           <li><a href="#galeria">Galeria</a></li>
           <li><a href="#grupo-vip">Grupo VIP</a></li>
-          <li><a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">PeÃ§a Agora</a></li>
+          <li><a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener">Peça Agora</a></li>
         </ul>
       </div>
 
@@ -1398,24 +1398,24 @@
         <h3>Contato</h3>
         <p>WhatsApp: (11) 97637-4369</p>
         <p>Instagram: @shipsburguer</p>
-        <p>Rua JosÃ© Mascarenhas, 586, Vila Matilde<br>SÃ£o Paulo - SP</p>
+        <p>Rua José Mascarenhas, 586, Vila Matilde<br>São Paulo - SP</p>
       </div>
 
       <div class="footer-col reveal">
-        <h3>HorÃ¡rio de funcionamento</h3>
+        <h3>Horário de funcionamento</h3>
         <p>Quarta-feira: 19:00 - 23:00</p>
         <p>Quinta-feira: 19:00 - 23:00</p>
         <p>Sexta-feira: 19:00 - 23:59</p>
-        <p>SÃ¡bado: 19:00 - 23:59</p>
+        <p>Sábado: 19:00 - 23:59</p>
         <p>Domingo: 19:00 - 23:00</p>
         <p>Segunda-feira: 19:00 - 23:00</p>
-        <p>TerÃ§a-feira: 19:00 - 23:00</p>
+        <p>Terça-feira: 19:00 - 23:00</p>
       </div>
     </div>
 
     <div class="container footer-bottom reveal">
-      <p>Â© 2024 Ship's Burguer. Todos os direitos reservados.</p>
-      <p>Feito com paixÃ£o para nossos clientes.</p>
+      <p>© 2024 Ship's Burguer. Todos os direitos reservados.</p>
+      <p>Feito com paixão para nossos clientes.</p>
     </div>
   </footer>
 
@@ -1601,9 +1601,9 @@
             bairro: payload.bairro,
             produto_favorito: payload.produto_favorito
           });
-          clubMessage.textContent = "Cadastro enviado! Em breve vocÃª pode receber novidades da Ship's.";
+          clubMessage.textContent = "Cadastro enviado! Em breve você pode receber novidades da Ship's.";
         } catch (error) {
-          clubMessage.textContent = "NÃ£o conseguimos enviar agora. Tente novamente em instantes.";
+          clubMessage.textContent = "Não conseguimos enviar agora. Tente novamente em instantes.";
           clubMessage.classList.add("error");
         } finally {
           submitButton.disabled = false;
