@@ -44,6 +44,13 @@
   a { color: inherit; text-decoration: none; }
 
   .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+  .image-frame { border: 2px solid var(--black); border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.68), rgba(15,78,162,.08)); box-shadow: 0 10px 22px rgba(17,17,17,.12); overflow: hidden; }
+  .card-image { width: 100%; height: 100%; object-fit: cover; object-position: center center; background: var(--paper-soft); }
+  .product-image { width: 100%; height: clamp(260px, 24vw, 320px); object-fit: cover; object-position: center center; filter: drop-shadow(0 12px 10px rgba(17,17,17,.18)); }
+  .gallery-image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center center; background: var(--paper-soft); }
+  .object-top { object-position: center top; }
+  .object-center { object-position: center center; }
+  .object-bottom { object-position: center bottom; }
 
   .site-header {
     position: sticky;
@@ -151,8 +158,8 @@
 
   .products-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
   .product-card { display: grid; grid-template-columns: 45% 1fr; min-height: 286px; border: 2px solid var(--blue); border-radius: var(--radius); color: inherit; background: rgba(255,250,240,.76); box-shadow: 5px 5px 0 rgba(17,17,17,.14); overflow: hidden; }
-  .product-media { display: grid; place-items: end center; min-height: 250px; padding: 14px; background: linear-gradient(180deg, rgba(255,255,255,.58), rgba(15,78,162,.08)); }
-  .product-media img { width: 100%; height: 220px; object-fit: contain; filter: drop-shadow(0 12px 10px rgba(17,17,17,.22)); }
+  .product-media { display: grid; place-items: center; min-height: 300px; padding: 12px; background: linear-gradient(180deg, rgba(255,255,255,.58), rgba(15,78,162,.08)); }
+  .product-media img { border-radius: var(--radius); }
   .product-info { display: flex; flex-direction: column; justify-content: center; gap: 12px; padding: 22px 18px 22px 6px; }
   .product-info h3 { font-size: clamp(1.75rem, 3vw, 2.2rem); }
   .product-info p { color: #303030; font-size: .96rem; font-weight: 700; }
@@ -164,7 +171,7 @@
 
   .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; }
   .gallery-item { width: 100%; min-height: 220px; border: 2px solid var(--black); border-radius: var(--radius); background: linear-gradient(135deg, rgba(15,78,162,.12), rgba(255,250,240,.85)), radial-gradient(circle at center, rgba(15,78,162,.22), transparent 55%); overflow: hidden; position: relative; }
-  .gallery-item img { width: 100%; height: 100%; min-height: 220px; object-fit: cover; }
+  .gallery-item img { min-height: 220px; }
   .gallery-item span { position: absolute; right: 12px; bottom: 12px; left: 12px; padding: 8px 10px; border: 1px solid var(--blue); background: rgba(255,250,240,.92); color: var(--black); font-family: "Oswald", sans-serif; font-size: 1rem; font-weight: 700; text-transform: uppercase; }
   .gallery-item:hover, .gallery-item:focus-visible { border-color: var(--blue); box-shadow: 5px 5px 0 rgba(15,78,162,.2); outline: none; }
 
@@ -284,8 +291,8 @@
     .timeline-item { background: linear-gradient(90deg, transparent, rgba(247,241,231,.92), transparent); }
     .products-grid { grid-template-columns: 1fr; }
     .product-card { grid-template-columns: 1fr; }
-    .product-media { min-height: 220px; }
-    .product-media img { height: 210px; }
+    .product-media { min-height: 260px; }
+    .product-image { height: clamp(230px, 52vw, 280px); }
     .product-info .retro-button { width: 100%; }
     .gallery-grid { grid-template-columns: 1fr; }
     .footer-grid { grid-template-columns: 1fr; text-align: center; }
@@ -309,7 +316,7 @@
     .hero-plate { min-height: 270px; }
     .hero-image-wrap { height: 270px; }
     .timeline-icon { width: 96px; height: 96px; font-size: 1.9rem; }
-    .product-media img { height: 190px; }
+    .product-image { height: clamp(220px, 66vw, 260px); }
     .vip, .cta-strip { padding: 22px 16px; }
     .btn-ifood { gap: 8px; white-space: normal; }
     .btn-ifood img { width: 50px; height: 22px; }
@@ -469,7 +476,7 @@
         <div class="products-grid">
           <a class="product-card reveal" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer" aria-label="Abrir cardápio digital para pedir LETCHIKEN">
             <div class="product-media">
-              <img src="./assets/letchiken.jpg" alt="LETCHIKEN" />
+              <img class="card-image product-image object-center" src="./assets/letchiken.jpg" alt="LETCHIKEN" />
             </div>
             <div class="product-info">
               <h3>LETCHIKEN</h3>
@@ -481,7 +488,7 @@
 
           <a class="product-card reveal reveal-delay" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer" aria-label="Abrir cardápio digital para pedir GUILBERT">
             <div class="product-media">
-              <img src="./assets/guilbert.jpg" alt="GUILBERT" />
+              <img class="card-image product-image object-center" src="./assets/guilbert.jpg" alt="GUILBERT" />
             </div>
             <div class="product-info">
               <h3>GUILBERT</h3>
@@ -493,7 +500,7 @@
 
           <a class="product-card reveal reveal-delay-2" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer" aria-label="Abrir cardápio digital para pedir TOVEN">
             <div class="product-media">
-              <img src="./assets/toven.png" alt="TOVEN" />
+              <img class="card-image product-image object-center" src="./assets/toven.png" alt="TOVEN" />
             </div>
             <div class="product-info">
               <h3>TOVEN</h3>
@@ -523,20 +530,20 @@
         </div>
 
         <div class="gallery-grid">
-          <a class="gallery-item reveal" href="./galeria-loja.html" aria-label="Abrir galeria da loja">
-            <img src="./assets/loja-ships-burguer.jpg" alt="Loja Ship's Burguer" onerror="this.style.display='none';" />
+          <a class="gallery-item image-frame reveal" href="./galeria-loja.html" aria-label="Abrir galeria da loja">
+            <img class="gallery-image object-center" src="./assets/loja-ships-burguer.jpg" alt="Loja Ship's Burguer" loading="lazy" onerror="this.style.display='none';" />
             <span>Loja</span>
           </a>
-          <a class="gallery-item reveal reveal-delay" href="./galeria-lanches.html" aria-label="Abrir galeria de lanches">
-            <img src="./assets/hero-burger-shipinho.png" alt="Lanches Ship's Burguer" onerror="this.style.display='none';" />
+          <a class="gallery-item image-frame reveal reveal-delay" href="./galeria-lanches.html" aria-label="Abrir galeria de lanches">
+            <img class="gallery-image object-center" src="./assets/hero-burger-shipinho.png" alt="Lanches Ship's Burguer" loading="lazy" onerror="this.style.display='none';" />
             <span>Lanches</span>
           </a>
-          <a class="gallery-item reveal reveal-delay-2" href="./galeria-clientes.html" aria-label="Abrir galeria de clientes">
-            <img src="./assets/shipinho.png" alt="Clientes da Ship's Burguer" onerror="this.style.display='none';" />
+          <a class="gallery-item image-frame reveal reveal-delay-2" href="./galeria-clientes.html" aria-label="Abrir galeria de clientes">
+            <img class="gallery-image object-center" src="./assets/shipinho.png" alt="Clientes da Ship's Burguer" loading="lazy" onerror="this.style.display='none';" />
             <span>Clientes</span>
           </a>
-          <a class="gallery-item reveal" href="./galeria-bastidores.html" aria-label="Abrir galeria dos bastidores">
-            <img src="./assets/batata-ships.png" alt="Bastidores da cozinha Ship's Burguer" onerror="this.style.display='none';" />
+          <a class="gallery-item image-frame reveal" href="./galeria-bastidores.html" aria-label="Abrir galeria dos bastidores">
+            <img class="gallery-image object-center" src="./assets/batata-ships.png" alt="Bastidores da cozinha Ship's Burguer" loading="lazy" onerror="this.style.display='none';" />
             <span>Bastidores</span>
           </a>
         </div>

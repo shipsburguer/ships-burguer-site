@@ -26,9 +26,14 @@
     .retro-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 20px; border: 2px solid var(--blue); border-radius: var(--radius); color: var(--blue); background: transparent; box-shadow: 4px 4px 0 var(--black); font-family: "Oswald", sans-serif; font-size: 1.05rem; font-weight: 700; text-transform: uppercase; transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease; }
     .retro-button:hover, .retro-button:focus-visible { color: var(--paper-soft); background: var(--blue); box-shadow: 2px 2px 0 var(--black); transform: translate(2px, 2px); outline: none; }
     .gallery-section { padding: clamp(42px, 7vw, 78px) 0; }
-    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
-    .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); overflow: hidden; }
-    .photo-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: rgba(15,78,162,.08); }
+    .image-frame { border: 2px solid var(--black); border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.68), rgba(15,78,162,.08)); box-shadow: 0 10px 22px rgba(17,17,17,.12); overflow: hidden; }
+    .card-image { width: 100%; height: 100%; object-fit: cover; object-position: center center; background: var(--paper-soft); }
+    .gallery-image { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; object-position: center center; background: var(--paper-soft); }
+    .object-top { object-position: center top; }
+    .object-center { object-position: center center; }
+    .object-bottom { object-position: center bottom; }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); box-shadow: 4px 4px 0 rgba(17,17,17,.12); overflow: hidden; }
     .photo-card-content { padding: 15px; }
     .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
     .photo-card p { margin-top: 6px; font-weight: 700; }
@@ -61,16 +66,16 @@
       <div class="container">
         <div class="photo-grid">
           <!-- Clientes: substitua por ./images/galeria/clientes/cliente-01.jpg quando enviar as fotos reais. -->
-          <article class="photo-card">
-            <img src="./assets/shipinho.png" alt="Clientes da Ship's Burguer">
+          <article class="photo-card image-frame">
+            <img class="gallery-image object-center" src="./assets/shipinho.png" alt="Clientes da Ship's Burguer" loading="lazy">
             <div class="photo-card-content">
               <h2>Clientes Ship's</h2>
               <p>Momentos de quem faz parte da nossa trajetória.</p>
             </div>
           </article>
           <!-- Clientes: substitua por ./images/galeria/clientes/cliente-02.jpg quando enviar as fotos reais. -->
-          <article class="photo-card">
-            <img src="./assets/hero-burger-shipinho.png" alt="Experiência Ship's Burguer">
+          <article class="photo-card image-frame">
+            <img class="gallery-image object-center" src="./assets/hero-burger-shipinho.png" alt="Experiência Ship's Burguer" loading="lazy">
             <div class="photo-card-content">
               <h2>Experiência Ship's</h2>
               <p>Fotos para registrar encontros na hamburgueria.</p>
