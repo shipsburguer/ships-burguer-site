@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Galeria - Bastidores | Ship's Burguer</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --blue: #0f4ea2; --black: #111111; --ink: #202020; --paper: #f7f1e7; --paper-soft: #fffaf0; --line: rgba(17,17,17,.2); --radius: 8px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { color: var(--ink); font-family: "Open Sans", Arial, sans-serif; line-height: 1.6; background: radial-gradient(circle at 12% 18%, rgba(15,78,162,.06) 0 1px, transparent 1px), linear-gradient(135deg, rgba(255,255,255,.72), rgba(247,241,231,.94)), var(--paper); background-size: 18px 18px, auto, auto; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+    .gallery-header { border-bottom: 2px solid var(--black); background: rgba(247,241,231,.96); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 92px; }
+    .logo-complete { height: 72px; width: auto; max-width: 230px; object-fit: contain; mix-blend-mode: multiply; filter: contrast(1.08) saturate(1.05); }
+    h1, h2, h3 { color: var(--black); font-family: "Bebas Neue", "Oswald", sans-serif; line-height: .95; text-transform: uppercase; }
+    .hero { padding: clamp(42px, 7vw, 82px) 0 32px; border-bottom: 2px solid var(--line); text-align: center; }
+    .kicker { color: var(--blue); font-family: "Oswald", sans-serif; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin-top: 10px; font-size: clamp(3.2rem, 9vw, 6.8rem); }
+    .hero p { max-width: 760px; margin: 18px auto 0; font-size: clamp(1rem, 2vw, 1.18rem); font-weight: 700; }
+    .actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+    .retro-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 20px; border: 2px solid var(--blue); border-radius: var(--radius); color: var(--blue); background: transparent; box-shadow: 4px 4px 0 var(--black); font-family: "Oswald", sans-serif; font-size: 1.05rem; font-weight: 700; text-transform: uppercase; transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease; }
+    .retro-button:hover, .retro-button:focus-visible { color: var(--paper-soft); background: var(--blue); box-shadow: 2px 2px 0 var(--black); transform: translate(2px, 2px); outline: none; }
+    .gallery-section { padding: clamp(42px, 7vw, 78px) 0; }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; }
+    .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); overflow: hidden; }
+    .photo-card img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; background: rgba(15,78,162,.08); }
+    .photo-card-content { padding: 15px; }
+    .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
+    .photo-card p { margin-top: 6px; font-weight: 700; }
+    .page-footer { padding: 22px 0; border-top: 2px solid var(--black); text-align: center; font-weight: 700; }
+    @media (max-width: 900px) { .photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+    @media (max-width: 560px) { .container { width: min(100% - 22px, 1160px); } .header-inner { justify-content: center; min-height: 78px; } .logo-complete { height: 54px; } .actions, .retro-button { width: 100%; } .photo-grid { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+  <header class="gallery-header">
+    <div class="container header-inner">
+      <a href="./index.html" aria-label="Voltar para Ship's Burguer"><img class="logo-complete" src="./assets/logo-site.avif" alt="Ship's Burguer"></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="kicker">Momentos Ship's</p>
+        <h1>Galeria - Bastidores</h1>
+        <p>Um pouco da rotina, do preparo e dos detalhes por trás de cada pedido.</p>
+        <div class="actions">
+          <a class="retro-button" href="./index.html#galeria">Voltar para o site</a>
+          <a class="retro-button" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer">Peça Agora</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section">
+      <div class="container">
+        <div class="photo-grid">
+          <!-- Bastidores: substitua por ./images/galeria/bastidores/bastidores-01.jpg quando enviar as fotos reais. -->
+          <article class="photo-card">
+            <img src="./assets/batata-ships.png" alt="Bastidores da cozinha Ship's Burguer">
+            <div class="photo-card-content">
+              <h2>Bastidores</h2>
+              <p>Detalhes do preparo e da rotina da casa.</p>
+            </div>
+          </article>
+          <!-- Bastidores: substitua por ./images/galeria/bastidores/bastidores-02.jpg quando enviar as fotos reais. -->
+          <article class="photo-card">
+            <img src="./assets/toven.png" alt="Preparo dos lanches Ship's Burguer">
+            <div class="photo-card-content">
+              <h2>Preparo</h2>
+              <p>O cuidado por trás de cada pedido.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">Ship's Burguer - Desde 2021</div>
+  </footer>
+</body>
+</html>
