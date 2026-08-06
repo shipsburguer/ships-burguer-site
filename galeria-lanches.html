@@ -32,7 +32,8 @@
     .object-top { object-position: center top; }
     .object-center { object-position: center center; }
     .object-bottom { object-position: center bottom; }
-    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    picture { display: block; }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
     .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); box-shadow: 4px 4px 0 rgba(17,17,17,.12); overflow: hidden; }
     .photo-card-content { padding: 15px; }
     .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
@@ -65,7 +66,6 @@
     <section class="gallery-section">
       <div class="container">
         <div class="photo-grid">
-          <!-- Lanches: substitua por ./images/galeria/lanches/lanche-01.jpg quando enviar as fotos reais. -->
           <article class="photo-card image-frame">
             <img class="gallery-image object-center" src="./assets/letchiken.jpg" alt="LETCHIKEN" loading="lazy">
             <div class="photo-card-content">
@@ -73,12 +73,67 @@
               <p>Frango empanado crocante com salada fresquinha.</p>
             </div>
           </article>
-          <!-- Lanches: substitua por ./images/galeria/lanches/lanche-02.jpg quando enviar as fotos reais. -->
+
           <article class="photo-card image-frame">
             <img class="gallery-image object-center" src="./assets/guilbert.jpg" alt="GUILBERT" loading="lazy">
             <div class="photo-card-content">
               <h2>GUILBERT</h2>
               <p>Smash com queijo derretido, crispy e molho Tosca.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/lanches/ships-10-2025-37-900.webp 900w, ./assets/lanches/ships-10-2025-37-1400.webp 1400w, ./assets/lanches/ships-10-2025-37-1600.webp 1600w, ./assets/lanches/ships-10-2025-37-2000.webp 2000w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 360px">
+              <img class="gallery-image object-center" src="./assets/lanches/ships-10-2025-37.jpg" alt="Torres de burgers da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Burgers em destaque</h2>
+              <p>Camadas de pão, carne, queijo e bacon no estilo Ship's.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/lanches/ships-10-2025-48-900.webp 900w, ./assets/lanches/ships-10-2025-48-1400.webp 1400w, ./assets/lanches/ships-10-2025-48-1600.webp 1600w, ./assets/lanches/ships-10-2025-48-2000.webp 2000w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 360px">
+              <img class="gallery-image object-center" src="./assets/lanches/ships-10-2025-48.jpg" alt="Burger com bacon da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Bacon e smash</h2>
+              <p>Pão brioche, carne na chapa, queijo derretido e bacon crocante.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/lanches/ships-10-2025-57-900.webp 900w, ./assets/lanches/ships-10-2025-57-1400.webp 1400w, ./assets/lanches/ships-10-2025-57-1600.webp 1600w, ./assets/lanches/ships-10-2025-57-2000.webp 2000w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 360px">
+              <img class="gallery-image object-center" src="./assets/lanches/ships-10-2025-57.jpg" alt="Smash com queijo derretido na chapa" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Na chapa</h2>
+              <p>Detalhe do queijo derretendo no smash durante o preparo.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/lanches/ships-118-900.webp 900w, ./assets/lanches/ships-118-1400.webp 1400w, ./assets/lanches/ships-118-1600.webp 1600w, ./assets/lanches/ships-118-2000.webp 2000w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 360px">
+              <img class="gallery-image object-center" src="./assets/lanches/ships-118.jpg" alt="Porções e batata da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Porções da casa</h2>
+              <p>Batata, acompanhamentos crocantes e molhos para dividir.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/lanches/ships-127-900.webp 900w, ./assets/lanches/ships-127-1400.webp 1400w, ./assets/lanches/ships-127-1600.webp 1600w, ./assets/lanches/ships-127-2000.webp 2000w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 360px">
+              <img class="gallery-image object-center" src="./assets/lanches/ships-127.jpg" alt="Combo com burgers e batata da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Combo Ship's</h2>
+              <p>Burgers e batata para deixar a experiência completa.</p>
             </div>
           </article>
         </div>
