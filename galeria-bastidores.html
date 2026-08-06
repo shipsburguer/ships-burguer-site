@@ -32,7 +32,8 @@
     .object-top { object-position: center top; }
     .object-center { object-position: center center; }
     .object-bottom { object-position: center bottom; }
-    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    picture { display: block; }
+    .photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
     .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); box-shadow: 4px 4px 0 rgba(17,17,17,.12); overflow: hidden; }
     .photo-card-content { padding: 15px; }
     .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
@@ -65,20 +66,25 @@
     <section class="gallery-section">
       <div class="container">
         <div class="photo-grid">
-          <!-- Ação social: substitua por ./images/galeria/acao-social/acao-01.jpg quando enviar as fotos reais. -->
           <article class="photo-card image-frame">
-            <img class="gallery-image object-center" src="./assets/batata-ships.png" alt="Ação social Ship's Burguer" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="./assets/acao-social/acao-social-01-900.webp 900w, ./assets/acao-social/acao-social-01-1400.webp 1400w, ./assets/acao-social/acao-social-01-1600.webp 1600w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 560px">
+              <img class="gallery-image object-center" src="./assets/acao-social/acao-social-01.jpg" alt="Crianças participando de ação social na Ship's Burguer" loading="lazy">
+            </picture>
             <div class="photo-card-content">
               <h2>Ação social Ship's</h2>
-              <p>Momentos especiais das iniciativas da Ship's com a comunidade.</p>
+              <p>Momento da ação social realizada no salão da Ship's Burguer.</p>
             </div>
           </article>
-          <!-- Ação social: substitua por ./images/galeria/acao-social/acao-02.jpg quando enviar as fotos reais. -->
+
           <article class="photo-card image-frame">
-            <img class="gallery-image object-center" src="./assets/toven.png" alt="Iniciativas sociais da Ship's Burguer" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="./assets/acao-social/acao-social-02-900.webp 900w, ./assets/acao-social/acao-social-02-1400.webp 1400w, ./assets/acao-social/acao-social-02-1600.webp 1600w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 560px">
+              <img class="gallery-image object-center" src="./assets/acao-social/acao-social-02.jpg" alt="Registros da ação social Ship's do Bem" loading="lazy">
+            </picture>
             <div class="photo-card-content">
-              <h2>Comunidade</h2>
-              <p>Espaço para registrar campanhas, encontros e ações solidárias.</p>
+              <h2>Ship's do Bem</h2>
+              <p>Registros de união, acolhimento e carinho com a comunidade.</p>
             </div>
           </article>
         </div>
