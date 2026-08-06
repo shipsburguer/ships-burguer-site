@@ -32,7 +32,8 @@
     .object-top { object-position: center top; }
     .object-center { object-position: center center; }
     .object-bottom { object-position: center bottom; }
-    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    picture { display: block; }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
     .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); box-shadow: 4px 4px 0 rgba(17,17,17,.12); overflow: hidden; }
     .photo-card-content { padding: 15px; }
     .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
@@ -65,20 +66,102 @@
     <section class="gallery-section">
       <div class="container">
         <div class="photo-grid">
-          <!-- Grupo VIP: substitua por ./images/galeria/grupo-vip/vip-01.jpg quando enviar as fotos reais. -->
           <article class="photo-card image-frame">
-            <img class="gallery-image object-center" src="./assets/shipinho.png" alt="Grupo VIP da Ship's Burguer" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="./assets/grupo-vip/grupo-vip-01.webp">
+              <img class="gallery-image object-center" src="./assets/grupo-vip/grupo-vip-01.jpg" alt="Cliente do Grupo VIP com voucher da Ship's Burguer" loading="lazy">
+            </picture>
             <div class="photo-card-content">
-              <h2>Grupo VIP Ship's</h2>
-              <p>Novidades, promoções e avisos especiais para quem acompanha a Ship's de perto.</p>
+              <h2>Cliente encontrou</h2>
+              <p>Registro de cliente com voucher secreto do Grupo VIP.</p>
             </div>
           </article>
-          <!-- Grupo VIP: substitua por ./images/galeria/grupo-vip/vip-02.jpg quando enviar as fotos reais. -->
+
           <article class="photo-card image-frame">
-            <img class="gallery-image object-center" src="./assets/hero-burger-shipinho.png" alt="Experiência do Grupo VIP Ship's Burguer" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="./assets/grupo-vip/grupo-vip-02.webp">
+              <img class="gallery-image object-center" src="./assets/grupo-vip/grupo-vip-02.jpg" alt="Dados do Grupo VIP da Ship's Burguer" loading="lazy">
+            </picture>
             <div class="photo-card-content">
-              <h2>Experiência VIP</h2>
-              <p>Espaço para registrar campanhas, cupons e ações exclusivas do grupo.</p>
+              <h2>450 membros</h2>
+              <p>Grupo VIP reunindo fãs da Ship's para novidades e cupons.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/grupo-vip/grupo-vip-03.webp">
+              <img class="gallery-image object-center" src="./assets/grupo-vip/grupo-vip-03.jpg" alt="Informações do Grupo VIP da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Cupom exclusivo</h2>
+              <p>Descrição do grupo com foco em novidades, melhorias e lançamentos.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/grupo-vip/grupo-vip-04.webp">
+              <img class="gallery-image object-center" src="./assets/grupo-vip/grupo-vip-04.jpg" alt="Campanha de voucher secreto da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Desafio na Vila Matilde</h2>
+              <p>Campanha com vouchers secretos para movimentar a galera.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/grupo-vip/grupo-vip-05.webp">
+              <img class="gallery-image object-center" src="./assets/grupo-vip/grupo-vip-05.jpg" alt="Voucher de combo do Grupo VIP da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Voucher resgatado</h2>
+              <p>Cliente registrando o cupom premiado do Grupo VIP.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/grupo-vip/grupo-vip-06.webp">
+              <img class="gallery-image object-center" src="./assets/grupo-vip/grupo-vip-06.jpg" alt="Print do Grupo VIP da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Grupo ativo</h2>
+              <p>Espaço para testar novidades e antecipar lançamentos.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/grupo-vip/grupo-vip-07.webp">
+              <img class="gallery-image object-center" src="./assets/grupo-vip/grupo-vip-07.jpg" alt="Conversa no Grupo VIP da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Novidade para VIP</h2>
+              <p>Movimento da comunidade aguardando pistas e campanhas.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/grupo-vip/grupo-vip-08.webp">
+              <img class="gallery-image object-center" src="./assets/grupo-vip/grupo-vip-08.jpg" alt="Cliente compartilha voucher no Grupo VIP" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Achou o voucher</h2>
+              <p>Cliente compartilhando a descoberta no Grupo VIP.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/grupo-vip/grupo-vip-09.webp">
+              <img class="gallery-image object-center" src="./assets/grupo-vip/grupo-vip-09.jpg" alt="Cliente ganha combo clássico no Grupo VIP" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Combo clássico</h2>
+              <p>Voucher premiado compartilhado por cliente do grupo.</p>
             </div>
           </article>
         </div>
