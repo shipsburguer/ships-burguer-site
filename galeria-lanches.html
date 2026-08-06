@@ -35,6 +35,10 @@
     picture { display: block; }
     .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
     .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); box-shadow: 4px 4px 0 rgba(17,17,17,.12); overflow: hidden; }
+    .photo-zoom-link { display: block; cursor: zoom-in; overflow: hidden; }
+    .photo-zoom-link .gallery-image { transition: transform .22s ease, filter .22s ease; }
+    .photo-zoom-link:hover .gallery-image, .photo-zoom-link:focus-visible .gallery-image { transform: scale(1.025); filter: saturate(1.05) contrast(1.03); }
+    .photo-zoom-link:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
     .photo-card-content { padding: 15px; }
     .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
     .photo-card p { margin-top: 6px; font-weight: 700; }
@@ -144,5 +148,24 @@
   <footer class="page-footer">
     <div class="container">Ship's Burguer - Desde 2021</div>
   </footer>
+  <script>
+    document.querySelectorAll(".photo-card").forEach((card) => {
+      const media = card.querySelector("picture, img.gallery-image");
+      if (!media || media.closest("a")) return;
+      const img = media.tagName.toLowerCase() === "picture" ? media.querySelector("img") : media;
+      if (!img) return;
+      const link = document.createElement("a");
+      link.className = "photo-zoom-link";
+      link.href = img.getAttribute("src");
+      link.target = "_blank";
+      link.rel = "noopener";
+      link.setAttribute("aria-label", "Abrir foto em tamanho maior");
+      media.parentNode.insertBefore(link, media);
+      link.appendChild(media);
+      link.addEventListener("click", () => {
+        link.href = img.currentSrc || img.src;
+      });
+    });
+  </script>
 </body>
 </html>
