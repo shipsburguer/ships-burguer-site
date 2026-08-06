@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Galeria - Loja | Ship's Burguer</title>
+  <title>Galeria - Salão | Ship's Burguer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
@@ -32,14 +32,17 @@
     .object-top { object-position: center top; }
     .object-center { object-position: center center; }
     .object-bottom { object-position: center bottom; }
-    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; }
+    picture { display: block; }
+    .photo-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
     .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); box-shadow: 4px 4px 0 rgba(17,17,17,.12); overflow: hidden; }
+    .photo-card.featured { grid-column: span 2; }
+    .photo-card.featured .gallery-image { aspect-ratio: 4 / 3; }
     .photo-card-content { padding: 15px; }
     .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
     .photo-card p { margin-top: 6px; font-weight: 700; }
     .page-footer { padding: 22px 0; border-top: 2px solid var(--black); text-align: center; font-weight: 700; }
-    @media (max-width: 900px) { .photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
-    @media (max-width: 560px) { .container { width: min(100% - 22px, 1160px); } .header-inner { justify-content: center; min-height: 78px; } .logo-complete { height: 54px; } .actions, .retro-button { width: 100%; } .photo-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 900px) { .photo-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } .photo-card.featured { grid-column: span 2; } }
+    @media (max-width: 560px) { .container { width: min(100% - 22px, 1160px); } .header-inner { justify-content: center; min-height: 78px; } .logo-complete { height: 54px; } .actions, .retro-button { width: 100%; } .photo-grid { grid-template-columns: 1fr; } .photo-card.featured { grid-column: span 1; } }
   </style>
 </head>
 <body>
@@ -53,8 +56,8 @@
     <section class="hero">
       <div class="container">
         <p class="kicker">Momentos Ship's</p>
-        <h1>Galeria - Loja</h1>
-        <p>Conheça detalhes do espaço da Ship's Burguer e o clima da nossa casa.</p>
+        <h1>Galeria - Salão</h1>
+        <p>Conheça o novo salão da Ship's Burguer, pensado para receber a galera com conforto, identidade e aquele clima da casa.</p>
         <div class="actions">
           <a class="retro-button" href="./index.html#galeria">Voltar para o site</a>
           <a class="retro-button" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer">Peça Agora</a>
@@ -65,20 +68,58 @@
     <section class="gallery-section">
       <div class="container">
         <div class="photo-grid">
-          <!-- Loja: substitua por ./images/galeria/loja/loja-01.jpg quando enviar as fotos reais. -->
-          <article class="photo-card image-frame">
-            <img class="gallery-image object-center" src="./assets/loja-ships-burguer.jpg" alt="Loja Ship's Burguer" loading="lazy">
+          <article class="photo-card image-frame featured">
+            <picture>
+              <source type="image/webp" srcset="./assets/salao/fachada-novo-salao-1-900.webp 900w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 100vw, 760px">
+              <img class="gallery-image object-center" src="./assets/salao/fachada-novo-salao-1.jpg" alt="Fachada do novo salão da Ship's Burguer" loading="eager" fetchpriority="high">
+            </picture>
             <div class="photo-card-content">
-              <h2>Loja Ship's</h2>
-              <p>Espaço preparado para receber nossos clientes.</p>
+              <h2>Fachada do novo salão</h2>
+              <p>A entrada da Ship's Burguer com a identidade da marca em destaque.</p>
             </div>
           </article>
-          <!-- Loja: substitua por ./images/galeria/loja/loja-02.jpg quando enviar as fotos reais. -->
+
           <article class="photo-card image-frame">
-            <img class="gallery-image object-center" src="./assets/logo-site.avif" alt="Identidade da Ship's Burguer" loading="lazy">
+            <picture>
+              <source type="image/webp" srcset="./assets/salao/fachada-novo-salao-5-900.webp 900w" sizes="(max-width: 560px) 100vw, 360px">
+              <img class="gallery-image object-center" src="./assets/salao/fachada-novo-salao-5.jpg" alt="Entrada lateral do novo salão da Ship's Burguer" loading="lazy">
+            </picture>
             <div class="photo-card-content">
-              <h2>Identidade Ship's</h2>
-              <p>Detalhes da nossa marca e da nossa história.</p>
+              <h2>Entrada do salão</h2>
+              <p>Vista externa mostrando o ambiente aberto e iluminado.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/salao/salao-1-900.webp 900w, ./assets/salao/salao-1-1400.webp 1400w, ./assets/salao/salao-1-1600.webp 1600w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 360px">
+              <img class="gallery-image object-center" src="./assets/salao/salao-1.jpg" alt="Área interna do salão da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Salão completo</h2>
+              <p>Mesas, balcão e o mural azul que dão personalidade ao espaço.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/salao/salao-8-900.webp 900w, ./assets/salao/salao-8-1400.webp 1400w, ./assets/salao/salao-8-1600.webp 1600w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 360px">
+              <img class="gallery-image object-center" src="./assets/salao/salao-8.jpg" alt="Mural e mesas do salão da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Mural e mesas</h2>
+              <p>Um dos pontos mais marcantes do salão para comer e registrar o momento.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <picture>
+              <source type="image/webp" srcset="./assets/salao/salao-9-900.webp 900w, ./assets/salao/salao-9-1400.webp 1400w, ./assets/salao/salao-9-1600.webp 1600w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 360px">
+              <img class="gallery-image object-center" src="./assets/salao/salao-9.jpg" alt="Mesas e decoração interna da Ship's Burguer" loading="lazy">
+            </picture>
+            <div class="photo-card-content">
+              <h2>Área interna</h2>
+              <p>O salão preparado para receber clientes no clima old school da Ship's.</p>
             </div>
           </article>
         </div>
