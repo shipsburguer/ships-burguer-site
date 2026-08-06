@@ -39,6 +39,18 @@
     .photo-zoom-link .gallery-image { transition: transform .22s ease, filter .22s ease; }
     .photo-zoom-link:hover .gallery-image, .photo-zoom-link:focus-visible .gallery-image { transform: scale(1.025); filter: saturate(1.05) contrast(1.03); }
     .photo-zoom-link:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
+    .gallery-lightbox { position: fixed; inset: 0; z-index: 10000; display: none; grid-template-columns: 58px minmax(0, 1fr) 58px; grid-template-rows: auto minmax(0, 1fr) auto; gap: 12px; padding: 18px; background: rgba(8, 10, 14, .94); color: var(--paper-soft); }
+    .gallery-lightbox.is-open { display: grid; }
+    .gallery-lightbox-image { grid-column: 1 / -1; grid-row: 2; align-self: center; justify-self: center; max-width: min(100%, 1280px); max-height: 78vh; width: auto; height: auto; object-fit: contain; border: 2px solid rgba(255,255,255,.82); border-radius: var(--radius); background: #111; box-shadow: 0 18px 42px rgba(0,0,0,.42); }
+    .gallery-lightbox-close, .gallery-lightbox-prev, .gallery-lightbox-next { display: grid; place-items: center; border: 2px solid rgba(255,255,255,.82); border-radius: 50%; background: rgba(255,250,240,.12); color: var(--paper-soft); font-family: "Oswald", sans-serif; font-size: 2rem; font-weight: 800; cursor: pointer; }
+    .gallery-lightbox-close:hover, .gallery-lightbox-prev:hover, .gallery-lightbox-next:hover, .gallery-lightbox-close:focus-visible, .gallery-lightbox-prev:focus-visible, .gallery-lightbox-next:focus-visible { background: var(--blue); outline: none; }
+    .gallery-lightbox-close { grid-column: 3; grid-row: 1; width: 48px; height: 48px; justify-self: end; font-size: 1.7rem; }
+    .gallery-lightbox-prev, .gallery-lightbox-next { grid-row: 2; width: 52px; height: 52px; align-self: center; }
+    .gallery-lightbox-prev { grid-column: 1; }
+    .gallery-lightbox-next { grid-column: 3; }
+    .gallery-lightbox-caption { grid-column: 1 / -1; grid-row: 3; text-align: center; font-family: "Oswald", sans-serif; font-size: 1rem; font-weight: 700; text-transform: uppercase; }
+    body.lightbox-open { overflow: hidden; }
+    @media (max-width: 560px) { .gallery-lightbox { grid-template-columns: 48px minmax(0, 1fr) 48px; padding: 12px; } .gallery-lightbox-image { max-height: 74vh; } .gallery-lightbox-prev, .gallery-lightbox-next { width: 44px; height: 44px; font-size: 1.6rem; } .gallery-lightbox-close { width: 44px; height: 44px; } }
     .photo-card-content { padding: 15px; }
     .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
     .photo-card p { margin-top: 6px; font-weight: 700; }
@@ -144,23 +156,87 @@
     <div class="container">Ship's Burguer - Desde 2021</div>
   </footer>
   <script>
-    document.querySelectorAll(".photo-card").forEach((card) => {
+    const galleryItems = [];
+
+    document.querySelectorAll(".photo-card").forEach((card, index) => {
       const media = card.querySelector("picture, img.gallery-image");
       if (!media || media.closest("a")) return;
       const img = media.tagName.toLowerCase() === "picture" ? media.querySelector("img") : media;
       if (!img) return;
+      const title = card.querySelector("h2")?.textContent.trim() || img.alt || "Foto";
       const link = document.createElement("a");
       link.className = "photo-zoom-link";
-      link.href = img.getAttribute("src");
-      link.target = "_blank";
-      link.rel = "noopener";
-      link.setAttribute("aria-label", "Abrir foto em tamanho maior");
+      link.href = "#galeria-foto";
+      link.setAttribute("aria-label", "Abrir foto na galeria");
       media.parentNode.insertBefore(link, media);
       link.appendChild(media);
-      link.addEventListener("click", () => {
-        link.href = img.currentSrc || img.src;
+      galleryItems.push({ img, title });
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        openGallery(index);
       });
     });
+
+    if (galleryItems.length) {
+      const lightbox = document.createElement("div");
+      lightbox.className = "gallery-lightbox";
+      lightbox.setAttribute("role", "dialog");
+      lightbox.setAttribute("aria-modal", "true");
+      lightbox.setAttribute("aria-label", "Galeria de fotos");
+      lightbox.innerHTML = `
+        <button class="gallery-lightbox-close" type="button" aria-label="Fechar foto">×</button>
+        <button class="gallery-lightbox-prev" type="button" aria-label="Foto anterior">‹</button>
+        <img class="gallery-lightbox-image" alt="">
+        <button class="gallery-lightbox-next" type="button" aria-label="Próxima foto">›</button>
+        <div class="gallery-lightbox-caption"></div>
+      `;
+      document.body.appendChild(lightbox);
+
+      const image = lightbox.querySelector(".gallery-lightbox-image");
+      const caption = lightbox.querySelector(".gallery-lightbox-caption");
+      const closeButton = lightbox.querySelector(".gallery-lightbox-close");
+      const prevButton = lightbox.querySelector(".gallery-lightbox-prev");
+      const nextButton = lightbox.querySelector(".gallery-lightbox-next");
+      let activeIndex = 0;
+
+      window.openGallery = (index) => {
+        activeIndex = index;
+        renderGallery();
+        lightbox.classList.add("is-open");
+        document.body.classList.add("lightbox-open");
+        closeButton.focus();
+      };
+
+      const closeGallery = () => {
+        lightbox.classList.remove("is-open");
+        document.body.classList.remove("lightbox-open");
+      };
+
+      const moveGallery = (step) => {
+        activeIndex = (activeIndex + step + galleryItems.length) % galleryItems.length;
+        renderGallery();
+      };
+
+      function renderGallery() {
+        const item = galleryItems[activeIndex];
+        image.src = item.img.currentSrc || item.img.src;
+        image.alt = item.img.alt || item.title;
+        caption.textContent = `${item.title} • ${activeIndex + 1} de ${galleryItems.length}`;
+      }
+
+      closeButton.addEventListener("click", closeGallery);
+      prevButton.addEventListener("click", () => moveGallery(-1));
+      nextButton.addEventListener("click", () => moveGallery(1));
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeGallery();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
+        if (event.key === "Escape") closeGallery();
+        if (event.key === "ArrowLeft") moveGallery(-1);
+        if (event.key === "ArrowRight") moveGallery(1);
+      });
+    }
   </script>
 </body>
 </html>
