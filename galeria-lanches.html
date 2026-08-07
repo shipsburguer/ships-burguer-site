@@ -74,10 +74,10 @@
       <div class="container">
         <p class="kicker">Momentos Ship's</p>
         <h1>Galeria - Lanches</h1>
-        <p>Fotos dos burgers, combos e sabores que fazem parte da nossa história.</p>
+        <p>Fotos dos burgers, combos e sabores que fazem parte da nossa hist&#xF3;ria.</p>
         <div class="actions">
           <a class="retro-button" href="./index.html#galeria">Voltar para o site</a>
-          <a class="retro-button" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer">Peça Agora</a>
+          <a class="retro-button" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer">Pe&#xE7;a Agora</a>
         </div>
       </div>
     </section>
@@ -108,7 +108,7 @@
             </picture>
             <div class="photo-card-content">
               <h2>Burgers em destaque</h2>
-              <p>Camadas de pão, carne, queijo e bacon no estilo Ship's.</p>
+              <p>Camadas de p&#xE3;o, carne, queijo e bacon no estilo Ship's.</p>
             </div>
           </article>
 
@@ -119,7 +119,7 @@
             </picture>
             <div class="photo-card-content">
               <h2>Bacon e smash</h2>
-              <p>Pão brioche, carne na chapa, queijo derretido e bacon crocante.</p>
+              <p>P&#xE3;o brioche, carne na chapa, queijo derretido e bacon crocante.</p>
             </div>
           </article>
 
@@ -137,10 +137,10 @@
           <article class="photo-card image-frame">
             <picture>
               <source type="image/webp" srcset="./assets/lanches/ships-118-900.webp 900w, ./assets/lanches/ships-118-1400.webp 1400w, ./assets/lanches/ships-118-1600.webp 1600w, ./assets/lanches/ships-118-2000.webp 2000w" sizes="(max-width: 560px) 100vw, (max-width: 900px) 50vw, 360px">
-              <img class="gallery-image object-center" src="./assets/lanches/ships-118.jpg" alt="Porções e batata da Ship's Burguer" loading="lazy">
+              <img class="gallery-image object-center" src="./assets/lanches/ships-118.jpg" alt="Por&#xE7;&#xF5;es e batata da Ship's Burguer" loading="lazy">
             </picture>
             <div class="photo-card-content">
-              <h2>Porções da casa</h2>
+              <h2>Por&#xE7;&#xF5;es da casa</h2>
               <p>Batata, acompanhamentos crocantes e molhos para dividir.</p>
             </div>
           </article>
@@ -152,7 +152,7 @@
             </picture>
             <div class="photo-card-content">
               <h2>Combo Ship's</h2>
-              <p>Burgers e batata para deixar a experiência completa.</p>
+              <p>Burgers e batata para deixar a experi&#xEA;ncia completa.</p>
             </div>
           </article>
         </div>
@@ -192,10 +192,10 @@
       lightbox.setAttribute("aria-modal", "true");
       lightbox.setAttribute("aria-label", "Galeria de fotos");
       lightbox.innerHTML = `
-        <button class="gallery-lightbox-close" type="button" aria-label="Fechar foto">×</button>
-        <button class="gallery-lightbox-prev" type="button" aria-label="Foto anterior">‹</button>
+        <button class="gallery-lightbox-close" type="button" aria-label="Fechar foto">&#xD7;</button>
+        <button class="gallery-lightbox-prev" type="button" aria-label="Foto anterior">&#x2039;</button>
         <img class="gallery-lightbox-image" alt="">
-        <button class="gallery-lightbox-next" type="button" aria-label="Próxima foto">›</button>
+        <button class="gallery-lightbox-next" type="button" aria-label="Pr&#xF3;xima foto">&#x203A;</button>
         <div class="gallery-lightbox-caption"></div>
       `;
       document.body.appendChild(lightbox);
@@ -229,7 +229,7 @@
         const item = galleryItems[activeIndex];
         image.src = item.img.currentSrc || item.img.src;
         image.alt = item.img.alt || item.title;
-        caption.textContent = `${item.title} • ${activeIndex + 1} de ${galleryItems.length}`;
+        caption.textContent = `${item.title} &#x2022; ${activeIndex + 1} de ${galleryItems.length}`;
       }
 
       closeButton.addEventListener("click", closeGallery);
