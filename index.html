@@ -43,6 +43,7 @@
   }
 
   body.menu-open { overflow: hidden; }
+  body.lead-popup-open { overflow: hidden; }
   img { display: block; max-width: 100%; }
   a { color: inherit; text-decoration: none; }
 
@@ -54,6 +55,180 @@
   .object-top { object-position: center top; }
   .object-center { object-position: center center; }
   .object-bottom { object-position: center bottom; }
+
+  .lead-popup {
+    position: fixed;
+    inset: 0;
+    z-index: 100;
+    display: grid;
+    place-items: center;
+    padding: 18px;
+    background: rgba(8, 8, 8, 0.76);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+  }
+
+  .lead-popup.is-visible {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .lead-popup__dialog {
+    position: relative;
+    width: min(430px, 100%);
+    overflow: hidden;
+    border: 2px solid rgba(255, 184, 43, 0.72);
+    border-radius: 22px;
+    background:
+      linear-gradient(145deg, rgba(255, 184, 43, 0.12), transparent 34%),
+      linear-gradient(180deg, #20140d 0%, #111111 100%);
+    color: #fff8ec;
+    box-shadow: 0 28px 80px rgba(0, 0, 0, 0.45);
+    transform: translateY(16px) scale(0.98);
+    transition: transform 0.25s ease;
+  }
+
+  .lead-popup.is-visible .lead-popup__dialog {
+    transform: translateY(0) scale(1);
+  }
+
+  .lead-popup__dialog::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 18% 12%, rgba(255, 184, 43, 0.25), transparent 25%),
+      radial-gradient(circle at 88% 18%, rgba(255, 87, 34, 0.2), transparent 24%);
+    pointer-events: none;
+  }
+
+  .lead-popup__content {
+    position: relative;
+    display: grid;
+    gap: 14px;
+    padding: clamp(24px, 7vw, 34px);
+    text-align: center;
+  }
+
+  .lead-popup__badge {
+    justify-self: center;
+    border: 1px solid rgba(255, 184, 43, 0.68);
+    border-radius: 999px;
+    padding: 7px 12px;
+    color: #ffcf5b;
+    font-family: "Oswald", sans-serif;
+    font-size: 0.78rem;
+    font-weight: 800;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+  }
+
+  .lead-popup h2 {
+    color: #fff8ec;
+    font-size: clamp(2.35rem, 12vw, 4.2rem);
+    letter-spacing: 0;
+    text-shadow: 0 4px 0 rgba(0, 0, 0, 0.28);
+  }
+
+  .lead-popup__subtitle {
+    color: #ffe6b0;
+    font-size: clamp(1rem, 4vw, 1.16rem);
+    font-weight: 800;
+    line-height: 1.45;
+  }
+
+  .lead-popup__microcopy {
+    color: rgba(255, 248, 236, 0.78);
+    font-size: 0.9rem;
+    font-weight: 700;
+  }
+
+  .lead-popup__form {
+    display: grid;
+    gap: 10px;
+    margin-top: 4px;
+  }
+
+  .lead-popup__input {
+    width: 100%;
+    min-height: 52px;
+    border: 2px solid rgba(255, 184, 43, 0.48);
+    border-radius: 14px;
+    padding: 0 15px;
+    background: rgba(255, 255, 255, 0.96);
+    color: #16110c;
+    font: 800 1rem "Open Sans", Arial, sans-serif;
+    outline: none;
+  }
+
+  .lead-popup__input:focus {
+    border-color: #ffb82b;
+    box-shadow: 0 0 0 4px rgba(255, 184, 43, 0.2);
+  }
+
+  .lead-popup__button {
+    min-height: 54px;
+    border: 0;
+    border-radius: 14px;
+    background: linear-gradient(135deg, #ffcf33, #ff7a1a);
+    color: #1a0f08;
+    cursor: pointer;
+    font-family: "Oswald", sans-serif;
+    font-size: 1rem;
+    font-weight: 900;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    box-shadow: 0 12px 22px rgba(255, 122, 26, 0.28);
+  }
+
+  .lead-popup__button:hover,
+  .lead-popup__button:focus-visible {
+    transform: translateY(-1px);
+    filter: saturate(1.08);
+  }
+
+  .lead-popup__error {
+    display: none;
+    color: #ffcf5b;
+    font-size: 0.86rem;
+    font-weight: 800;
+  }
+
+  .lead-popup__error.is-visible { display: block; }
+
+  .lead-popup__close,
+  .lead-popup__dismiss {
+    border: 0;
+    background: transparent;
+    color: rgba(255, 248, 236, 0.74);
+    cursor: pointer;
+    font: 800 0.9rem "Open Sans", Arial, sans-serif;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+  }
+
+  .lead-popup__close {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
+    display: grid;
+    place-items: center;
+    width: 38px;
+    height: 38px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.08);
+    color: #fff8ec;
+    font-size: 1.4rem;
+    line-height: 1;
+    text-decoration: none;
+  }
+
+  .lead-popup__dismiss {
+    justify-self: center;
+    margin-top: 2px;
+  }
 
   .site-header {
     position: sticky;
@@ -625,6 +800,24 @@
     </div>
   </footer>
 
+  <div class="lead-popup" id="leadPopup" aria-hidden="true">
+    <div class="lead-popup__dialog" role="dialog" aria-modal="true" aria-labelledby="leadPopupTitle">
+      <button class="lead-popup__close" type="button" data-lead-close aria-label="Fechar pop-up">&times;</button>
+      <div class="lead-popup__content">
+        <span class="lead-popup__badge">Primeira mordida com vantagem</span>
+        <h2 id="leadPopupTitle">Burger na chapa! &#127828;&#128293;</h2>
+        <p class="lead-popup__subtitle">Ganhe 10% OFF no seu primeiro pedido e prove um blend suculento com queijo derretido saindo da chapa quente.</p>
+        <p class="lead-popup__microcopy">Deixe seu WhatsApp ou e-mail para liberar seu desconto.</p>
+        <form class="lead-popup__form" id="leadPopupForm">
+          <input class="lead-popup__input" id="leadContact" name="leadContact" type="text" inputmode="email" autocomplete="email" placeholder="Seu WhatsApp ou e-mail" aria-label="Seu WhatsApp ou e-mail">
+          <p class="lead-popup__error" id="leadPopupError">Preencha seu WhatsApp ou e-mail para liberar o desconto.</p>
+          <button class="lead-popup__button" type="submit">Quero meu desconto</button>
+        </form>
+        <button class="lead-popup__dismiss" type="button" data-lead-close>N&atilde;o quero desconto</button>
+      </div>
+    </div>
+  </div>
+
   <script>
     const menuToggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector(".nav");
@@ -668,6 +861,64 @@
     } else {
       revealElements.forEach((element) => element.classList.add("active"));
     }
+
+    const leadPopup = document.querySelector("#leadPopup");
+    const leadPopupForm = document.querySelector("#leadPopupForm");
+    const leadContact = document.querySelector("#leadContact");
+    const leadPopupError = document.querySelector("#leadPopupError");
+    const leadCloseButtons = document.querySelectorAll("[data-lead-close]");
+    const menuUrl = "https://app.cardapioweb.com/ships_burguer";
+
+    function openLeadPopup() {
+      if (sessionStorage.getItem("shipsLeadPopupClosed") === "true") return;
+      leadPopup.classList.add("is-visible");
+      leadPopup.setAttribute("aria-hidden", "false");
+      document.body.classList.add("lead-popup-open");
+      window.setTimeout(() => leadContact.focus(), 180);
+    }
+
+    function closeLeadPopup() {
+      leadPopup.classList.remove("is-visible");
+      leadPopup.setAttribute("aria-hidden", "true");
+      document.body.classList.remove("lead-popup-open");
+      sessionStorage.setItem("shipsLeadPopupClosed", "true");
+    }
+
+    window.setTimeout(openLeadPopup, 5000);
+
+    leadCloseButtons.forEach((button) => {
+      button.addEventListener("click", closeLeadPopup);
+    });
+
+    leadPopup.addEventListener("click", (event) => {
+      if (event.target === leadPopup) closeLeadPopup();
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && leadPopup.classList.contains("is-visible")) {
+        closeLeadPopup();
+      }
+    });
+
+    leadPopupForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const contact = leadContact.value.trim();
+
+      if (!contact) {
+        leadPopupError.classList.add("is-visible");
+        leadContact.focus();
+        return;
+      }
+
+      leadPopupError.classList.remove("is-visible");
+      localStorage.setItem("shipsLeadContact", contact);
+      sessionStorage.setItem("shipsLeadPopupClosed", "true");
+      leadPopupForm.querySelector("button").textContent = "Desconto liberado!";
+
+      window.setTimeout(() => {
+        window.location.href = menuUrl;
+      }, 650);
+    });
   </script>
   <a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chamar a Ship's Burguer no WhatsApp"><img src="./assets/whatsapp.svg" alt="WhatsApp"></a>
 </body>
