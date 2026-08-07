@@ -868,9 +868,10 @@
     const leadPopupError = document.querySelector("#leadPopupError");
     const leadCloseButtons = document.querySelectorAll("[data-lead-close]");
     const menuUrl = "https://app.cardapioweb.com/ships_burguer";
+    const leadPopupStorageKey = "shipsLeadPopupClosedV2";
 
     function openLeadPopup() {
-      if (sessionStorage.getItem("shipsLeadPopupClosed") === "true") return;
+      if (sessionStorage.getItem(leadPopupStorageKey) === "true") return;
       leadPopup.classList.add("is-visible");
       leadPopup.setAttribute("aria-hidden", "false");
       document.body.classList.add("lead-popup-open");
@@ -881,7 +882,7 @@
       leadPopup.classList.remove("is-visible");
       leadPopup.setAttribute("aria-hidden", "true");
       document.body.classList.remove("lead-popup-open");
-      sessionStorage.setItem("shipsLeadPopupClosed", "true");
+      sessionStorage.setItem(leadPopupStorageKey, "true");
     }
 
     window.setTimeout(openLeadPopup, 5000);
@@ -912,7 +913,7 @@
 
       leadPopupError.classList.remove("is-visible");
       localStorage.setItem("shipsLeadContact", contact);
-      sessionStorage.setItem("shipsLeadPopupClosed", "true");
+      sessionStorage.setItem(leadPopupStorageKey, "true");
       leadPopupForm.querySelector("button").textContent = "Desconto liberado!";
 
       window.setTimeout(() => {
