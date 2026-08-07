@@ -152,33 +152,20 @@
     font-weight: 700;
   }
 
-  .lead-popup__form {
+  .lead-popup__actions {
     display: grid;
     gap: 10px;
     margin-top: 4px;
   }
 
-  .lead-popup__input {
-    width: 100%;
-    min-height: 52px;
-    border: 2px solid rgba(255, 207, 51, 0.58);
-    border-radius: 14px;
-    padding: 0 15px;
-    background: rgba(255, 255, 255, 0.96);
-    color: #16110c;
-    font: 800 1rem "Open Sans", Arial, sans-serif;
-    outline: none;
-  }
-
-  .lead-popup__input:focus {
-    border-color: #ffcf33;
-    box-shadow: 0 0 0 4px rgba(15, 78, 162, 0.26);
-  }
-
   .lead-popup__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     min-height: 54px;
     border: 0;
     border-radius: 14px;
+    padding: 0 18px;
     background: linear-gradient(135deg, #ffcf33, #ff7a1a);
     color: #071832;
     cursor: pointer;
@@ -195,15 +182,6 @@
     transform: translateY(-1px);
     filter: saturate(1.08);
   }
-
-  .lead-popup__error {
-    display: none;
-    color: #ffcf33;
-    font-size: 0.86rem;
-    font-weight: 800;
-  }
-
-  .lead-popup__error.is-visible { display: block; }
 
   .lead-popup__close,
   .lead-popup__dismiss {
@@ -814,14 +792,12 @@
       <div class="lead-popup__content">
         <img class="lead-popup__logo" src="./assets/logo-site.avif" alt="Ship's Burguer">
         <span class="lead-popup__badge">Primeira mordida com vantagem</span>
-        <h2 id="leadPopupTitle">Smash de verdade! &#127828;&#128293;</h2>
+        <h2 id="leadPopupTitle">Smash de verdade!</h2>
         <p class="lead-popup__subtitle">Ganhe 10% OFF no seu primeiro pedido e prove um smash suculento com queijo derretido saindo da chapa quente.</p>
-        <p class="lead-popup__microcopy">Deixe seu WhatsApp ou e-mail para liberar seu desconto.</p>
-        <form class="lead-popup__form" id="leadPopupForm">
-          <input class="lead-popup__input" id="leadContact" name="leadContact" type="text" inputmode="email" autocomplete="email" placeholder="Seu WhatsApp ou e-mail" aria-label="Seu WhatsApp ou e-mail">
-          <p class="lead-popup__error" id="leadPopupError">Preencha seu WhatsApp ou e-mail para liberar o desconto.</p>
-          <button class="lead-popup__button" type="submit">Quero meu desconto</button>
-        </form>
+        <p class="lead-popup__microcopy">Clique no bot&atilde;o para chamar a Ship's no WhatsApp e receber seu cupom.</p>
+        <div class="lead-popup__actions">
+          <a class="lead-popup__button" href="https://wa.me/5511976374369?text=Oiii%2C%20tudo%20bem%3F%20vim%20pelo%20site%20e%20gostaria%20de%20receber%20o%20cupom%20de%2010%25" target="_blank" rel="noopener" data-lead-whatsapp>Quero meu cupom</a>
+        </div>
         <button class="lead-popup__dismiss" type="button" data-lead-close>N&atilde;o quero desconto</button>
       </div>
     </div>
@@ -872,11 +848,8 @@
     }
 
     const leadPopup = document.querySelector("#leadPopup");
-    const leadPopupForm = document.querySelector("#leadPopupForm");
-    const leadContact = document.querySelector("#leadContact");
-    const leadPopupError = document.querySelector("#leadPopupError");
+    const leadWhatsappButton = document.querySelector("[data-lead-whatsapp]");
     const leadCloseButtons = document.querySelectorAll("[data-lead-close]");
-    const menuUrl = "https://app.cardapioweb.com/ships_burguer";
     const leadPopupStorageKey = "shipsLeadPopupClosedV3";
 
     function openLeadPopup() {
@@ -884,7 +857,7 @@
       leadPopup.classList.add("is-visible");
       leadPopup.setAttribute("aria-hidden", "false");
       document.body.classList.add("lead-popup-open");
-      window.setTimeout(() => leadContact.focus(), 180);
+      window.setTimeout(() => leadWhatsappButton.focus(), 180);
     }
 
     function closeLeadPopup() {
@@ -910,24 +883,8 @@
       }
     });
 
-    leadPopupForm.addEventListener("submit", (event) => {
-      event.preventDefault();
-      const contact = leadContact.value.trim();
-
-      if (!contact) {
-        leadPopupError.classList.add("is-visible");
-        leadContact.focus();
-        return;
-      }
-
-      leadPopupError.classList.remove("is-visible");
-      localStorage.setItem("shipsLeadContact", contact);
+    leadWhatsappButton.addEventListener("click", () => {
       sessionStorage.setItem(leadPopupStorageKey, "true");
-      leadPopupForm.querySelector("button").textContent = "Desconto liberado!";
-
-      window.setTimeout(() => {
-        window.location.href = menuUrl;
-      }, 650);
     });
   </script>
   <a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chamar a Ship's Burguer no WhatsApp"><img src="./assets/whatsapp.svg" alt="WhatsApp"></a>
