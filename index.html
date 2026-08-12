@@ -401,10 +401,7 @@
   .vip p { max-width: 760px; margin: 18px auto 28px; font-size: clamp(1rem, 2vw, 1.18rem); font-weight: 700; }
 
   .local-seo {
-    display: grid;
-    grid-template-columns: minmax(0, 1.1fr) minmax(280px, .9fr);
-    gap: clamp(18px, 4vw, 38px);
-    align-items: center;
+    display: block;
     padding: clamp(24px, 5vw, 46px);
     border: 2px solid var(--blue);
     border-radius: var(--radius);
@@ -414,23 +411,6 @@
 
   .local-seo h2 { font-size: clamp(2.5rem, 5vw, 4.8rem); }
   .local-seo p { margin-top: 14px; font-size: clamp(1rem, 2vw, 1.12rem); font-weight: 700; }
-
-  .local-seo-list {
-    display: grid;
-    gap: 10px;
-    list-style: none;
-  }
-
-  .local-seo-list li {
-    padding: 12px 14px;
-    border: 1px solid rgba(15,78,162,.28);
-    border-radius: var(--radius);
-    background: var(--paper-soft);
-    color: var(--black);
-    font-family: "Oswald", sans-serif;
-    font-weight: 800;
-    text-transform: uppercase;
-  }
 
   .location-grid {
     display: grid;
@@ -469,6 +449,26 @@
     height: 100%;
     min-height: 420px;
     border: 0;
+  }
+
+  .seo-tags {
+    padding: 22px 0 12px;
+    color: rgba(17, 17, 17, 0.62);
+    font-size: 0.82rem;
+    font-weight: 700;
+    text-align: center;
+  }
+
+  .seo-tags ul {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 8px 14px;
+    list-style: none;
+  }
+
+  .seo-tags li {
+    white-space: nowrap;
   }
 
   .cta-strip { display: grid; grid-template-columns: 1fr auto auto; align-items: center; gap: 18px; margin-top: 18px; padding: 22px; border: 2px solid var(--blue); border-radius: var(--radius); background: var(--paper-soft); }
@@ -825,23 +825,20 @@
       <div class="container">
         <div class="local-seo reveal">
           <div>
-            <p class="section-kicker">Delivery na Vila Matilde</p>
-            <h2>Hamburgueria em <span>Vila Matilde</span></h2>
+            <p class="section-kicker">Nossa hist&#xF3;ria</p>
+            <h2>Uma curiosidade sobre <span>a Ship's</span></h2>
             <p>
-              A Ship's Burguer &#xE9; uma hamburgueria em Vila Matilde, S&#xE3;o Paulo, feita para quem procura smash burger,
-              lanche artesanal, sal&#xE3;o para comer no local e delivery de hamb&#xFA;rguer com pedido online r&#xE1;pido.
+              Voc&#xEA; sabia que a Ship's Burguer &#xE9; formada por tr&#xEA;s amigos de inf&#xE2;ncia? Desde o nosso in&#xED;cio,
+              l&#xE1; em 2021, prezamos pela amizade em todos os momentos. Tanto que todos os lanches do card&#xE1;pio
+              levam nomes de amigos nossos.
             </p>
             <p>
-              Se voc&#xEA; est&#xE1; procurando smash burger em Vila Matilde, hamburgueria artesanal perto de mim ou delivery
-              de lanche em S&#xE3;o Paulo, a Ship's prepara tudo na chapa quente e recebe pedidos pelo Card&#xE1;pio Web.
+              Todos os meses lan&#xE7;amos o Lanche do M&#xEA;s. Ele fica no card&#xE1;pio durante 30 dias e &#xE9; sempre um
+              sucesso de vendas. Para voc&#xEA; ter uma ideia, o Smash Moda tamb&#xE9;m come&#xE7;ou como Lanche do M&#xEA;s,
+              mas fez tanto sucesso que decidimos coloc&#xE1;-lo no nosso card&#xE1;pio fixo. Hoje, ele &#xE9; o lanche
+              que mais vende na loja.
             </p>
           </div>
-          <ul class="local-seo-list" aria-label="Buscas relacionadas &#xE0; Ship's Burguer">
-            <li>Smash burger em Vila Matilde</li>
-            <li>Hamburgueria artesanal em S&#xE3;o Paulo</li>
-            <li>Delivery de hamb&#xFA;rguer na Vila Matilde</li>
-            <li>Pedido online pelo Card&#xE1;pio Web</li>
-          </ul>
         </div>
       </div>
     </section>
@@ -899,6 +896,17 @@
           </p>
           <a class="retro-button" href="https://chat.whatsapp.com/E45CywnC8P7261yBHHF9EA" target="_blank" rel="noopener noreferrer">Entrar no Grupo VIP</a>
         </div>
+      </div>
+    </section>
+
+    <section class="seo-tags" aria-label="Buscas relacionadas &#xE0; Ship's Burguer">
+      <div class="container">
+        <ul>
+          <li>Smash burger em Vila Matilde</li>
+          <li>Hamburgueria artesanal em S&#xE3;o Paulo</li>
+          <li>Delivery de hamb&#xFA;rguer na Vila Matilde</li>
+          <li>Pedido online pelo Card&#xE1;pio Web</li>
+        </ul>
       </div>
     </section>
   </main>
