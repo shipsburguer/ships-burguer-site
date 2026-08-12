@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="icon" type="image/png" href="./assets/favicon.png" />
+  <link rel="shortcut icon" href="./assets/favicon.ico" />
+  <link rel="apple-touch-icon" href="./assets/apple-touch-icon.png" />
+  <title>Card&#xE1;pio F&#xED;sico | Ship's Burguer</title>
+  <meta name="description" content="Veja a frente e o verso do card&#xE1;pio f&#xED;sico da Ship's Burguer com zoom e navega&#xE7;&#xE3;o em tela cheia." />
+  <link rel="canonical" href="https://ships-burguer-site.vercel.app/cardapio-fisico.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Open+Sans:wght@400;600;700;800&family=Oswald:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root { --blue: #0f4ea2; --black: #111111; --ink: #202020; --paper: #f7f1e7; --paper-soft: #fffaf0; --line: rgba(17,17,17,.2); --radius: 8px; }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body { color: var(--ink); font-family: "Open Sans", Arial, sans-serif; line-height: 1.6; background: radial-gradient(circle at 12% 18%, rgba(15,78,162,.06) 0 1px, transparent 1px), linear-gradient(135deg, rgba(255,255,255,.72), rgba(247,241,231,.94)), var(--paper); background-size: 18px 18px, auto, auto; }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
+    .gallery-header { border-bottom: 2px solid var(--black); background: rgba(247,241,231,.96); }
+    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 92px; }
+    .logo-complete { height: 72px; width: auto; max-width: 230px; object-fit: contain; mix-blend-mode: multiply; filter: contrast(1.08) saturate(1.05); }
+    h1, h2, h3 { color: var(--black); font-family: "Bebas Neue", "Oswald", sans-serif; line-height: .95; text-transform: uppercase; }
+    .hero { padding: clamp(42px, 7vw, 82px) 0 32px; border-bottom: 2px solid var(--line); text-align: center; }
+    .kicker { color: var(--blue); font-family: "Oswald", sans-serif; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
+    h1 { margin-top: 10px; font-size: clamp(3.2rem, 9vw, 6.8rem); }
+    .hero p { max-width: 760px; margin: 18px auto 0; font-size: clamp(1rem, 2vw, 1.18rem); font-weight: 700; }
+    .actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
+    .retro-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 20px; border: 2px solid var(--blue); border-radius: var(--radius); color: var(--blue); background: transparent; box-shadow: 4px 4px 0 var(--black); font-family: "Oswald", sans-serif; font-size: 1.05rem; font-weight: 700; text-transform: uppercase; transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease; }
+    .retro-button:hover, .retro-button:focus-visible { color: var(--paper-soft); background: var(--blue); box-shadow: 2px 2px 0 var(--black); transform: translate(2px, 2px); outline: none; }
+    .gallery-section { padding: clamp(42px, 7vw, 78px) 0; }
+    .image-frame { border: 2px solid var(--black); border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.68), rgba(15,78,162,.08)); box-shadow: 0 10px 22px rgba(17,17,17,.12); overflow: hidden; }
+    .gallery-image { width: 100%; aspect-ratio: 4961 / 3508; object-fit: contain; object-position: center center; background: var(--paper-soft); }
+    picture { display: block; }
+    .photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
+    .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); box-shadow: 4px 4px 0 rgba(17,17,17,.12); overflow: hidden; }
+    .photo-zoom-link { display: block; cursor: zoom-in; overflow: hidden; }
+    .photo-zoom-link .gallery-image { transition: transform .22s ease, filter .22s ease; }
+    .photo-zoom-link:hover .gallery-image, .photo-zoom-link:focus-visible .gallery-image { transform: scale(1.025); filter: saturate(1.05) contrast(1.03); }
+    .photo-zoom-link:focus-visible { outline: 3px solid var(--blue); outline-offset: -3px; }
+    .gallery-lightbox { position: fixed; inset: 0; z-index: 10000; display: none; grid-template-columns: 58px minmax(0, 1fr) 58px; grid-template-rows: auto minmax(0, 1fr) auto; gap: 12px; padding: 18px; background: rgba(8, 10, 14, .94); color: var(--paper-soft); }
+    .gallery-lightbox.is-open { display: grid; }
+    .gallery-lightbox-image { grid-column: 1 / -1; grid-row: 2; align-self: center; justify-self: center; max-width: min(100%, 1280px); max-height: 78vh; width: auto; height: auto; object-fit: contain; border: 2px solid rgba(255,255,255,.82); border-radius: var(--radius); background: #111; box-shadow: 0 18px 42px rgba(0,0,0,.42); }
+    .gallery-lightbox-close, .gallery-lightbox-prev, .gallery-lightbox-next { display: grid; place-items: center; border: 2px solid rgba(255,255,255,.82); border-radius: 50%; background: rgba(255,250,240,.12); color: var(--paper-soft); font-family: "Oswald", sans-serif; font-size: 2rem; font-weight: 800; cursor: pointer; }
+    .gallery-lightbox-close:hover, .gallery-lightbox-prev:hover, .gallery-lightbox-next:hover, .gallery-lightbox-close:focus-visible, .gallery-lightbox-prev:focus-visible, .gallery-lightbox-next:focus-visible { background: var(--blue); outline: none; }
+    .gallery-lightbox-close { grid-column: 3; grid-row: 1; width: 48px; height: 48px; justify-self: end; font-size: 1.7rem; }
+    .gallery-lightbox-prev, .gallery-lightbox-next { grid-row: 2; width: 52px; height: 52px; align-self: center; }
+    .gallery-lightbox-prev { grid-column: 1; }
+    .gallery-lightbox-next { grid-column: 3; }
+    .gallery-lightbox-caption { grid-column: 1 / -1; grid-row: 3; text-align: center; font-family: "Oswald", sans-serif; font-size: 1rem; font-weight: 700; text-transform: uppercase; }
+    body.lightbox-open { overflow: hidden; }
+    .photo-card-content { padding: 15px; }
+    .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
+    .photo-card p { margin-top: 6px; font-weight: 700; }
+    .page-footer { padding: 22px 0; border-top: 2px solid var(--black); text-align: center; font-weight: 700; }
+    @media (max-width: 900px) { .photo-grid { grid-template-columns: 1fr; } }
+    @media (max-width: 560px) { .container { width: min(100% - 22px, 1160px); } .header-inner { justify-content: center; min-height: 78px; } .logo-complete { height: 54px; } .actions, .retro-button { width: 100%; } .gallery-lightbox { grid-template-columns: 48px minmax(0, 1fr) 48px; padding: 12px; } .gallery-lightbox-image { max-height: 74vh; } .gallery-lightbox-prev, .gallery-lightbox-next { width: 44px; height: 44px; font-size: 1.6rem; } .gallery-lightbox-close { width: 44px; height: 44px; } }
+  </style>
+</head>
+<body>
+  <header class="gallery-header">
+    <div class="container header-inner">
+      <a href="./index.html" aria-label="Voltar para Ship's Burguer"><img class="logo-complete" src="./assets/logo-site.avif" alt="Ship's Burguer"></a>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <p class="kicker">Card&#xE1;pio Ship's</p>
+        <h1>Card&#xE1;pio F&#xED;sico</h1>
+        <p>Confira a frente e o verso do card&#xE1;pio impresso da Ship's Burguer. Clique nas imagens para ampliar.</p>
+        <div class="actions">
+          <a class="retro-button" href="./index.html">Voltar para o site</a>
+          <a class="retro-button" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer">Pe&#xE7;a Agora</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="gallery-section" id="cardapio-fisico">
+      <div class="container">
+        <div class="photo-grid">
+          <article class="photo-card image-frame">
+            <img class="gallery-image" src="./assets/cardapio/cardapio-frente.png" alt="Frente do card&#xE1;pio f&#xED;sico da Ship's Burguer" width="4961" height="3508" loading="eager" fetchpriority="high">
+            <div class="photo-card-content">
+              <h2>Frente do card&#xE1;pio</h2>
+              <p>Primeira parte do card&#xE1;pio impresso da Ship's Burguer.</p>
+            </div>
+          </article>
+
+          <article class="photo-card image-frame">
+            <img class="gallery-image" src="./assets/cardapio/cardapio-verso.png" alt="Verso do card&#xE1;pio f&#xED;sico da Ship's Burguer" width="4961" height="3508" loading="lazy">
+            <div class="photo-card-content">
+              <h2>Verso do card&#xE1;pio</h2>
+              <p>Segunda parte do card&#xE1;pio impresso da Ship's Burguer.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="page-footer">
+    <div class="container">Ship's Burguer - Desde 2021</div>
+  </footer>
+  <script>
+    const galleryItems = [];
+
+    document.querySelectorAll(".photo-card").forEach((card, index) => {
+      const media = card.querySelector("picture, img.gallery-image");
+      if (!media || media.closest("a")) return;
+      const img = media.tagName.toLowerCase() === "picture" ? media.querySelector("img") : media;
+      if (!img) return;
+      const title = card.querySelector("h2")?.textContent.trim() || img.alt || "Foto";
+      const link = document.createElement("a");
+      link.className = "photo-zoom-link";
+      link.href = "#galeria-foto";
+      link.setAttribute("aria-label", "Abrir foto na galeria");
+      media.parentNode.insertBefore(link, media);
+      link.appendChild(media);
+      galleryItems.push({ img, title });
+      link.addEventListener("click", (event) => {
+        event.preventDefault();
+        openGallery(index);
+      });
+    });
+
+    if (galleryItems.length) {
+      const lightbox = document.createElement("div");
+      lightbox.className = "gallery-lightbox";
+      lightbox.setAttribute("role", "dialog");
+      lightbox.setAttribute("aria-modal", "true");
+      lightbox.setAttribute("aria-label", "Galeria de fotos");
+      lightbox.innerHTML = `
+        <button class="gallery-lightbox-close" type="button" aria-label="Fechar foto">&#xD7;</button>
+        <button class="gallery-lightbox-prev" type="button" aria-label="Foto anterior">&#x2039;</button>
+        <img class="gallery-lightbox-image" alt="">
+        <button class="gallery-lightbox-next" type="button" aria-label="Pr&#xF3;xima foto">&#x203A;</button>
+        <div class="gallery-lightbox-caption"></div>
+      `;
+      document.body.appendChild(lightbox);
+
+      const image = lightbox.querySelector(".gallery-lightbox-image");
+      const caption = lightbox.querySelector(".gallery-lightbox-caption");
+      const closeButton = lightbox.querySelector(".gallery-lightbox-close");
+      const prevButton = lightbox.querySelector(".gallery-lightbox-prev");
+      const nextButton = lightbox.querySelector(".gallery-lightbox-next");
+      let activeIndex = 0;
+
+      window.openGallery = (index) => {
+        activeIndex = index;
+        renderGallery();
+        lightbox.classList.add("is-open");
+        document.body.classList.add("lightbox-open");
+        closeButton.focus();
+      };
+
+      const closeGallery = () => {
+        lightbox.classList.remove("is-open");
+        document.body.classList.remove("lightbox-open");
+      };
+
+      const moveGallery = (step) => {
+        activeIndex = (activeIndex + step + galleryItems.length) % galleryItems.length;
+        renderGallery();
+      };
+
+      function renderGallery() {
+        const item = galleryItems[activeIndex];
+        image.src = item.img.currentSrc || item.img.src;
+        image.alt = item.img.alt || item.title;
+        caption.textContent = `${item.title} &#x2022; ${activeIndex + 1} de ${galleryItems.length}`;
+      }
+
+      closeButton.addEventListener("click", closeGallery);
+      prevButton.addEventListener("click", () => moveGallery(-1));
+      nextButton.addEventListener("click", () => moveGallery(1));
+      lightbox.addEventListener("click", (event) => {
+        if (event.target === lightbox) closeGallery();
+      });
+      document.addEventListener("keydown", (event) => {
+        if (!lightbox.classList.contains("is-open")) return;
+        if (event.key === "Escape") closeGallery();
+        if (event.key === "ArrowLeft") moveGallery(-1);
+        if (event.key === "ArrowRight") moveGallery(1);
+      });
+    }
+  </script>
+</body>
+</html>
