@@ -18,24 +18,15 @@
     body { color: var(--ink); font-family: "Open Sans", Arial, sans-serif; line-height: 1.6; background: radial-gradient(circle at 12% 18%, rgba(15,78,162,.06) 0 1px, transparent 1px), linear-gradient(135deg, rgba(255,255,255,.72), rgba(247,241,231,.94)), var(--paper); background-size: 18px 18px, auto, auto; }
     img { display: block; max-width: 100%; }
     a { color: inherit; text-decoration: none; }
-    .container { width: min(1160px, calc(100% - 32px)); margin: 0 auto; }
-    .gallery-header { border-bottom: 2px solid var(--black); background: rgba(247,241,231,.96); }
-    .header-inner { display: flex; align-items: center; justify-content: space-between; gap: 18px; min-height: 92px; }
-    .logo-complete { height: 72px; width: auto; max-width: 230px; object-fit: contain; mix-blend-mode: multiply; filter: contrast(1.08) saturate(1.05); }
-    h1, h2, h3 { color: var(--black); font-family: "Bebas Neue", "Oswald", sans-serif; line-height: .95; text-transform: uppercase; }
-    .hero { padding: clamp(42px, 7vw, 82px) 0 32px; border-bottom: 2px solid var(--line); text-align: center; }
-    .kicker { color: var(--blue); font-family: "Oswald", sans-serif; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; }
-    h1 { margin-top: 10px; font-size: clamp(3.2rem, 9vw, 6.8rem); }
-    .hero p { max-width: 760px; margin: 18px auto 0; font-size: clamp(1rem, 2vw, 1.18rem); font-weight: 700; }
-    .actions { display: flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 14px; margin-top: 28px; }
-    .retro-button { display: inline-flex; align-items: center; justify-content: center; min-height: 48px; padding: 12px 20px; border: 2px solid var(--blue); border-radius: var(--radius); color: var(--blue); background: transparent; box-shadow: 4px 4px 0 var(--black); font-family: "Oswald", sans-serif; font-size: 1.05rem; font-weight: 700; text-transform: uppercase; transition: transform .18s ease, box-shadow .18s ease, background .18s ease, color .18s ease; }
-    .retro-button:hover, .retro-button:focus-visible { color: var(--paper-soft); background: var(--blue); box-shadow: 2px 2px 0 var(--black); transform: translate(2px, 2px); outline: none; }
-    .gallery-section { padding: clamp(42px, 7vw, 78px) 0; }
-    .image-frame { border: 2px solid var(--black); border-radius: var(--radius); background: linear-gradient(180deg, rgba(255,255,255,.68), rgba(15,78,162,.08)); box-shadow: 0 10px 22px rgba(17,17,17,.12); overflow: hidden; }
-    .gallery-image { width: 100%; aspect-ratio: 4961 / 3508; object-fit: contain; object-position: center center; background: var(--paper-soft); }
+    .container { width: min(1600px, calc(100% - 10px)); margin: 0 auto; }
+    .gallery-header { border-bottom: 1px solid rgba(17,17,17,.12); background: rgba(247,241,231,.96); }
+    .header-inner { display: flex; align-items: center; justify-content: center; min-height: 62px; }
+    .logo-complete { height: 44px; width: auto; max-width: 170px; object-fit: contain; mix-blend-mode: multiply; filter: contrast(1.08) saturate(1.05); }
+    .gallery-section { padding: 10px 0; }
+    .gallery-image { width: 100%; height: auto; object-fit: contain; object-position: center center; background: #ffffff; }
     picture { display: block; }
-    .photo-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 18px; align-items: stretch; }
-    .photo-card { border: 2px solid var(--black); border-radius: var(--radius); background: rgba(255,250,240,.78); box-shadow: 4px 4px 0 rgba(17,17,17,.12); overflow: hidden; }
+    .photo-grid { display: grid; grid-template-columns: 1fr; gap: 10px; }
+    .photo-card { overflow: hidden; }
     .photo-zoom-link { display: block; cursor: zoom-in; overflow: hidden; }
     .photo-zoom-link .gallery-image { transition: transform .22s ease, filter .22s ease; }
     .photo-zoom-link:hover .gallery-image, .photo-zoom-link:focus-visible .gallery-image { transform: scale(1.025); filter: saturate(1.05) contrast(1.03); }
@@ -51,12 +42,7 @@
     .gallery-lightbox-next { grid-column: 3; }
     .gallery-lightbox-caption { grid-column: 1 / -1; grid-row: 3; text-align: center; font-family: "Oswald", sans-serif; font-size: 1rem; font-weight: 700; text-transform: uppercase; }
     body.lightbox-open { overflow: hidden; }
-    .photo-card-content { padding: 15px; }
-    .photo-card h2 { font-family: "Oswald", sans-serif; font-size: 1.18rem; }
-    .photo-card p { margin-top: 6px; font-weight: 700; }
-    .page-footer { padding: 22px 0; border-top: 2px solid var(--black); text-align: center; font-weight: 700; }
-    @media (max-width: 900px) { .photo-grid { grid-template-columns: 1fr; } }
-    @media (max-width: 560px) { .container { width: min(100% - 22px, 1160px); } .header-inner { justify-content: center; min-height: 78px; } .logo-complete { height: 54px; } .actions, .retro-button { width: 100%; } .gallery-lightbox { grid-template-columns: 48px minmax(0, 1fr) 48px; padding: 12px; } .gallery-lightbox-image { max-height: 74vh; } .gallery-lightbox-prev, .gallery-lightbox-next { width: 44px; height: 44px; font-size: 1.6rem; } .gallery-lightbox-close { width: 44px; height: 44px; } }
+    @media (max-width: 560px) { .container { width: min(100% - 6px, 1600px); } .header-inner { min-height: 54px; } .logo-complete { height: 38px; } .gallery-section { padding: 3px 0; } .photo-grid { gap: 3px; } .gallery-lightbox { grid-template-columns: 48px minmax(0, 1fr) 48px; padding: 12px; } .gallery-lightbox-image { max-height: 74vh; } .gallery-lightbox-prev, .gallery-lightbox-next { width: 44px; height: 44px; font-size: 1.6rem; } .gallery-lightbox-close { width: 44px; height: 44px; } }
   </style>
 </head>
 <body>
@@ -67,44 +53,21 @@
   </header>
 
   <main>
-    <section class="hero">
-      <div class="container">
-        <p class="kicker">Card&#xE1;pio Ship's</p>
-        <h1>Card&#xE1;pio F&#xED;sico</h1>
-        <p>Confira a frente e o verso do card&#xE1;pio impresso da Ship's Burguer. Clique nas imagens para ampliar.</p>
-        <div class="actions">
-          <a class="retro-button" href="./index.html">Voltar para o site</a>
-          <a class="retro-button" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer">Pe&#xE7;a Agora</a>
-        </div>
-      </div>
-    </section>
-
     <section class="gallery-section" id="cardapio-fisico">
       <div class="container">
         <div class="photo-grid">
-          <article class="photo-card image-frame">
+          <article class="photo-card" data-title="Frente do card&#xE1;pio">
             <img class="gallery-image" src="./assets/cardapio/cardapio-frente.png" alt="Frente do card&#xE1;pio f&#xED;sico da Ship's Burguer" width="4961" height="3508" loading="eager" fetchpriority="high">
-            <div class="photo-card-content">
-              <h2>Frente do card&#xE1;pio</h2>
-              <p>Primeira parte do card&#xE1;pio impresso da Ship's Burguer.</p>
-            </div>
           </article>
 
-          <article class="photo-card image-frame">
+          <article class="photo-card" data-title="Verso do card&#xE1;pio">
             <img class="gallery-image" src="./assets/cardapio/cardapio-verso.png" alt="Verso do card&#xE1;pio f&#xED;sico da Ship's Burguer" width="4961" height="3508" loading="lazy">
-            <div class="photo-card-content">
-              <h2>Verso do card&#xE1;pio</h2>
-              <p>Segunda parte do card&#xE1;pio impresso da Ship's Burguer.</p>
-            </div>
           </article>
         </div>
       </div>
     </section>
   </main>
 
-  <footer class="page-footer">
-    <div class="container">Ship's Burguer - Desde 2021</div>
-  </footer>
   <script>
     const galleryItems = [];
 
@@ -113,7 +76,7 @@
       if (!media || media.closest("a")) return;
       const img = media.tagName.toLowerCase() === "picture" ? media.querySelector("img") : media;
       if (!img) return;
-      const title = card.querySelector("h2")?.textContent.trim() || img.alt || "Foto";
+      const title = card.dataset.title || img.alt || "Foto";
       const link = document.createElement("a");
       link.className = "photo-zoom-link";
       link.href = "#galeria-foto";
