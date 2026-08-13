@@ -664,6 +664,246 @@
     object-fit: contain;
   }
 
+  .ships-chat {
+    position: fixed;
+    right: 20px;
+    bottom: 94px;
+    z-index: 9998;
+    font-family: "Open Sans", Arial, sans-serif;
+  }
+
+  .ships-chat__button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    min-height: 54px;
+    padding: 0 18px;
+    border: 2px solid var(--black);
+    border-radius: 999px;
+    background: var(--blue);
+    color: #fff;
+    font-weight: 900;
+    box-shadow: 4px 4px 0 var(--black), 0 12px 28px rgba(17, 17, 17, 0.22);
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+  }
+
+  .ships-chat__button:hover,
+  .ships-chat__button:focus-visible {
+    transform: translate(2px, 2px);
+    background: var(--blue-dark);
+    box-shadow: 2px 2px 0 var(--black), 0 10px 24px rgba(17, 17, 17, 0.24);
+    outline: none;
+  }
+
+  .ships-chat__icon {
+    display: grid;
+    place-items: center;
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: #fff;
+    color: var(--blue);
+    font-size: 1rem;
+    line-height: 1;
+  }
+
+  .ships-chat__panel {
+    position: absolute;
+    right: 0;
+    bottom: 70px;
+    width: min(370px, calc(100vw - 32px));
+    overflow: hidden;
+    border: 2px solid var(--black);
+    border-radius: var(--radius);
+    background: var(--paper-soft);
+    color: var(--black);
+    box-shadow: 6px 6px 0 var(--black), 0 22px 56px rgba(17, 17, 17, 0.25);
+    opacity: 0;
+    pointer-events: none;
+    transform: translateY(14px) scale(0.98);
+    transition: opacity 0.22s ease, transform 0.22s ease;
+  }
+
+  .ships-chat.is-open .ships-chat__panel {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translateY(0) scale(1);
+  }
+
+  .ships-chat__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 16px;
+    background: var(--blue);
+    color: #fff;
+  }
+
+  .ships-chat__brand {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .ships-chat__brand img {
+    width: 42px;
+    height: 42px;
+    border: 2px solid #fff;
+    border-radius: 50%;
+    background: var(--paper-soft);
+    object-fit: cover;
+    object-position: center 16%;
+  }
+
+  .ships-chat__title {
+    display: block;
+    font-family: "Oswald", sans-serif;
+    font-size: 1.12rem;
+    font-weight: 800;
+    line-height: 1.1;
+  }
+
+  .ships-chat__status {
+    display: block;
+    font-size: 0.76rem;
+    font-weight: 800;
+    opacity: 0.92;
+  }
+
+  .ships-chat__close {
+    display: grid;
+    place-items: center;
+    width: 34px;
+    height: 34px;
+    border: 1px solid rgba(255, 255, 255, 0.72);
+    border-radius: 50%;
+    background: transparent;
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .ships-chat__body {
+    display: grid;
+    gap: 14px;
+    max-height: min(560px, calc(100vh - 210px));
+    padding: 14px;
+    overflow-y: auto;
+  }
+
+  .ships-chat__messages {
+    display: grid;
+    gap: 10px;
+  }
+
+  .ships-chat__message {
+    max-width: 92%;
+    padding: 10px 12px;
+    border: 1px solid rgba(17, 17, 17, 0.14);
+    border-radius: var(--radius);
+    background: #fff;
+    font-size: 0.92rem;
+    line-height: 1.45;
+    box-shadow: 2px 2px 0 rgba(17, 17, 17, 0.08);
+    white-space: pre-line;
+  }
+
+  .ships-chat__message--user {
+    justify-self: end;
+    background: #eaf2ff;
+    border-color: rgba(15, 78, 162, 0.24);
+    color: var(--blue-dark);
+    font-weight: 800;
+  }
+
+  .ships-chat__quick {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+
+  .ships-chat__quick button {
+    border: 1px solid rgba(15, 78, 162, 0.34);
+    border-radius: 999px;
+    background: #fff;
+    color: var(--blue-dark);
+    padding: 7px 10px;
+    font-size: 0.78rem;
+    font-weight: 900;
+    cursor: pointer;
+    transition: border-color 0.18s ease, transform 0.18s ease;
+  }
+
+  .ships-chat__quick button:hover,
+  .ships-chat__quick button:focus-visible {
+    transform: translateY(-1px);
+    border-color: var(--blue);
+    outline: none;
+  }
+
+  .ships-chat__form {
+    display: flex;
+    gap: 8px;
+  }
+
+  .ships-chat__input {
+    min-width: 0;
+    flex: 1;
+    height: 42px;
+    border: 1px solid rgba(17, 17, 17, 0.2);
+    border-radius: var(--radius);
+    background: #fff;
+    color: var(--black);
+    padding: 0 11px;
+    font: inherit;
+    font-size: 0.9rem;
+  }
+
+  .ships-chat__input:focus {
+    border-color: var(--blue);
+    outline: 2px solid rgba(15, 78, 162, 0.18);
+  }
+
+  .ships-chat__send {
+    display: grid;
+    place-items: center;
+    width: 46px;
+    height: 42px;
+    border: 2px solid var(--black);
+    border-radius: var(--radius);
+    background: var(--blue);
+    color: #fff;
+    font-weight: 900;
+    cursor: pointer;
+  }
+
+  .ships-chat__actions {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+  }
+
+  .ships-chat__action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 40px;
+    border: 2px solid var(--black);
+    border-radius: var(--radius);
+    background: var(--paper);
+    color: var(--black);
+    padding: 8px 10px;
+    font-size: 0.82rem;
+    font-weight: 900;
+    text-align: center;
+    box-shadow: 2px 2px 0 rgba(17, 17, 17, 0.18);
+  }
+
   @media (max-width: 480px) {
     .socials a { width: 48px; height: 48px; }
     .socials a img { width: 24px; height: 24px; }
@@ -677,6 +917,25 @@
     .whatsapp-float img {
       width: 28px;
       height: 28px;
+    }
+
+    .ships-chat {
+      right: 14px;
+      bottom: 82px;
+    }
+
+    .ships-chat__button {
+      min-height: 50px;
+      padding: 0 14px;
+      font-size: 0.88rem;
+    }
+
+    .ships-chat__panel {
+      bottom: 64px;
+    }
+
+    .ships-chat__body {
+      max-height: min(530px, calc(100vh - 170px));
     }
   }
 </style>
@@ -1003,6 +1262,48 @@
     </div>
   </div>
 
+  <div class="ships-chat" data-ships-chat>
+    <section class="ships-chat__panel" id="shipsChatPanel" aria-labelledby="shipsChatTitle" aria-hidden="true">
+      <div class="ships-chat__header">
+        <div class="ships-chat__brand">
+          <img src="./assets/logo-site.avif" alt="" aria-hidden="true">
+          <div>
+            <strong class="ships-chat__title" id="shipsChatTitle">Atendimento Ship's</strong>
+            <span class="ships-chat__status">Respostas rápidas para tirar sua dúvida</span>
+          </div>
+        </div>
+        <button class="ships-chat__close" type="button" data-chat-close aria-label="Fechar atendimento">&times;</button>
+      </div>
+      <div class="ships-chat__body">
+        <div class="ships-chat__messages" data-chat-messages aria-live="polite"></div>
+        <div class="ships-chat__quick" aria-label="Perguntas rápidas">
+          <button type="button" data-chat-question="horario">Horário</button>
+          <button type="button" data-chat-question="endereco">Endereço</button>
+          <button type="button" data-chat-question="pagamento">Pagamento</button>
+          <button type="button" data-chat-question="delivery">Delivery</button>
+          <button type="button" data-chat-question="cardapio">Cardápio</button>
+          <button type="button" data-chat-question="combos">Combos</button>
+          <button type="button" data-chat-question="vip">Grupo VIP</button>
+          <button type="button" data-chat-question="como-pedir">Como pedir</button>
+          <button type="button" data-chat-question="entrega">Área/taxa</button>
+          <button type="button" data-chat-question="retirada">Retirada</button>
+        </div>
+        <form class="ships-chat__form" data-chat-form>
+          <input class="ships-chat__input" type="text" data-chat-input placeholder="Digite sua dúvida" aria-label="Digite sua dúvida">
+          <button class="ships-chat__send" type="submit" aria-label="Enviar pergunta">OK</button>
+        </form>
+        <div class="ships-chat__actions">
+          <a class="ships-chat__action" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer">Abrir Cardápio Web</a>
+          <a class="ships-chat__action" href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener noreferrer">Chamar WhatsApp</a>
+        </div>
+      </div>
+    </section>
+    <button class="ships-chat__button" type="button" data-chat-toggle aria-expanded="false" aria-controls="shipsChatPanel">
+      <span class="ships-chat__icon" aria-hidden="true">?</span>
+      <span>Tirar dúvida</span>
+    </button>
+  </div>
+
   <script>
     const menuToggle = document.querySelector(".menu-toggle");
     const nav = document.querySelector(".nav");
@@ -1085,6 +1386,106 @@
 
     leadWhatsappButton.addEventListener("click", () => {
       sessionStorage.setItem(leadPopupStorageKey, "true");
+    });
+
+    const shipsChat = document.querySelector("[data-ships-chat]");
+    const shipsChatPanel = shipsChat.querySelector(".ships-chat__panel");
+    const shipsChatToggle = shipsChat.querySelector("[data-chat-toggle]");
+    const shipsChatClose = shipsChat.querySelector("[data-chat-close]");
+    const shipsChatMessages = shipsChat.querySelector("[data-chat-messages]");
+    const shipsChatForm = shipsChat.querySelector("[data-chat-form]");
+    const shipsChatInput = shipsChat.querySelector("[data-chat-input]");
+    const shipsChatQuickButtons = shipsChat.querySelectorAll("[data-chat-question]");
+
+    const shipsChatAnswers = {
+      horario: "A Ship's Burguer funciona todos os dias a partir das 19h. De domingo a quinta, o atendimento vai ate 23h. Sexta e sabado, vai ate 23h59.",
+      endereco: "Estamos na Rua Jose Mascarenhas, 586, Vila Matilde, Sao Paulo - SP, CEP 03515-000. No site tem o botao de rota pelo Google Maps.",
+      pagamento: "Aceitamos dinheiro, Pix, cartao de credito, cartao de debito e vale-refeicao. Pelo cadastro do cardapio, credito/debito aparecem com Visa, Mastercard, Elo e Amex. As bandeiras de vale-refeicao aparecem no fechamento do pedido.",
+      delivery: "Temos pedido online pelo Cardapio Web e tambem atendimento por WhatsApp. O site tambem aponta opcoes de delivery por iFood e Keeta.",
+      cardapio: "Voce pode abrir o Cardapio Web para ver itens, valores atualizados e finalizar o pedido. Alguns destaques do site sao Letchiken, Guilbert e Smash Moda.",
+      combos: "Os combos e promocoes podem mudar. Para ver o que esta disponivel hoje, abra o Cardapio Web ou chame a Ship's no WhatsApp.",
+      vip: "O Grupo VIP recebe promocoes exclusivas, novidades do cardapio e ofertas especiais antes de todo mundo.",
+      "como-pedir": "Para pedir, o caminho mais rapido e abrir o Cardapio Web, escolher seus itens e finalizar por la. Se preferir atendimento direto, chame no WhatsApp.",
+      entrega: "Atendemos delivery na Vila Matilde e regiao dentro da area cadastrada. Como a taxa pode variar pelo endereco, confira no Cardapio Web ou envie sua localizacao pelo WhatsApp.",
+      retirada: "Voce tambem pode retirar no balcao na Rua Jose Mascarenhas, 586, Vila Matilde. Faca o pedido pelo Cardapio Web ou pelo WhatsApp e combine a retirada."
+    };
+
+    const shipsChatKeywords = [
+      { key: "horario", words: ["horario", "horário", "abre", "abrem", "fecha", "funciona", "funcionamento"] },
+      { key: "endereco", words: ["endereco", "endereço", "onde", "local", "rua", "rota", "maps", "chegar"] },
+      { key: "pagamento", words: ["pagamento", "pagar", "pix", "dinheiro", "credito", "crédito", "debito", "débito", "cartao", "cartão", "vale", "refeicao", "refeição"] },
+      { key: "delivery", words: ["delivery", "entregar", "entrega", "ifood", "keeta"] },
+      { key: "cardapio", words: ["cardapio", "cardápio", "menu", "lanche", "lanches", "preco", "preço", "valor"] },
+      { key: "combos", words: ["combo", "combos", "promocao", "promoção", "cupom", "desconto", "oferta"] },
+      { key: "vip", words: ["vip", "grupo", "whatsapp"] },
+      { key: "como-pedir", words: ["pedir", "pedido", "comprar", "encomendar"] },
+      { key: "entrega", words: ["taxa", "area", "área", "bairro", "raio", "regiao", "região"] },
+      { key: "retirada", words: ["retirada", "retirar", "balcao", "balcão", "buscar"] }
+    ];
+
+    function addShipsChatMessage(text, type = "bot") {
+      const message = document.createElement("div");
+      message.className = `ships-chat__message ships-chat__message--${type}`;
+      message.textContent = text;
+      shipsChatMessages.appendChild(message);
+      shipsChatMessages.parentElement.scrollTop = shipsChatMessages.parentElement.scrollHeight;
+    }
+
+    function answerShipsChat(questionKey, userText) {
+      if (userText) addShipsChatMessage(userText, "user");
+      addShipsChatMessage(shipsChatAnswers[questionKey] || "Ainda nao tenho essa resposta pronta. Chame a Ship's no WhatsApp que a equipe te ajuda rapidinho.");
+    }
+
+    function findShipsChatAnswer(text) {
+      const normalizedText = text.toLowerCase();
+      const match = shipsChatKeywords.find((item) => item.words.some((word) => normalizedText.includes(word)));
+      return match ? match.key : null;
+    }
+
+    function openShipsChat() {
+      shipsChat.classList.add("is-open");
+      shipsChatPanel.setAttribute("aria-hidden", "false");
+      shipsChatToggle.setAttribute("aria-expanded", "true");
+      window.setTimeout(() => shipsChatInput.focus(), 120);
+    }
+
+    function closeShipsChat() {
+      shipsChat.classList.remove("is-open");
+      shipsChatPanel.setAttribute("aria-hidden", "true");
+      shipsChatToggle.setAttribute("aria-expanded", "false");
+    }
+
+    addShipsChatMessage("Ola! Sou o atendimento rapido da Ship's. Posso te ajudar com horario, endereco, pagamento, delivery, cardapio, combos, Grupo VIP, taxa de entrega ou retirada no balcao.");
+
+    shipsChatToggle.addEventListener("click", () => {
+      if (shipsChat.classList.contains("is-open")) {
+        closeShipsChat();
+      } else {
+        openShipsChat();
+      }
+    });
+
+    shipsChatClose.addEventListener("click", closeShipsChat);
+
+    shipsChatQuickButtons.forEach((button) => {
+      button.addEventListener("click", () => {
+        answerShipsChat(button.dataset.chatQuestion, button.textContent.trim());
+      });
+    });
+
+    shipsChatForm.addEventListener("submit", (event) => {
+      event.preventDefault();
+      const value = shipsChatInput.value.trim();
+      if (!value) return;
+      const answerKey = findShipsChatAnswer(value);
+      answerShipsChat(answerKey, value);
+      shipsChatInput.value = "";
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && shipsChat.classList.contains("is-open")) {
+        closeShipsChat();
+      }
     });
   </script>
   <a href="https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="Chamar a Ship's Burguer no WhatsApp"><img src="./assets/whatsapp.svg" alt="WhatsApp"></a>
