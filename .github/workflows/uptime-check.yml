@@ -1,0 +1,32 @@
+name: Uptime Check
+
+on:
+  schedule:
+    - cron: "*/10 * * * *"
+  workflow_dispatch: {}
+
+jobs:
+  check-site:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verificar se o site esta no ar
+        env:
+          SITE_URL: "https://ships-burguer-site.vercel.app/"
+          WHATSAPP_NUMBER: ${{ secrets.WHATSAPP_NUMBER }}
+          CALLMEBOT_API_KEY: ${{ secrets.CALLMEBOT_API_KEY }}
+        run: |
+          STATUS=$(curl --max-time 20 -s -o /dev/null -w "%{http_code}" "$SITE_URL")
+          echo "Status retornado: $STATUS"
+
+          if [ "$STATUS" -ge 400 ] || [ "$STATUS" -eq 000 ]; then
+            if [ -z "$WHATSAPP_NUMBER" ] || [ -z "$CALLMEBOT_API_KEY" ]; then
+              echo "Secrets WHATSAPP_NUMBER e CALLMEBOT_API_KEY precisam ser cadastradas no GitHub Actions."
+              exit 1
+            fi
+
+            MESSAGE="Alerta: Ship's Burguer site retornou status $STATUS em $(date -u +'%d/%m/%Y %H:%M UTC')"
+            ENCODED_MESSAGE=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$MESSAGE")
+            curl -s "https://api.callmebot.com/whatsapp.php?phone=$WHATSAPP_NUMBER&text=$ENCODED_MESSAGE&apikey=$CALLMEBOT_API_KEY"
+          else
+            echo "Site esta no ar, tudo certo."
+          fi
