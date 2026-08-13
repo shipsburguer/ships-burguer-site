@@ -16,11 +16,16 @@
     h1 { margin: 0; color: #111; font-family: Impact, Arial Black, sans-serif; font-size: clamp(2.8rem, 10vw, 5.8rem); line-height: .92; text-transform: uppercase; }
     h1 span, strong { color: #0f4ea2; }
     p { max-width: 760px; font-size: 1.12rem; font-weight: 700; line-height: 1.6; }
-    .actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
-    a.button { padding: 14px 20px; border: 2px solid #0f4ea2; border-radius: 8px; background: #0f4ea2; color: #fff; font-weight: 900; text-decoration: none; text-transform: uppercase; }
-    a.secondary { background: #fffaf0; color: #0f4ea2; }
-    ul { display: grid; gap: 10px; max-width: 760px; padding: 0; list-style: none; }
-    li { padding: 12px 14px; border: 1px solid rgba(15,78,162,.3); border-radius: 8px; background: #fffaf0; font-weight: 800; }
+    .delivery-options { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin-top: 28px; }
+    .delivery-card { display: grid; align-content: space-between; gap: 16px; min-height: 230px; padding: 20px; border: 2px solid #0f4ea2; border-radius: 8px; background: #fffaf0; color: #111; box-shadow: 4px 4px 0 rgba(17,17,17,.14); text-decoration: none; transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+    .delivery-card:hover, .delivery-card:focus-visible { transform: translate(2px, 2px); border-color: #111; box-shadow: 2px 2px 0 rgba(17,17,17,.22); outline: none; }
+    .delivery-card-logo { display: flex; align-items: center; min-height: 58px; }
+    .delivery-card-logo img { max-width: 150px; max-height: 58px; object-fit: contain; }
+    .delivery-card h2 { margin: 0; color: #111; font-family: Impact, Arial Black, sans-serif; font-size: clamp(1.45rem, 3vw, 2rem); line-height: 1; text-transform: uppercase; }
+    .delivery-card p { margin: 0; font-size: .98rem; }
+    .site-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 24px; }
+    a.button { padding: 14px 20px; border: 2px solid #0f4ea2; border-radius: 8px; background: #fffaf0; color: #0f4ea2; font-weight: 900; text-decoration: none; text-transform: uppercase; }
+    @media (max-width: 760px) { .delivery-options { grid-template-columns: 1fr; } }
     footer { padding: 24px 0 36px; font-weight: 700; }
   </style>
 </head>
@@ -33,19 +38,30 @@
       <h1>Delivery de hamb&#xFA;rguer na <span>Vila Matilde</span></h1>
       <p>A Ship's Burguer atende quem procura delivery de hamb&#xFA;rguer em Vila Matilde, S&#xE3;o Paulo, com smash burger, lanches artesanais e pedido online pelo Card&#xE1;pio Web.</p>
       <p>Nosso foco &#xE9; entregar lanche bem montado, sabor de chapa quente e experi&#xEA;ncia de hamburgueria para comer em casa ou no sal&#xE3;o.</p>
-      <div class="actions">
-        <a class="button" href="https://app.cardapioweb.com/ships_burguer">Pedir pelo Card&#xE1;pio Web</a>
-        <a class="button secondary" href="./index.html">Voltar ao site</a>
+      <div class="delivery-options">
+        <a class="delivery-card" href="https://url-eu.mykeeta.com/KRVQNdKz" target="_blank" rel="noopener noreferrer" aria-label="Pe&#xE7;a pelo Keeta">
+          <span class="delivery-card-logo"><img src="./assets/keeta-logo.svg" alt="Keeta"></span>
+          <span>
+            <h2>Pe&#xE7;a pelo Keeta</h2>
+          </span>
+        </a>
+        <a class="delivery-card" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener noreferrer" aria-label="Pe&#xE7;a pelo iFood">
+          <span class="delivery-card-logo"><img src="./assets/ifood-logo.png" alt="iFood"></span>
+          <span>
+            <h2>Pe&#xE7;a pelo iFood</h2>
+          </span>
+        </a>
+        <a class="delivery-card" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer" aria-label="Pe&#xE7;a pelo card&#xE1;pio pr&#xF3;prio da Ship's">
+          <span class="delivery-card-logo"><img src="./assets/logo-site.avif" alt="Ship's Burguer"></span>
+          <span>
+            <h2>Pe&#xE7;a pelo nosso card&#xE1;pio pr&#xF3;prio</h2>
+            <p>Acumule pontos para trocar por produtos.</p>
+          </span>
+        </a>
       </div>
-    </section>
-    <section>
-      <h2>Buscas que a Ship's atende</h2>
-      <ul>
-        <li>Hamburgueria em Vila Matilde</li>
-        <li>Delivery de hamb&#xFA;rguer em S&#xE3;o Paulo</li>
-        <li>Lanche artesanal perto de mim</li>
-        <li>Smash burger para delivery</li>
-      </ul>
+      <div class="site-actions">
+        <a class="button" href="./index.html">Voltar ao site</a>
+      </div>
     </section>
   </main>
   <footer>Rua Jos&#xE9; Mascarenhas, 586, Vila Matilde, S&#xE3;o Paulo - SP</footer>

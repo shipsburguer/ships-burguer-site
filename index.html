@@ -412,56 +412,6 @@
   .local-seo h2 { font-size: clamp(2.5rem, 5vw, 4.8rem); }
   .local-seo p { margin-top: 14px; font-size: clamp(1rem, 2vw, 1.12rem); font-weight: 700; }
 
-  .delivery-options {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: 16px;
-    margin-top: 24px;
-  }
-
-  .delivery-card {
-    display: grid;
-    align-content: space-between;
-    gap: 16px;
-    min-height: 230px;
-    padding: 20px;
-    border: 2px solid var(--blue);
-    border-radius: var(--radius);
-    background: var(--paper-soft);
-    color: var(--black);
-    box-shadow: 4px 4px 0 rgba(17,17,17,.14);
-    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
-  }
-
-  .delivery-card:hover,
-  .delivery-card:focus-visible {
-    transform: translate(2px, 2px);
-    border-color: var(--black);
-    box-shadow: 2px 2px 0 rgba(17,17,17,.22);
-    outline: none;
-  }
-
-  .delivery-card-logo {
-    display: flex;
-    align-items: center;
-    min-height: 58px;
-  }
-
-  .delivery-card-logo img {
-    max-width: 150px;
-    max-height: 58px;
-    object-fit: contain;
-  }
-
-  .delivery-card h3 {
-    font-size: clamp(1.45rem, 3vw, 2rem);
-  }
-
-  .delivery-card p {
-    margin-top: 0;
-    font-size: 0.95rem;
-  }
-
   .location-grid {
     display: grid;
     grid-template-columns: minmax(0, 0.82fr) minmax(0, 1.18fr);
@@ -507,14 +457,6 @@
     font-size: 0.82rem;
     font-weight: 700;
     text-align: center;
-  }
-
-  .seo-tags p {
-    margin-bottom: 8px;
-    font-family: "Oswald", sans-serif;
-    font-size: 0.88rem;
-    font-weight: 800;
-    text-transform: uppercase;
   }
 
   .seo-tags ul {
@@ -621,7 +563,6 @@
     .product-info { padding: 20px; }
     .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     .local-seo { grid-template-columns: 1fr; }
-    .delivery-options { grid-template-columns: 1fr; }
     .location-grid { grid-template-columns: 1fr; }
     .map-frame, .map-frame iframe { min-height: 360px; }
     .cta-strip { grid-template-columns: 1fr; text-align: center; }
@@ -884,30 +825,19 @@
     <section class="section" id="delivery-vila-matilde">
       <div class="container">
         <div class="local-seo reveal">
-          <div class="section-heading">
-            <p class="section-kicker">Delivery</p>
-            <h2 class="section-title">Escolha onde <span>pedir</span></h2>
-          </div>
-          <div class="delivery-options">
-            <a class="delivery-card" href="https://url-eu.mykeeta.com/KRVQNdKz" target="_blank" rel="noopener noreferrer" aria-label="Pe&#xE7;a pelo Keeta">
-              <span class="delivery-card-logo"><img src="./assets/keeta-logo.svg" alt="Keeta"></span>
-              <div>
-                <h3>Pe&#xE7;a pelo Keeta</h3>
-              </div>
-            </a>
-            <a class="delivery-card" href="https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc?utm_medium=share" target="_blank" rel="noopener noreferrer" aria-label="Pe&#xE7;a pelo iFood">
-              <span class="delivery-card-logo"><img src="./assets/ifood-logo.png" alt="iFood"></span>
-              <div>
-                <h3>Pe&#xE7;a pelo iFood</h3>
-              </div>
-            </a>
-            <a class="delivery-card" href="https://app.cardapioweb.com/ships_burguer" target="_blank" rel="noopener noreferrer" aria-label="Pe&#xE7;a pelo card&#xE1;pio pr&#xF3;prio da Ship's">
-              <span class="delivery-card-logo"><img src="./assets/logo-site.avif" alt="Ship's Burguer"></span>
-              <div>
-                <h3>Pe&#xE7;a pelo nosso card&#xE1;pio pr&#xF3;prio</h3>
-                <p>Acumule pontos para trocar por produtos.</p>
-              </div>
-            </a>
+          <div>
+            <h2>Uma curiosidade sobre <span>a Ship's</span></h2>
+            <p>
+              Voc&#xEA; sabia que a Ship's Burguer &#xE9; formada por tr&#xEA;s amigos de inf&#xE2;ncia? Desde o nosso in&#xED;cio,
+              l&#xE1; em 2021, prezamos pela amizade em todos os momentos. Tanto que todos os lanches do card&#xE1;pio
+              levam nomes de amigos nossos.
+            </p>
+            <p>
+              Todos os meses lan&#xE7;amos o Lanche do M&#xEA;s. Ele fica no card&#xE1;pio durante 30 dias e &#xE9; sempre um
+              sucesso de vendas. Para voc&#xEA; ter uma ideia, o Smash Moda tamb&#xE9;m come&#xE7;ou como Lanche do M&#xEA;s,
+              mas fez tanto sucesso que decidimos coloc&#xE1;-lo no nosso card&#xE1;pio fixo. Hoje, ele &#xE9; o lanche
+              que mais vende na loja.
+            </p>
           </div>
         </div>
       </div>
@@ -969,9 +899,8 @@
       </div>
     </section>
 
-    <section class="seo-tags" aria-label="Buscas que a Ship's atende">
+    <section class="seo-tags" aria-label="Buscas relacionadas &#xE0; Ship's Burguer">
       <div class="container">
-        <p>Buscas que a Ship's atende</p>
         <ul>
           <li>Smash burger em Vila Matilde</li>
           <li>Hamburgueria artesanal em S&#xE3;o Paulo</li>
