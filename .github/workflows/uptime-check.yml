@@ -25,30 +25,35 @@ jobs:
           CALLMEBOT_API_KEY: ${{ secrets.CALLMEBOT_API_KEY }}
           SEND_TEST_ALERT: ${{ inputs.send_test_alert || 'false' }}
         run: |
+          send_whatsapp_alert() {
+            if [ -z "$WHATSAPP_NUMBER" ] || [ -z "$CALLMEBOT_API_KEY" ]; then
+              echo "Secrets WHATSAPP_NUMBER e CALLMEBOT_API_KEY precisam ser cadastradas no GitHub Actions."
+              exit 1
+            fi
+
+            ENCODED_MESSAGE=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$1")
+            RESPONSE=$(curl -s "https://api.callmebot.com/whatsapp.php?phone=$WHATSAPP_NUMBER&text=$ENCODED_MESSAGE&apikey=$CALLMEBOT_API_KEY")
+            CLEAN_RESPONSE=$(echo "$RESPONSE" | sed -E 's/\+[0-9]+/+***/g')
+            echo "Resposta do CallMeBot: $CLEAN_RESPONSE"
+
+            if echo "$RESPONSE" | grep -Eiq "invalid|error|not authorized|not allowed|lost it"; then
+              echo "CallMeBot recusou o envio. Confira se a API key pertence ao mesmo numero cadastrado em WHATSAPP_NUMBER."
+              exit 1
+            fi
+          }
+
           STATUS=$(curl --max-time 20 -s -o /dev/null -w "%{http_code}" "$SITE_URL")
           echo "Status retornado: $STATUS"
 
           if [ "$SEND_TEST_ALERT" = "true" ]; then
-            if [ -z "$WHATSAPP_NUMBER" ] || [ -z "$CALLMEBOT_API_KEY" ]; then
-              echo "Secrets WHATSAPP_NUMBER e CALLMEBOT_API_KEY precisam ser cadastradas no GitHub Actions."
-              exit 1
-            fi
-
             MESSAGE="Teste de alerta: Ship's Burguer uptime monitor esta funcionando em $(date -u +'%d/%m/%Y %H:%M UTC')"
-            ENCODED_MESSAGE=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$MESSAGE")
-            curl -s "https://api.callmebot.com/whatsapp.php?phone=$WHATSAPP_NUMBER&text=$ENCODED_MESSAGE&apikey=$CALLMEBOT_API_KEY"
+            send_whatsapp_alert "$MESSAGE"
             exit 0
           fi
 
           if [ "$STATUS" -ge 400 ] || [ "$STATUS" -eq 000 ]; then
-            if [ -z "$WHATSAPP_NUMBER" ] || [ -z "$CALLMEBOT_API_KEY" ]; then
-              echo "Secrets WHATSAPP_NUMBER e CALLMEBOT_API_KEY precisam ser cadastradas no GitHub Actions."
-              exit 1
-            fi
-
             MESSAGE="Alerta: Ship's Burguer site retornou status $STATUS em $(date -u +'%d/%m/%Y %H:%M UTC')"
-            ENCODED_MESSAGE=$(python3 -c "import urllib.parse, sys; print(urllib.parse.quote(sys.argv[1]))" "$MESSAGE")
-            curl -s "https://api.callmebot.com/whatsapp.php?phone=$WHATSAPP_NUMBER&text=$ENCODED_MESSAGE&apikey=$CALLMEBOT_API_KEY"
+            send_whatsapp_alert "$MESSAGE"
           else
             echo "Site esta no ar, tudo certo."
           fi
