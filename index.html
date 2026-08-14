@@ -1283,6 +1283,12 @@
           <button type="button" data-chat-question="delivery">Delivery</button>
           <button type="button" data-chat-question="cardapio">Cardápio</button>
           <button type="button" data-chat-question="combos">Combos</button>
+          <button type="button" data-chat-question="historia">História</button>
+          <button type="button" data-chat-question="lanches">Lanches</button>
+          <button type="button" data-chat-question="porcoes">Porções</button>
+          <button type="button" data-chat-question="molhos">Molhos</button>
+          <button type="button" data-chat-question="bebidas">Bebidas</button>
+          <button type="button" data-chat-question="promocoes">Promoções</button>
           <button type="button" data-chat-question="vip">Grupo VIP</button>
           <button type="button" data-chat-question="como-pedir">Como pedir</button>
           <button type="button" data-chat-question="entrega">Área/taxa</button>
@@ -1397,30 +1403,98 @@
     const shipsChatInput = shipsChat.querySelector("[data-chat-input]");
     const shipsChatQuickButtons = shipsChat.querySelectorAll("[data-chat-question]");
 
-    const shipsChatAnswers = {
-      horario: "A Ship's Burguer funciona todos os dias a partir das 19h. De domingo a quinta, o atendimento vai ate 23h. Sexta e sabado, vai ate 23h59.",
-      endereco: "Estamos na Rua Jose Mascarenhas, 586, Vila Matilde, Sao Paulo - SP, CEP 03515-000. No site tem o botao de rota pelo Google Maps.",
-      pagamento: "Aceitamos dinheiro, Pix, cartao de credito, cartao de debito e vale-refeicao. Pelo cadastro do cardapio, credito/debito aparecem com Visa, Mastercard, Elo e Amex. As bandeiras de vale-refeicao aparecem no fechamento do pedido.",
-      delivery: "Temos pedido online pelo Cardapio Web e tambem atendimento por WhatsApp. O site tambem aponta opcoes de delivery por iFood e Keeta.",
-      cardapio: "Voce pode abrir o Cardapio Web para ver itens, valores atualizados e finalizar o pedido. Alguns destaques do site sao Letchiken, Guilbert e Smash Moda.",
-      combos: "Os combos e promocoes podem mudar. Para ver o que esta disponivel hoje, abra o Cardapio Web ou chame a Ship's no WhatsApp.",
-      vip: "O Grupo VIP recebe promocoes exclusivas, novidades do cardapio e ofertas especiais antes de todo mundo.",
-      "como-pedir": "Para pedir, o caminho mais rapido e abrir o Cardapio Web, escolher seus itens e finalizar por la. Se preferir atendimento direto, chame no WhatsApp.",
-      entrega: "Atendemos delivery na Vila Matilde e regiao dentro da area cadastrada. Como a taxa pode variar pelo endereco, confira no Cardapio Web ou envie sua localizacao pelo WhatsApp.",
-      retirada: "Voce tambem pode retirar no balcao na Rua Jose Mascarenhas, 586, Vila Matilde. Faca o pedido pelo Cardapio Web ou pelo WhatsApp e combine a retirada."
+    const shipsKnowledgeBase = {
+      brand: {
+        name: "Ship's Burguer",
+        phrase: "Nao e so sobre burger. E sobre historia.",
+        short: "A Ship's Burguer e uma hamburgueria artesanal em Vila Matilde, Sao Paulo, nascida em 2021 a partir de um pequeno trailer. A marca cresceu com determinacao, familia, clientes que viraram amigos e uma vontade enorme de servir smash burgers bem feitos, com sabor de chapa quente, queijo derretido e atendimento proximo."
+      },
+      links: {
+        menu: "https://app.cardapioweb.com/ships_burguer",
+        whatsapp: "https://wa.me/5511976374369?text=Ol%C3%A1,%20vim%20pelo%20site%20da%20Ship%27s%20Burguer%20e%20quero%20fazer%20um%20pedido!",
+        vip: "https://chat.whatsapp.com/E45CywnC8P7261yBHHF9EA",
+        ifood: "https://www.ifood.com.br/delivery/sao-paulo-sp/ships-burguer---hamburguer-vila-matilde/5e734093-5204-4abb-bb86-9f1d7c4520bc"
+      },
+      answers: {
+        horario: "A Ship's funciona todos os dias a partir das 19h. Segunda, terca, quarta, quinta e domingo: 19h as 23h. Sexta e sabado: 19h as 23h59.",
+        endereco: "Estamos na Rua Jose Mascarenhas, 586, Vila Matilde, Sao Paulo - SP. CEP: 03515-000. Se quiser, use o botao de rota no site para abrir o Google Maps.",
+        pagamento: "Aceitamos dinheiro, Pix, cartao de credito, cartao de debito e vale-refeicao. No Cardapio Web aparecem bandeiras como Visa, Mastercard, Elo e Amex para credito/debito. Vale-refeicao deve ser confirmado no fechamento do pedido.",
+        delivery: "Atendemos por Cardapio Web, WhatsApp, iFood e tambem aparece opcao de Keeta nos materiais. A entrega atende Vila Matilde e regiao dentro da area cadastrada.",
+        cardapio: "O Cardapio Web tem itens, valores atualizados e fechamento do pedido. Posso te falar sobre lanches, combos, porcoes, molhos, extras e bebidas, mas os valores podem mudar. Para confirmar hoje, abra o Cardapio Web.",
+        combos: "Temos combos com lanche + batata + bebida, como Goao, Leoncio, Tonhao, Letchiken, Guilbert, Ferdi, Toven, Balao, Djeep e Moda. Os valores podem mudar, entao confirme no Cardapio Web antes de finalizar.",
+        historia: "A Ship's nasceu em 2021 com a primeira chapa dentro de um pequeno trailer, movida por determinacao, familia e vontade de servir o melhor burger da regiao. O trailer ficou pequeno, os clientes viraram amigos, veio a loja fisica e depois um novo salao para receber melhor a galera.",
+        lanches: "Alguns lanches da Ship's: Smash Goao, Smash Leoncio, Smash Tonhao, Letchiken, Smash Guilbert, Smash Ferdi, Smash Toven, Smash Balao, Smash Djeep e Smash Moda. Se quiser saber de um especifico, digite o nome dele.",
+        porcoes: "Porcoes e acompanhamentos encontrados: nuggets 10 unidades, nuggets 5 unidades, fritas cheddar & bacon, batata individual e coxinha de costela com cream cheese. Valores podem mudar, confirme no Cardapio Web.",
+        molhos: "Molhos encontrados: Molho Ship's, molho de alho famoso da casa; Molho Chipotle, levemente apimentado; Maionese Grill, o molho usado no Letchiken. Tambem aparecem barbecue e maionese verde em opcoes do cardapio.",
+        bebidas: "Bebidas encontradas: Coca-Cola lata 350ml, Coca-Cola Zero lata 350ml, Sprite Zero 350ml, Fanta Uva lata 350ml, agua sem gas 500ml, agua com gas 500ml, Ship's Lemonade e Heineken Zero 330ml.",
+        promocoes: "As promocoes podem mudar. Ja apareceram nos materiais: promocao VIP Smash Goao + Smash Tonhao, promo VIP retirada, Promo Smash Goao + Letchiken, cupom de 10% do popup, vouchers secretos e cupons premiados no Grupo VIP. Para saber o que esta ativo hoje, confira o Cardapio Web, WhatsApp ou Grupo VIP.",
+        vip: "O Grupo VIP da Ship's recebe promocoes exclusivas, novidades do cardapio, lancamentos, cupons quando ativos e ofertas especiais antes de todo mundo. Tambem rolam vouchers secretos e cupons premiados.",
+        "como-pedir": "Para pedir: 1. Abra o Cardapio Web. 2. Escolha os itens. 3. Finalize o pedido por la. 4. Se preferir atendimento direto, chame a Ship's no WhatsApp.",
+        entrega: "Atendemos delivery na Vila Matilde e regiao dentro da area cadastrada. A taxa pode variar pelo endereco, entao confira no Cardapio Web ou envie sua localizacao pelo WhatsApp.",
+        retirada: "Voce pode retirar no balcao na Rua Jose Mascarenhas, 586, Vila Matilde. Faca o pedido pelo Cardapio Web ou pelo WhatsApp e combine a retirada.",
+        descartaveis: "O cardapio pede para selecionar se precisa de ketchup, mostarda e descartaveis, para a equipe saber se deve enviar.",
+        fallback: "Ainda nao tenho essa informacao certinha por aqui. Chama a Ship's no WhatsApp que a equipe te ajuda rapidinho: (11) 97637-4369."
+      },
+      products: [
+        { name: "Smash Goao", aliases: ["goao", "goo", "cheeseburguer smash"], details: "Pao de brioche, 1 carne smash de 100g e queijo cheddar bem derretido.", price: "R$ 21,00" },
+        { name: "Smash Leoncio", aliases: ["leoncio", "leoncio cheese bacon", "cheese bacon"], details: "Pao de brioche, 1 carne smash de 100g, queijo cheddar bem derretido e bacon fatiado crocante.", price: "R$ 26,50" },
+        { name: "Smash Tonhao", aliases: ["tonhao", "cheese salada"], details: "Pao de brioche, 1 carne smash de 100g, queijo cheddar bem derretido, alface americana, tomate e cebola roxa.", price: "R$ 25,50" },
+        { name: "Letchiken", aliases: ["letchiken", "frango"], details: "Pao com gergelim, alface americana, tomate, molho e frango empanado super crocante.", price: "R$ 23,50" },
+        { name: "Smash Guilbert", aliases: ["guilbert"], details: "Pao de brioche, 2 carnes smash de 100g, queijo mussarela bem derretido, alface americana picada, tomate, cebola crispy e molho Tosca sabor churrasco.", price: "R$ 36,50" },
+        { name: "Smash Ferdi", aliases: ["ferdi"], details: "Pao de brioche, 2 carnes smash de 100g, queijo cheddar bem derretido, muito requeijao cremoso, cebola crispy crocante e bacon fatiado.", price: "R$ 36,50" },
+        { name: "Smash Toven", aliases: ["toven"], details: "Pao com gergelim, 2 carnes smash de 100g cada, queijo cheddar derretido, ketchup de picles Heinz, mostarda, cebola picada, picles e bacon.", price: "R$ 37,50" },
+        { name: "Smash Balao", aliases: ["balao"], details: "Pao de brioche, 3 carnes smash, 300g no total, e queijo cheddar.", price: "R$ 40,50" },
+        { name: "Smash Djeep", aliases: ["djeep"], details: "Pao de brioche, 2 carnes, 200g no total, queijo cheddar e bacon fatiado.", price: "R$ 31,50" },
+        { name: "Smash Moda", aliases: ["moda"], details: "Pao brioche macio, carne smash com queijo cheddar, queijo coalho no mel, bacon fatiado crocante e molho exclusivo Moda, feito com oregano, salsa e limao.", price: "R$ 37,99" }
+      ],
+      combos: [
+        { name: "Combo Goao", aliases: ["combo goao"], details: "Smash Goao + batata + bebida.", price: "R$ 32,99" },
+        { name: "Combo Leoncio", aliases: ["combo leoncio"], details: "Smash Leoncio + batata + bebida.", price: "R$ 39,50" },
+        { name: "Combo Tonhao", aliases: ["combo tonhao"], details: "Smash Tonhao + batata + bebida.", price: "R$ 37,50" },
+        { name: "Combo Letchiken", aliases: ["combo letchiken"], details: "Letchiken + batata palito + bebida lata.", price: "R$ 35,50" },
+        { name: "Combo Smash Guilbert", aliases: ["combo guilbert"], details: "Smash Guilbert + batata + bebida lata.", price: "R$ 48,50" },
+        { name: "Combo Smash Ferdi", aliases: ["combo ferdi"], details: "Smash Ferdi + batata + bebida.", price: "R$ 54,50" },
+        { name: "Combo Smash Toven", aliases: ["combo toven"], details: "Smash Toven + batata + bebida.", price: "R$ 50,50" },
+        { name: "Combo Smash Balao", aliases: ["combo balao"], details: "Smash Balao + batata + bebida lata.", price: "R$ 56,50" },
+        { name: "Combo Smash Djeep", aliases: ["combo djeep"], details: "Smash Djeep + batata + bebida lata.", price: "R$ 46,50" },
+        { name: "Combo Smash Moda", aliases: ["combo moda"], details: "Smash Moda + batata + bebida.", price: "R$ 46,50" }
+      ],
+      sides: [
+        { name: "Porcao de nuggets", details: "10 unidades.", price: "R$ 27,50" },
+        { name: "Nuggets", details: "5 unidades.", price: "R$ 13,99" },
+        { name: "Fritas cheddar & bacon", details: "Batata com cheddar e bacon.", price: "R$ 27,50" },
+        { name: "Batata individual", details: "Porcao individual.", price: "R$ 8,50" },
+        { name: "Coxinha de costela com cream cheese", details: "6 unidades.", price: "R$ 26,99" }
+      ],
+      sauces: [
+        { name: "Molho Ship's", details: "Molho de alho famoso da Ship's, para consumo imediato.", price: "R$ 3,50" },
+        { name: "Molho Chipotle", details: "Levemente apimentado.", price: "R$ 3,50" },
+        { name: "Maionese Grill", details: "Molho grill, o mesmo usado no Letchiken.", price: "R$ 3,50" },
+        { name: "Barbecue", details: "Aparece em opcoes do cardapio.", price: "Confirme no Cardapio Web" },
+        { name: "Maionese verde", details: "Aparece em opcoes do cardapio.", price: "Confirme no Cardapio Web" }
+      ],
+      extras: ["Extra de bacon", "Extra de carne smash com queijo cheddar", "Extra queijo cheddar, 2 fatias", "Extra ovo frito", "Extra salada", "Extra frango", "Extra picles"],
+      drinks: ["Coca-Cola lata 350ml", "Coca-Cola Zero lata 350ml", "Sprite Zero 350ml", "Fanta Uva lata 350ml", "Agua mineral sem gas 500ml", "Agua com gas 500ml", "Ship's Lemonade", "Heineken Zero 330ml"]
     };
 
     const shipsChatKeywords = [
-      { key: "horario", words: ["horario", "horário", "abre", "abrem", "fecha", "funciona", "funcionamento"] },
-      { key: "endereco", words: ["endereco", "endereço", "onde", "local", "rua", "rota", "maps", "chegar"] },
-      { key: "pagamento", words: ["pagamento", "pagar", "pix", "dinheiro", "credito", "crédito", "debito", "débito", "cartao", "cartão", "vale", "refeicao", "refeição"] },
-      { key: "delivery", words: ["delivery", "entregar", "entrega", "ifood", "keeta"] },
-      { key: "cardapio", words: ["cardapio", "cardápio", "menu", "lanche", "lanches", "preco", "preço", "valor"] },
-      { key: "combos", words: ["combo", "combos", "promocao", "promoção", "cupom", "desconto", "oferta"] },
-      { key: "vip", words: ["vip", "grupo", "whatsapp"] },
+      { key: "horario", words: ["horario", "abre", "abrem", "fecha", "funciona", "funcionamento"] },
+      { key: "endereco", words: ["endereco", "onde", "local", "rua", "rota", "maps", "chegar", "cep"] },
+      { key: "pagamento", words: ["pagamento", "pagar", "pix", "dinheiro", "credito", "debito", "cartao", "vale", "refeicao", "bandeira"] },
+      { key: "delivery", words: ["delivery", "ifood", "keeta"] },
+      { key: "entrega", words: ["entrega", "entregar", "taxa", "area", "bairro", "raio", "regiao"] },
+      { key: "cardapio", words: ["cardapio", "menu", "preco", "valor", "valores"] },
+      { key: "combos", words: ["combo", "combos"] },
+      { key: "historia", words: ["historia", "marca", "trailer", "familia", "desde", "2021", "sobre"] },
+      { key: "lanches", words: ["lanche", "lanches", "smash", "burger", "hamburguer"] },
+      { key: "porcoes", words: ["porcao", "porcoes", "batata", "fritas", "nuggets", "coxinha", "acompanhamento"] },
+      { key: "molhos", words: ["molho", "molhos", "alho", "chipotle", "maionese", "barbecue"] },
+      { key: "bebidas", words: ["bebida", "bebidas", "coca", "sprite", "fanta", "agua", "lemonade", "heineken"] },
+      { key: "promocoes", words: ["promocao", "promocoes", "cupom", "desconto", "oferta", "voucher"] },
+      { key: "vip", words: ["vip", "grupo"] },
       { key: "como-pedir", words: ["pedir", "pedido", "comprar", "encomendar"] },
-      { key: "entrega", words: ["taxa", "area", "área", "bairro", "raio", "regiao", "região"] },
-      { key: "retirada", words: ["retirada", "retirar", "balcao", "balcão", "buscar"] }
+      { key: "retirada", words: ["retirada", "retirar", "balcao", "buscar"] },
+      { key: "descartaveis", words: ["ketchup", "mostarda", "descartavel", "descartaveis", "guardanapo", "talher"] }
     ];
 
     function addShipsChatMessage(text, type = "bot") {
@@ -1431,13 +1505,80 @@
       shipsChatMessages.parentElement.scrollTop = shipsChatMessages.parentElement.scrollHeight;
     }
 
+    function normalizeShipsText(text) {
+      return text
+        .toLowerCase()
+        .normalize("NFD")
+        .replace(/[\u0300-\u036f]/g, "")
+        .replace(/[^a-z0-9\s]/g, " ")
+        .replace(/\s+/g, " ")
+        .trim();
+    }
+
+    function formatShipsPrice(item) {
+      return item.price ? `\nPreco encontrado: ${item.price}. Valores podem mudar, confirme no Cardapio Web.` : "\nValores podem mudar, confirme no Cardapio Web.";
+    }
+
+    function formatShipsItem(item) {
+      return `${item.name}: ${item.details}${formatShipsPrice(item)}`;
+    }
+
+    function findShipsItem(text, collection) {
+      const normalizedText = normalizeShipsText(text);
+      return collection.find((item) => {
+        const names = [item.name, ...(item.aliases || [])].map(normalizeShipsText);
+        return names.some((name) => normalizedText.includes(name));
+      });
+    }
+
+    function findShipsListItem(text, list) {
+      const normalizedText = normalizeShipsText(text);
+      return list.find((item) => normalizedText.includes(normalizeShipsText(item)));
+    }
+
+    function summarizeShipsCollection(collection) {
+      return collection.map((item) => `${item.name} (${item.price})`).join(", ") + ". Valores podem mudar, confirme no Cardapio Web.";
+    }
+
+    function buildShipsAnswer(questionKey, userText = "") {
+      const combo = findShipsItem(userText, shipsKnowledgeBase.combos);
+      if (combo) return formatShipsItem(combo);
+
+      const product = findShipsItem(userText, shipsKnowledgeBase.products);
+      if (product) return formatShipsItem(product);
+
+      const side = findShipsItem(userText, shipsKnowledgeBase.sides);
+      if (side) return formatShipsItem(side);
+
+      const sauce = findShipsItem(userText, shipsKnowledgeBase.sauces);
+      if (sauce) return formatShipsItem(sauce);
+
+      const extra = findShipsListItem(userText, shipsKnowledgeBase.extras);
+      if (extra) return `${extra}. Extras podem mudar conforme disponibilidade; confirme no Cardapio Web.`;
+
+      const drink = findShipsListItem(userText, shipsKnowledgeBase.drinks);
+      if (drink) return `${drink}. Bebidas podem mudar conforme disponibilidade; confirme no Cardapio Web.`;
+
+      const answers = shipsKnowledgeBase.answers;
+      if (questionKey === "lanches") return `${answers.lanches}\n\nPrecos encontrados: ${summarizeShipsCollection(shipsKnowledgeBase.products)}`;
+      if (questionKey === "combos") return `${answers.combos}\n\nPrecos encontrados: ${summarizeShipsCollection(shipsKnowledgeBase.combos)}`;
+      if (questionKey === "porcoes") return `${answers.porcoes}\n\nPrecos encontrados: ${summarizeShipsCollection(shipsKnowledgeBase.sides)}`;
+      if (questionKey === "molhos") return `${answers.molhos}\n\nPrecos encontrados: ${summarizeShipsCollection(shipsKnowledgeBase.sauces)}`;
+      if (questionKey === "bebidas") return `${answers.bebidas}\n\nPara disponibilidade de hoje, confira no Cardapio Web.`;
+      if (questionKey === "extras") return `Extras encontrados: ${shipsKnowledgeBase.extras.join(", ")}. Confirme disponibilidade no Cardapio Web.`;
+      if (questionKey === "marca") return `${shipsKnowledgeBase.brand.phrase}\n\n${shipsKnowledgeBase.brand.short}`;
+
+      return answers[questionKey] || answers.fallback;
+    }
+
     function answerShipsChat(questionKey, userText) {
       if (userText) addShipsChatMessage(userText, "user");
-      addShipsChatMessage(shipsChatAnswers[questionKey] || "Ainda nao tenho essa resposta pronta. Chame a Ship's no WhatsApp que a equipe te ajuda rapidinho.");
+      addShipsChatMessage(buildShipsAnswer(questionKey, userText));
     }
 
     function findShipsChatAnswer(text) {
-      const normalizedText = text.toLowerCase();
+      const normalizedText = normalizeShipsText(text);
+      if (normalizedText.includes("nao e so") || normalizedText.includes("frase") || normalizedText.includes("identidade")) return "marca";
       const match = shipsChatKeywords.find((item) => item.words.some((word) => normalizedText.includes(word)));
       return match ? match.key : null;
     }
@@ -1455,7 +1596,7 @@
       shipsChatToggle.setAttribute("aria-expanded", "false");
     }
 
-    addShipsChatMessage("Ola! Sou o atendimento rapido da Ship's. Posso te ajudar com horario, endereco, pagamento, delivery, cardapio, combos, Grupo VIP, taxa de entrega ou retirada no balcao.");
+    addShipsChatMessage("Ola! Sou o atendimento rapido da Ship's. Posso te ajudar com horario, endereco, pagamento, delivery, cardapio, lanches, combos, porcoes, molhos, bebidas, Grupo VIP, taxa de entrega ou retirada no balcao.");
 
     shipsChatToggle.addEventListener("click", () => {
       if (shipsChat.classList.contains("is-open")) {
