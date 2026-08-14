@@ -821,6 +821,31 @@
     font-weight: 800;
   }
 
+  .ships-chat__message-action {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    min-height: 38px;
+    margin-top: 10px;
+    border: 2px solid var(--black);
+    border-radius: var(--radius);
+    background: #25D366;
+    color: var(--black);
+    padding: 8px 10px;
+    font-size: 0.82rem;
+    font-weight: 900;
+    font-family: inherit;
+    text-align: center;
+    box-shadow: 2px 2px 0 rgba(17, 17, 17, 0.18);
+    cursor: pointer;
+  }
+
+  .ships-chat__message-action:disabled {
+    cursor: wait;
+    opacity: 0.72;
+  }
+
   .ships-chat__quick {
     display: flex;
     flex-wrap: wrap;
@@ -1508,6 +1533,51 @@
       shipsChatMessages.parentElement.scrollTop = shipsChatMessages.parentElement.scrollHeight;
     }
 
+    function addShipsChatUnknownQuestionAction(userText) {
+      const message = document.createElement("div");
+      const notifyText = encodeURIComponent(`Nova pergunta sem resposta no chatbot da Ship's:
+
+"${userText}"
+
+Por favor, adicionar essa resposta na base de conhecimento.`);
+      message.className = "ships-chat__message ships-chat__message--bot";
+      message.textContent = "Posso avisar a equipe da Ship's sobre essa duvida para ela entrar na base do chat.";
+
+      const action = document.createElement("button");
+      action.className = "ships-chat__message-action";
+      action.type = "button";
+      action.textContent = "Avisar equipe";
+      action.addEventListener("click", async () => {
+        action.disabled = true;
+        action.textContent = "Enviando...";
+
+        try {
+          const response = await fetch("/api/chat-unanswered", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              question: userText,
+              page: window.location.href
+            })
+          });
+
+          if (!response.ok) throw new Error("api_failed");
+
+          action.textContent = "Equipe avisada";
+          addShipsChatMessage("Pronto! A equipe da Ship's recebeu essa duvida para responder e avaliar se entra na base do chat.");
+        } catch (error) {
+          action.disabled = false;
+          action.textContent = "Enviar pelo WhatsApp";
+          window.open(`https://wa.me/5511976374369?text=${notifyText}`, "_blank", "noopener,noreferrer");
+          addShipsChatMessage("Nao consegui avisar pela API agora, entao abri o WhatsApp com a duvida pronta para envio.");
+        }
+      });
+
+      message.appendChild(action);
+      shipsChatMessages.appendChild(message);
+      shipsChatMessages.parentElement.scrollTop = shipsChatMessages.parentElement.scrollHeight;
+    }
+
     function normalizeShipsText(text) {
       return text
         .toLowerCase()
@@ -1576,6 +1646,11 @@
 
     function answerShipsChat(questionKey, userText) {
       if (userText) addShipsChatMessage(userText, "user");
+      if (!questionKey && userText) {
+        addShipsChatMessage(shipsKnowledgeBase.answers.fallback);
+        addShipsChatUnknownQuestionAction(userText);
+        return;
+      }
       addShipsChatMessage(buildShipsAnswer(questionKey, userText));
     }
 
