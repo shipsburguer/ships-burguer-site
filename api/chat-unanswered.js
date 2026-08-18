@@ -1,4 +1,14 @@
 const DEFAULT_TO = "5511976374369";
+const DEFAULT_ALLOWED_ORIGINS = [
+  "https://www.shipsburguer.com.br",
+  "https://shipsburguer.com.br",
+  "https://ships-burguer-site.vercel.app",
+  "http://127.0.0.1:4173",
+  "http://localhost:4173"
+];
+const requestLog = new Map();
+const RATE_LIMIT_WINDOW_MS = 15 * 60 * 1000;
+const RATE_LIMIT_MAX_REQUESTS = 5;
 
 function cleanText(value, maxLength = 900) {
   return String(value || "")
@@ -15,9 +25,64 @@ function json(res, status, payload) {
 
 async function readBody(req) {
   const chunks = [];
+  let size = 0;
+
   for await (const chunk of req) chunks.push(chunk);
+  for (const chunk of chunks) size += chunk.length;
+  if (size > 4096) {
+    const error = new Error("request_too_large");
+    error.statusCode = 413;
+    throw error;
+  }
+
   const raw = Buffer.concat(chunks).toString("utf8");
   return raw ? JSON.parse(raw) : {};
+}
+
+function getAllowedOrigins() {
+  const configuredOrigins = String(process.env.SITE_ORIGIN || "")
+    .split(",")
+    .map((origin) => origin.trim())
+    .filter(Boolean);
+
+  return new Set([...DEFAULT_ALLOWED_ORIGINS, ...configuredOrigins]);
+}
+
+function isAllowedOrigin(origin) {
+  if (!origin) return process.env.VERCEL_ENV !== "production";
+  return getAllowedOrigins().has(origin);
+}
+
+function setCorsHeaders(req, res) {
+  const origin = req.headers.origin;
+  res.setHeader("Vary", "Origin");
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+
+  if (isAllowedOrigin(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin || DEFAULT_ALLOWED_ORIGINS[0]);
+  }
+}
+
+function getClientIp(req) {
+  return String(req.headers["x-forwarded-for"] || req.socket?.remoteAddress || "unknown")
+    .split(",")[0]
+    .trim();
+}
+
+function isRateLimited(clientIp) {
+  const now = Date.now();
+  const previous = requestLog.get(clientIp) || [];
+  const recent = previous.filter((timestamp) => now - timestamp < RATE_LIMIT_WINDOW_MS);
+
+  if (recent.length >= RATE_LIMIT_MAX_REQUESTS) {
+    requestLog.set(clientIp, recent);
+    return true;
+  }
+
+  recent.push(now);
+  requestLog.set(clientIp, recent);
+  return false;
 }
 
 function buildMessage({ question, page }) {
@@ -158,12 +223,10 @@ async function sendWhatsAppMessage(payload) {
 }
 
 module.exports = async function handler(req, res) {
-  res.setHeader("Access-Control-Allow-Origin", process.env.SITE_ORIGIN || "*");
-  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS");
-  res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+  setCorsHeaders(req, res);
 
   if (req.method === "OPTIONS") {
-    res.statusCode = 204;
+    res.statusCode = isAllowedOrigin(req.headers.origin) ? 204 : 403;
     res.end();
     return;
   }
@@ -174,6 +237,16 @@ module.exports = async function handler(req, res) {
   }
 
   try {
+    if (!isAllowedOrigin(req.headers.origin)) {
+      json(res, 403, { ok: false, error: "origin_not_allowed" });
+      return;
+    }
+
+    if (isRateLimited(getClientIp(req))) {
+      json(res, 429, { ok: false, error: "too_many_requests" });
+      return;
+    }
+
     const body = await readBody(req);
     const question = cleanText(body.question);
     const page = cleanText(body.page, 300);
@@ -199,6 +272,6 @@ module.exports = async function handler(req, res) {
 
     json(res, 202, { ok: true });
   } catch (error) {
-    json(res, 500, { ok: false, error: "internal_error" });
+    json(res, error.statusCode || 500, { ok: false, error: error.message === "request_too_large" ? "request_too_large" : "internal_error" });
   }
 };
